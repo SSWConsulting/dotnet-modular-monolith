@@ -12,13 +12,14 @@ public static class OrdersModule
             {
                 var orders = Enumerable.Range(1, 5).Select(index => new OrderDto
                 (
-                    Name: $"Order {index}",
-                    Description: $"Order {index} description"
+                    $"Order {index}",
+                    $"Order {index} description"
                 ));
 
                 return orders;
             })
-            .WithName("GetWeatherForecast")
+            .WithName("GetOrders")
+            .WithTags("Orders")
             .WithOpenApi();
     }
 }

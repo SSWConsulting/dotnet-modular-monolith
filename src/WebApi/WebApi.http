@@ -5,3 +5,6 @@ GET {{Web_HostAddress}}/api/orders
 Accept: application/json
 
 ###
+
+GET {{Web_HostAddress}}/api/products
+Accept: application/json

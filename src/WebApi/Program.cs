@@ -1,3 +1,4 @@
+using Modules.Inventory.Endpoints;
 using Modules.Orders.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddOrdersServices();
+builder.Services.AddInventoryServices();
 
 var app = builder.Build();
 
@@ -21,5 +23,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseOrdersModule();
+app.UseInventoryModule();
 
 app.Run();

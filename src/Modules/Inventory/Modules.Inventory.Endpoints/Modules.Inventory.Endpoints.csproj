@@ -11,4 +11,8 @@
       <ProjectReference Include="..\Modules.Inventory.Application\Modules.Inventory.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+    </ItemGroup>
+
 </Project>
