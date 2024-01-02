@@ -1,5 +1,4 @@
 ﻿using Modules.Orders.Domain.Customers;
-
 using SharedKernel.Domain.Base;
 
 namespace Modules.Orders.Domain.Orders;

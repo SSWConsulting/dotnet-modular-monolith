@@ -1,5 +1,4 @@
 ﻿using Ardalis.GuardClauses;
-
 using SharedKernel.Domain.Base;
 using SharedKernel.Domain.Exceptions;
 

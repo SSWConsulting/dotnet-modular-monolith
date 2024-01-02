@@ -1,7 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-
 using Modules.Warehouse.Domain.Categories;
-
 using SharedKernel.Domain.Base;
 using SharedKernel.Domain.Entities;
 using SharedKernel.Domain.Identifiers;

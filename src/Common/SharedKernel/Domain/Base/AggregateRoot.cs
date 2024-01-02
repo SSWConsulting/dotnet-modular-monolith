@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-using SharedKernel.Domain.Interfaces;
+﻿using SharedKernel.Domain.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SharedKernel.Domain.Base;
 
