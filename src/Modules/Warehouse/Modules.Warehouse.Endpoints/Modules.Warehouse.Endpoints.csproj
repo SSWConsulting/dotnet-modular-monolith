@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Modules.Inventory.Application\Modules.Inventory.Application.csproj" />
+      <ProjectReference Include="..\Modules.Warehouse.Application\Modules.Warehouse.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>

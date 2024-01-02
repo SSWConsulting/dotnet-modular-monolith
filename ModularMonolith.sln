@@ -15,13 +15,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Orders.Domain", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Orders.Endpoints", "src\Modules\Orders\Modules.Orders.Endpoints\Modules.Orders.Endpoints.csproj", "{841BBC7F-E258-4315-A5D0-09833D165125}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inventory", "Inventory", "{D4C452DB-CB41-4B65-8A1A-FCD6E7811EE8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Warehouse", "Warehouse", "{D4C452DB-CB41-4B65-8A1A-FCD6E7811EE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Inventory.Application", "src\Modules\Inventory\Modules.Inventory.Application\Modules.Inventory.Application.csproj", "{A8A66142-1496-46D5-916B-A166CEB880E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Warehouse.Application", "src\Modules\Warehouse\Modules.Warehouse.Application\Modules.Warehouse.Application.csproj", "{A8A66142-1496-46D5-916B-A166CEB880E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Inventory.Domain", "src\Modules\Inventory\Modules.Inventory.Domain\Modules.Inventory.Domain.csproj", "{9B7CCD18-6F88-4A12-A2CF-5D97C17F0470}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Warehouse.Domain", "src\Modules\Warehouse\Modules.Warehouse.Domain\Modules.Warehouse.Domain.csproj", "{9B7CCD18-6F88-4A12-A2CF-5D97C17F0470}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Inventory.Endpoints", "src\Modules\Inventory\Modules.Inventory.Endpoints\Modules.Inventory.Endpoints.csproj", "{17A97D45-868F-4BED-9C17-C6FD39C1384E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Warehouse.Endpoints", "src\Modules\Warehouse\Modules.Warehouse.Endpoints\Modules.Warehouse.Endpoints.csproj", "{17A97D45-868F-4BED-9C17-C6FD39C1384E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "src\WebApi\WebApi.csproj", "{61A6637F-3057-4658-A8F7-945D66C945B1}"
 EndProject

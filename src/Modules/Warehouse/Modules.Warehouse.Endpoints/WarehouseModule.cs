@@ -1,12 +1,12 @@
-﻿namespace Modules.Inventory.Endpoints;
+﻿namespace Modules.Warehouse.Endpoints;
 
-public static class InventoryModule
+public static class WarhouseModule
 {
-    public static void AddInventoryServices(this IServiceCollection services)
+    public static void AddWarehouseServices(this IServiceCollection services)
     {
     }
 
-    public static void UseInventoryModule(this WebApplication app)
+    public static void UseWarehouseModule(this WebApplication app)
     {
         app.MapGet("/api/products", () =>
             {
@@ -21,7 +21,7 @@ public static class InventoryModule
                 return products;
             })
             .WithName("GetProducts")
-            .WithTags("Inventory")
+            .WithTags("Warehouse")
             .WithOpenApi();
     }
 }
