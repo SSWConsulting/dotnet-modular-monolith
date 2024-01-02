@@ -1,11 +1,9 @@
 ﻿using Ardalis.GuardClauses;
-
 using Modules.Orders.Domain.Customers;
-using Modules.Orders.Domain.Products;
-
 using SharedKernel.Domain.Base;
 using SharedKernel.Domain.Entities;
 using SharedKernel.Domain.Exceptions;
+using SharedKernel.Domain.Identifiers;
 
 namespace Modules.Orders.Domain.Orders;
 
@@ -61,10 +59,12 @@ public class Order : AggregateRoot<OrderId>
 
     public LineItem AddLineItem(ProductId productId, Money price, int quantity)
     {
-        Guard.Against.Expression(_ => Status != OrderStatus.PendingPayment, Status, "Can't modify order once payment is done");
+        Guard.Against.Expression(_ => Status != OrderStatus.PendingPayment, Status,
+            "Can't modify order once payment is done");
 
         if (OrderCurrency != null && OrderCurrency != price.Currency)
-            throw new DomainException($"Cannot add line item with currency {price.Currency} to and order than already contains a currency of {price.Currency}");
+            throw new DomainException(
+                $"Cannot add line item with currency {price.Currency} to and order than already contains a currency of {price.Currency}");
 
         var existingLineItem = _lineItems.FirstOrDefault(li => li.ProductId == productId);
         if (existingLineItem != null)
@@ -82,7 +82,8 @@ public class Order : AggregateRoot<OrderId>
 
     public void RemoveLineItem(ProductId productId)
     {
-        Guard.Against.Expression(_ => Status != OrderStatus.PendingPayment, Status, "Can't modify order once payment is done");
+        Guard.Against.Expression(_ => Status != OrderStatus.PendingPayment, Status,
+            "Can't modify order once payment is done");
 
         var lineItem = _lineItems.RemoveAll(x => x.ProductId == productId);
     }

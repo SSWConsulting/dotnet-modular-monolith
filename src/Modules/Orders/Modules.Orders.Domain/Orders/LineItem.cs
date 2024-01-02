@@ -1,9 +1,7 @@
 ﻿using Ardalis.GuardClauses;
-
-using Modules.Orders.Domain.Products;
-
 using SharedKernel.Domain.Base;
 using SharedKernel.Domain.Entities;
+using SharedKernel.Domain.Identifiers;
 
 namespace Modules.Orders.Domain.Orders;
 
@@ -13,7 +11,7 @@ public class LineItem : Entity<LineItemId>
 
     public required ProductId ProductId { get; init; }
 
-    public Product? Product { get; init; }
+    //public Product? Product { get; init; }
 
     // Detatch price from product to capture the price at the time of purchase
     public required Money Price { get; init; }
@@ -47,7 +45,8 @@ public class LineItem : Entity<LineItemId>
 
     internal void RemoveQuantity(int quantity)
     {
-        Guard.Against.Expression(_ => Quantity - quantity <= 0, quantity, "Can't remove all units.  Remove the entire item instead.");
+        Guard.Against.Expression(_ => Quantity - quantity <= 0, quantity,
+            "Can't remove all units.  Remove the entire item instead.");
         Quantity -= quantity;
     }
 }
