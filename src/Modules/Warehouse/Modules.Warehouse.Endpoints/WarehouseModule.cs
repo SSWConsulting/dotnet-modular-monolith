@@ -1,4 +1,5 @@
-﻿using Modules.Warehouse.Infrastructure;
+﻿using Modules.Warehouse.Application;
+using Modules.Warehouse.Infrastructure;
 using Modules.Warehouse.Infrastructure.Persistence;
 
 namespace Modules.Warehouse.Endpoints;
@@ -7,6 +8,7 @@ public static class WarehouseModule
 {
     public static void AddWarehouseServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddApplication();
         services.AddInfrastructure(configuration);
     }
 
