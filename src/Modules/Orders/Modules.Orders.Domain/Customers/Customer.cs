@@ -1,5 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-using SharedKernel.Domain.Base;
+using Common.SharedKernel.Domain.Base;
 
 namespace Modules.Orders.Domain.Customers;
 

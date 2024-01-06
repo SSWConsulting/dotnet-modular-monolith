@@ -9,7 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddOrdersServices();
-builder.Services.AddWarehouseServices();
+builder.Services.AddWarehouseServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -23,6 +23,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseOrdersModule();
-app.UseWarehouseModule();
+await app.UseWarehouseModule();
 
 app.Run();

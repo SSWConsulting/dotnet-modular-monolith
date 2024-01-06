@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Modules.Warehouse.Application\Modules.Warehouse.Application.csproj" />
+      <ProjectReference Include="..\Modules.Warehouse.Infrastructure\Modules.Warehouse.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

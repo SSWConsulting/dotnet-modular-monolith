@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.Domain.Base;
+﻿namespace Common.SharedKernel.Domain.Base;
 
 //public record DomainEvent : INotification { }
 

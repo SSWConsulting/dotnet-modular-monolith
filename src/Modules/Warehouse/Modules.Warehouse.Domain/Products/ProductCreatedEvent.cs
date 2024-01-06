@@ -1,5 +1,5 @@
-﻿using SharedKernel.Domain.Base;
-using SharedKernel.Domain.Identifiers;
+﻿using Common.SharedKernel.Domain.Base;
+using Common.SharedKernel.Domain.Identifiers;
 
 namespace Modules.Warehouse.Domain.Products;
 

@@ -1,6 +1,7 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Ardalis.GuardClauses;
+using System.Runtime.CompilerServices;
 
-namespace Ardalis.GuardClauses;
+namespace Common.SharedKernel.Domain.Exceptions;
 
 public static class FooGuard
 {

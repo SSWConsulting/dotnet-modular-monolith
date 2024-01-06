@@ -1,7 +1,7 @@
-﻿using SharedKernel.Domain.Interfaces;
+﻿using Common.SharedKernel.Domain.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SharedKernel.Domain.Base;
+namespace Common.SharedKernel.Domain.Base;
 
 public abstract class AggregateRoot<TId> : Entity<TId>, IDomainEvents
 {

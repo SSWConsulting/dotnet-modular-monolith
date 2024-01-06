@@ -1,7 +1,8 @@
 ﻿using Ardalis.GuardClauses;
-using SharedKernel.Domain.Base;
-using SharedKernel.Domain.Entities;
-using SharedKernel.Domain.Identifiers;
+using Common.SharedKernel.Domain.Base;
+using Common.SharedKernel.Domain.Entities;
+using Common.SharedKernel.Domain.Exceptions;
+using Common.SharedKernel.Domain.Identifiers;
 
 namespace Modules.Orders.Domain.Orders;
 

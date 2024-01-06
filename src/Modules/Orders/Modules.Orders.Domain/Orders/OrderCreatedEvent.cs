@@ -1,5 +1,5 @@
-﻿using Modules.Orders.Domain.Customers;
-using SharedKernel.Domain.Base;
+﻿using Common.SharedKernel.Domain.Base;
+using Modules.Orders.Domain.Customers;
 
 namespace Modules.Orders.Domain.Orders;
 

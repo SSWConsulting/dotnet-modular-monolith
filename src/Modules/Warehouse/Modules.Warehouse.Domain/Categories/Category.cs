@@ -1,6 +1,6 @@
 ﻿using Ardalis.GuardClauses;
-using SharedKernel.Domain.Base;
-using SharedKernel.Domain.Exceptions;
+using Common.SharedKernel.Domain.Base;
+using Common.SharedKernel.Domain.Exceptions;
 
 namespace Modules.Warehouse.Domain.Categories;
 
@@ -11,25 +11,25 @@ public class Category : AggregateRoot<CategoryId>
     private Category() { }
 
     // NOTE: Need to use a factory, as EF does not let owned entities (i.e Money & Sku) be passed via the constructor
-    public static Category Create(string name, ICategoryService categoryService)
+    public static Category Create(string name, ICategoryRepository categoryRepository)
     {
         var category = new Category
         {
             Id = new CategoryId(Guid.NewGuid()),
         };
 
-        category.UpdateName(name, categoryService);
+        category.UpdateName(name, categoryRepository);
 
         category.AddDomainEvent(new CategoryCreatedEvent(category.Id, category.Name));
 
         return category;
     }
 
-    public void UpdateName(string name, ICategoryService categoryService)
+    public void UpdateName(string name, ICategoryRepository categoryRepository)
     {
         Guard.Against.NullOrWhiteSpace(name);
 
-        if (categoryService.CategoryExists(name))
+        if (categoryRepository.CategoryExists(name))
             throw new DomainException($"Category {name} already exists");
 
         Name = name;

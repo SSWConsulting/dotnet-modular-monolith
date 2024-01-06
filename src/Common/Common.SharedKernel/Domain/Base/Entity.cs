@@ -1,6 +1,6 @@
-﻿using SharedKernel.Domain.Interfaces;
+﻿using Common.SharedKernel.Domain.Interfaces;
 
-namespace SharedKernel.Domain.Base;
+namespace Common.SharedKernel.Domain.Base;
 
 public abstract class Entity<TId> : IAuditableEntity
 {

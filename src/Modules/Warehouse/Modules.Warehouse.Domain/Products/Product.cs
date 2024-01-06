@@ -1,13 +1,16 @@
 ﻿using Ardalis.GuardClauses;
+using Common.SharedKernel.Domain.Base;
+using Common.SharedKernel.Domain.Entities;
+using Common.SharedKernel.Domain.Exceptions;
+using Common.SharedKernel.Domain.Identifiers;
 using Modules.Warehouse.Domain.Categories;
-using SharedKernel.Domain.Base;
-using SharedKernel.Domain.Entities;
-using SharedKernel.Domain.Identifiers;
 
 namespace Modules.Warehouse.Domain.Products;
 
 public class Product : AggregateRoot<ProductId>
 {
+    private const int LowStockThreshold = 5;
+
     public CategoryId CategoryId { get; set; } = null!;
 
     public Category Category { get; set; } = null!;
@@ -18,7 +21,11 @@ public class Product : AggregateRoot<ProductId>
 
     public Sku Sku { get; private set; } = null!;
 
-    private Product() { }
+    public int StockOnHand { get; private set; }
+
+    private Product()
+    {
+    }
 
     // NOTE: Need to use a factory, as EF does not let owned entities (i.e Money & Sku) be passed via the constructor
     public static Product Create(string name, Money price, Sku sku, CategoryId categoryId)
@@ -35,7 +42,8 @@ public class Product : AggregateRoot<ProductId>
             CategoryId = categoryId,
             Name = name,
             Price = price,
-            Sku = sku
+            Sku = sku,
+            StockOnHand = 0
         };
 
         product.AddDomainEvent(ProductCreatedEvent.Create(product));
@@ -60,5 +68,24 @@ public class Product : AggregateRoot<ProductId>
     {
         Guard.Against.Null(sku);
         Sku = sku;
+    }
+
+    public void RemoveStock(int quantity)
+    {
+        Guard.Against.NegativeOrZero(quantity);
+
+        if (StockOnHand - quantity < 0)
+            throw new DomainException("Cannot adjust stock below zero");
+
+        StockOnHand -= quantity;
+
+        if (StockOnHand <= LowStockThreshold)
+            AddDomainEvent(new LowStockEvent(Id));
+    }
+
+    public void AddStock(int quantity)
+    {
+        Guard.Against.NegativeOrZero(quantity);
+        StockOnHand += quantity;
     }
 }

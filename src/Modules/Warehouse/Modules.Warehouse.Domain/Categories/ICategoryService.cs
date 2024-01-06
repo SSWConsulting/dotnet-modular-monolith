@@ -1,6 +1,6 @@
 ﻿namespace Modules.Warehouse.Domain.Categories;
 
-public interface ICategoryService
+public interface ICategoryRepository
 {
     bool CategoryExists(string categoryName);
 }

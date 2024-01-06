@@ -1,29 +1,26 @@
-﻿namespace Modules.Warehouse.Endpoints;
+﻿using Modules.Warehouse.Infrastructure;
+using Modules.Warehouse.Infrastructure.Persistence;
 
-public static class WarhouseModule
+namespace Modules.Warehouse.Endpoints;
+
+public static class WarehouseModule
 {
-    public static void AddWarehouseServices(this IServiceCollection services)
+    public static void AddWarehouseServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddInfrastructure(configuration);
     }
 
-    public static void UseWarehouseModule(this WebApplication app)
+    public static async Task UseWarehouseModule(this WebApplication app)
     {
-        app.MapGet("/api/products", () =>
-            {
-                var products = Enumerable.Range(1, 5).Select(index => new ProductDto
-                (
-                    $"Product {index}",
-                    $"Product {index} description",
-                    index * 10.0m,
-                    index * 10
-                ));
+        if (app.Environment.IsDevelopment())
+        {
+            // Initialise and seed database
+            using var scope = app.Services.CreateScope();
+            var initializer = scope.ServiceProvider.GetRequiredService<WarehouseDbContextInitializer>();
+            await initializer.InitializeAsync();
+            await initializer.SeedAsync();
+        }
 
-                return products;
-            })
-            .WithName("GetProducts")
-            .WithTags("Warehouse")
-            .WithOpenApi();
+        app.MapProductEndpoints();
     }
 }
-
-record ProductDto(string Name, string Description, decimal Price, int Quantity);

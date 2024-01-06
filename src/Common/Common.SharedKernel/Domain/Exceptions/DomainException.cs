@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.Domain.Exceptions;
+﻿namespace Common.SharedKernel.Domain.Exceptions;
 
 public class DomainException : Exception
 {
