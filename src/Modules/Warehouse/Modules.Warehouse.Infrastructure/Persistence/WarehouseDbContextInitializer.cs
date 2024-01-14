@@ -3,6 +3,7 @@ using Common.SharedKernel.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Modules.Warehouse.Application.Categories;
+using Modules.Warehouse.Application.Products;
 using Modules.Warehouse.Domain.Categories;
 using Modules.Warehouse.Domain.Products;
 
@@ -14,6 +15,7 @@ public class WarehouseDbContextInitializer
     private readonly WarehouseDbContext _dbContext;
 
     private const int NumProducts = 20;
+
     private const int NumCategories = 5;
     // private const int NumCustomers = 20;
     // private const int NumOrders = 20;
@@ -75,9 +77,11 @@ public class WarehouseDbContextInitializer
         var skuFaker = new Faker<Sku>()
             .CustomInstantiator(f => Sku.Create(f.Commerce.Ean8())!);
 
+        var productRepository = new ProductRepository(_dbContext);
+
         var faker = new Faker<Product>()
             .CustomInstantiator(f => Product.Create(f.Commerce.ProductName(), moneyFaker.Generate(),
-                skuFaker.Generate(), f.PickRandom(categories).Id));
+                skuFaker.Generate(), f.PickRandom(categories).Id, productRepository));
 
         var products = faker.Generate(NumProducts);
         _dbContext.Products.AddRange(products);

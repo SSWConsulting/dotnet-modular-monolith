@@ -28,7 +28,7 @@ public class Product : AggregateRoot<ProductId>
     }
 
     // NOTE: Need to use a factory, as EF does not let owned entities (i.e Money & Sku) be passed via the constructor
-    public static Product Create(string name, Money price, Sku sku, CategoryId categoryId)
+    public static Product Create(string name, Money price, Sku sku, CategoryId categoryId, IProductRepository productRepository)
     {
         Guard.Against.NullOrWhiteSpace(name);
         Guard.Against.Null(sku);
@@ -42,9 +42,10 @@ public class Product : AggregateRoot<ProductId>
             CategoryId = categoryId,
             Name = name,
             Price = price,
-            Sku = sku,
             StockOnHand = 0
         };
+
+        product.UpdateSku(sku, productRepository);
 
         product.AddDomainEvent(ProductCreatedEvent.Create(product));
 
@@ -64,9 +65,13 @@ public class Product : AggregateRoot<ProductId>
         Price = price;
     }
 
-    public void UpdateSku(Sku sku)
+    public void UpdateSku(Sku sku, IProductRepository productRepository)
     {
         Guard.Against.Null(sku);
+
+        if (productRepository.SkuExists(sku))
+            throw new ArgumentException("Sku already exists");
+
         Sku = sku;
     }
 
