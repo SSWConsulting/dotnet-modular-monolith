@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Modules.Warehouse.Application.Products.Commands.CreateProduct;
 using Modules.Warehouse.Application.Products.Queries.GetProducts;
 using Modules.Warehouse.Endpoints.Extensions;
 
@@ -18,9 +19,9 @@ public static class ProductEndpoints
             .WithName("GetProducts")
             .ProducesGet<ProductDto[]>();
 
-        // group
-        //     .MapPost("/", async (ISender sender, CreateProductCommand command, CancellationToken ct) => await sender.Send(command, ct))
-        //     .WithName("CreateProduct")
-        //     .ProducesPost();
+        group
+            .MapPost("/", async (ISender sender, CreateProductCommand command, CancellationToken ct) => await sender.Send(command, ct))
+            .WithName("CreateProduct")
+            .ProducesPost();
     }
 }

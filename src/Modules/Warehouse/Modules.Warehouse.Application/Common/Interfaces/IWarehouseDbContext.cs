@@ -9,4 +9,6 @@ public interface IWarehouseDbContext
     public DbSet<Category> Categories { get; }
     
     public DbSet<Product> Products { get; }
+
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

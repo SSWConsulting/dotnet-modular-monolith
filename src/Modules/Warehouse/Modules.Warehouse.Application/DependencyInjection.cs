@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Modules.Warehouse.Application.Common.Behaviours;
+using Modules.Warehouse.Application.Products;
+using Modules.Warehouse.Domain.Products;
 
 namespace Modules.Warehouse.Application;
 
@@ -18,6 +21,9 @@ public static class DependencyInjection
             config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
             config.AddOpenBehavior(typeof(PerformanceBehaviour<,>));
         });
+
+        services.AddTransient<IProductRepository, ProductRepository>();
+
         return services;
     }
 }

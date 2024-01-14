@@ -20,6 +20,7 @@ public class WarehouseDbContext : DbContext, IWarehouseDbContext
     //
 
     public DbSet<Product> Products => Set<Product>();
+
     public DbSet<Category> Categories => Set<Category>();
 
     public WarehouseDbContext(DbContextOptions options /*EntitySaveChangesInterceptor saveChangesInterceptor, OutboxInterceptor outboxInterceptor*/) : base(options)
@@ -41,4 +42,8 @@ public class WarehouseDbContext : DbContext, IWarehouseDbContext
         //     _outboxInterceptor);
     }
 
+    // public Task<int> SaveChangesAsync() => this
+    // {
+    //     throw new NotImplementedException();
+    // }
 }
