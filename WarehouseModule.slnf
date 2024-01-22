@@ -1,0 +1,11 @@
+﻿{
+  "solution": {
+    "path": "ModularMonolith.sln",
+    "projects": [
+      "src\\Modules\\Warehouse\\Modules.Warehouse.Application\\Modules.Warehouse.Application.csproj",
+      "src\\Modules\\Warehouse\\Modules.Warehouse.Domain\\Modules.Warehouse.Domain.csproj",
+      "src\\Modules\\Warehouse\\Modules.Warehouse.Endpoints\\Modules.Warehouse.Endpoints.csproj",
+      "src\\Modules\\Warehouse\\Modules.Warehouse.Infrastructure\\Modules.Warehouse.Infrastructure.csproj"
+    ]
+  }
+}

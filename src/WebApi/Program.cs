@@ -1,3 +1,4 @@
+using Common.Endpoints;
 using Modules.Orders.Endpoints;
 using Modules.Warehouse.Endpoints;
 
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddOrdersServices();
+builder.Services.AddOrdersServices(builder.Configuration);
 builder.Services.AddWarehouseServices(builder.Configuration);
 
 var app = builder.Build();

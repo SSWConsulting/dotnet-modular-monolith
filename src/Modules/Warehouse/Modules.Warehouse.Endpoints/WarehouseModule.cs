@@ -1,9 +1,12 @@
-﻿using Modules.Warehouse.Application;
+﻿using Common.Endpoints;
+using Common.Endpoints.Interfaces;
+using Modules.Warehouse.Application;
 using Modules.Warehouse.Infrastructure;
 using Modules.Warehouse.Infrastructure.Persistence;
 
 namespace Modules.Warehouse.Endpoints;
 
+// ReSharper disable once UnusedType.Global
 public static class WarehouseModule
 {
     public static void AddWarehouseServices(this IServiceCollection services, IConfiguration configuration)
@@ -24,5 +27,6 @@ public static class WarehouseModule
         }
 
         app.MapProductEndpoints();
+        app.MapCategoryEndpoints();
     }
 }

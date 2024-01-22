@@ -1,12 +1,19 @@
-﻿using MediatR;
+﻿using Common.Endpoints.Interfaces;
+using MediatR;
 using Modules.Warehouse.Application.Products.Commands.CreateProduct;
 using Modules.Warehouse.Application.Products.Queries.GetProducts;
 using Modules.Warehouse.Endpoints.Extensions;
 
 namespace Modules.Warehouse.Endpoints;
 
-public static class ProductEndpoints
+// ReSharper disable once UnusedType.Global
+public static class ProductEndpoints //: IMapEndpoints
 {
+    // public static void MapProductEndpoints(this WebApplication app)
+    // {
+    //
+    // }
+
     public static void MapProductEndpoints(this WebApplication app)
     {
         var group = app
