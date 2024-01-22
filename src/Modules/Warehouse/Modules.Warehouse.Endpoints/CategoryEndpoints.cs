@@ -1,18 +1,14 @@
 ﻿using Common.Endpoints.Interfaces;
 using MediatR;
+using Modules.Warehouse.Application.Categories.Commands.CreateCategory;
 using Modules.Warehouse.Application.Products.Commands.CreateProduct;
 using Modules.Warehouse.Application.Products.Queries.GetProducts;
 using Modules.Warehouse.Endpoints.Extensions;
 
 namespace Modules.Warehouse.Endpoints;
 
-public static class CategoryEndpoints //: IMapEndpoints
+public static class CategoryEndpoints
 {
-    // public static void MapCategoryEndpoints(this WebApplication app)
-    // {
-    //
-    // }
-
     public static void MapCategoryEndpoints(this WebApplication app)
     {
         var group = app
@@ -25,9 +21,9 @@ public static class CategoryEndpoints //: IMapEndpoints
         //     .WithName("GetCa")
         //     .ProducesGet<ProductDto[]>();
 
-        // group
-        //     .MapPost("/", async (ISender sender, CreateCategoryCommand command, CancellationToken ct) => await sender.Send(command, ct))
-        //     .WithName("CreateCategory")
-        //     .ProducesPost();
+        group
+            .MapPost("/", async (ISender sender, CreateCategoryCommand command, CancellationToken ct) => await sender.Send(command, ct))
+            .WithName("CreateCategory")
+            .ProducesPost();
     }
 }

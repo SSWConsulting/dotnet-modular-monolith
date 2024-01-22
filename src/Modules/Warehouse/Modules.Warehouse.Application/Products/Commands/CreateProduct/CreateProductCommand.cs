@@ -13,7 +13,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand>
     private readonly IWarehouseDbContext _dbContext;
     private readonly IProductRepository _productRepository;
 
-    public CreateProductCommandHandler(IWarehouseDbContext dbContext, IProductRepository productRepository, CancellationToken cancellationToken)
+    public CreateProductCommandHandler(IWarehouseDbContext dbContext, IProductRepository productRepository)
     {
         _dbContext = dbContext;
         _productRepository = productRepository;
