@@ -1,5 +1,6 @@
-using Modules.Orders.Endpoints;
-using Modules.Warehouse.Endpoints;
+using Common.SharedKernel.Behaviours;
+using Module.Orders;
+using Modules.Warehouse;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +9,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddOrdersServices();
-builder.Services.AddWarehouseServices(builder.Configuration);
+// Common MediatR behaviors across all modules
+builder.Services.AddMediatR(config =>
+{
+    config.AddOpenBehavior(typeof(UnhandledExceptionBehaviour<,>));
+    config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+    config.AddOpenBehavior(typeof(PerformanceBehaviour<,>));
+});
+
+
+
+builder.Services.AddOrders();
+builder.Services.AddWarehouse(builder.Configuration);
 
 var app = builder.Build();
 
@@ -22,7 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseOrdersModule();
-await app.UseWarehouseModule();
+app.UseOrders();
+await app.UseWarehouse();
 
 app.Run();
