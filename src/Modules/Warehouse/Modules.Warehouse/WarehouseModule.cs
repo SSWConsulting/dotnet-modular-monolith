@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Common.SharedKernel;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -42,4 +43,13 @@ public static class WarehouseModule
         // TODO: Move to feature DI
         app.MapProductEndpoints();
     }
+}
+
+public class WarehouseModule2 : IModule
+{
+    public void AddServices(IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddWarehouse(configuration);
+    }
+
 }
