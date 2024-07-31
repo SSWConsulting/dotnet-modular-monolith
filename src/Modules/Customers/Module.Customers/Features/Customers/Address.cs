@@ -1,6 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 
-namespace Module.Orders.Features.Customers;
+namespace Module.Customers.Features.Customers;
 
 internal record Address
 {

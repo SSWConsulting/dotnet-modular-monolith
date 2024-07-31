@@ -15,8 +15,6 @@ internal class Order : AggregateRoot<OrderId>
 
     public required CustomerId CustomerId { get; init; }
 
-    public Customer? Customer { get; set; }
-
     // TODO: Check FE overrides this
     public Money AmountPaid { get; private set; } = null!;
 

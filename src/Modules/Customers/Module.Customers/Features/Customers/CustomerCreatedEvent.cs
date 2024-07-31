@@ -1,6 +1,6 @@
 ﻿using Common.SharedKernel.Domain.Base;
 
-namespace Module.Orders.Features.Customers;
+namespace Module.Customers.Features.Customers;
 
 internal record CustomerCreatedEvent(CustomerId Id, string FirstName, string LastName) : DomainEvent
 {
