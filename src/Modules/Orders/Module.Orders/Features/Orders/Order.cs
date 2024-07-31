@@ -9,7 +9,7 @@ namespace Module.Orders.Features.Orders;
 
 internal class Order : AggregateRoot<OrderId>
 {
-    private readonly List<LineItem> _lineItems = new();
+    private readonly List<LineItem> _lineItems = [];
 
     public IEnumerable<LineItem> LineItems => _lineItems.AsReadOnly();
 

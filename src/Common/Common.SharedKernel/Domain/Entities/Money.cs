@@ -4,6 +4,8 @@ namespace Common.SharedKernel.Domain.Entities;
 
 public record Money(Currency Currency, decimal Amount)
 {
+    public static Money Create(decimal amount) => new(Currency.Default, amount);
+
     public static Money Default => new(Currency.Default, 0);
 
     public static Money Zero => Default;
@@ -48,5 +50,5 @@ public record Money(Currency Currency, decimal Amount)
         return left with { Amount = left.Amount * right.Amount };
     }
 
-    private static void AssertValidCurrencies(Money left, Money right) => left.Throw().IfNotEquals(right);
+    private static void AssertValidCurrencies(Money left, Money right) => left.Currency.Throw().IfNotEquals(right.Currency);
 }

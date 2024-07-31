@@ -1,34 +1,38 @@
 ﻿using Ardalis.GuardClauses;
 using Common.SharedKernel.Domain.Base;
 using Common.SharedKernel.Domain.Entities;
-using Common.SharedKernel.Domain.Exceptions;
 using Common.SharedKernel.Domain.Identifiers;
+using Throw;
 
 namespace Module.Orders.Features.Orders;
 
 internal class LineItem : Entity<LineItemId>
 {
+    private const decimal TaxRate = 0.1m;
+
     public required OrderId OrderId { get; init; }
 
     public required ProductId ProductId { get; init; }
 
-    //public Product? Product { get; init; }
-
-    // Detatch price from product to capture the price at the time of purchase
+    // Detach price from product to capture the price at the time of purchase
     public required Money Price { get; init; }
 
     public int Quantity { get; private set; }
 
-    public Money Total => new(Price.Currency, Price.Amount * Quantity);
+    public Money Total => Price with { Amount = Price.Amount * Quantity };
+
+    public Money Tax => Total * Total with { Amount = TaxRate };
+
+    public Money TotalIncludingTax => Total + Tax;
 
     private LineItem() { }
 
-    // NOTE: Need to use a factory, as EF does not let owned entities (i.e Money) be passed via the constructor
+    // NOTE: Need to use a factory, as EF does not let owned entities (i.e. Money) be passed via the constructor
     // Internal so that only the Order can create a LineItem
     internal static LineItem Create(OrderId orderId, ProductId productId, Money price, int quantity)
     {
-        Guard.Against.ZeroOrNegative(price.Amount);
-        Guard.Against.ZeroOrNegative(quantity);
+        price.Amount.Throw().IfNegativeOrZero();
+        quantity.Throw().IfNegativeOrZero();
 
         var lineItem = new LineItem()
         {
