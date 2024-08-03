@@ -3,9 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Modules.Warehouse.Common.Persistence;
-using Modules.Warehouse.Features.Products;
-using Modules.Warehouse.Features.Products.Domain;
-using Modules.Warehouse.Features.Products.Endpoints;
+using Modules.Warehouse.Products;
+using Modules.Warehouse.Products.Domain;
+using Modules.Warehouse.Products.Endpoints;
 
 namespace Modules.Warehouse;
 
@@ -24,20 +24,20 @@ public static class WarehouseModule
         });
 
         // Todo: Move to feature DI
-        services.AddTransient<IProductRepository, ProductRepository>();
+        // services.AddTransient<IProductRepository, ProductRepository>();
     }
 
     public static async Task UseWarehouse(this WebApplication app)
     {
         // TODO: Refactor to up.ps1
-        if (app.Environment.IsDevelopment())
-        {
-            // Initialise and seed database
-            using var scope = app.Services.CreateScope();
-            var initializer = scope.ServiceProvider.GetRequiredService<WarehouseDbContextInitializer>();
-            await initializer.InitializeAsync();
-            await initializer.SeedAsync();
-        }
+        // if (app.Environment.IsDevelopment())
+        // {
+        //     // Initialise and seed database
+        //     using var scope = app.Services.CreateScope();
+        //     var initializer = scope.ServiceProvider.GetRequiredService<WarehouseDbContextInitializer>();
+        //     await initializer.InitializeAsync();
+        //     await initializer.SeedAsync();
+        // }
 
         // TODO: Move to feature DI
         app.MapProductEndpoints();

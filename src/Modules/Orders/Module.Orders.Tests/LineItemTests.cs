@@ -1,7 +1,7 @@
 using Common.SharedKernel.Domain.Entities;
 using Common.SharedKernel.Domain.Identifiers;
 using FluentAssertions;
-using Module.Orders.Features.Orders;
+using Module.Orders.Orders;
 
 namespace Module.Orders.Tests;
 

@@ -30,31 +30,27 @@ Responsible for Warehouse and Inventory Management
 
 ## Business Invariants
 
+Warehouse:
+- N/A
+
+Product Catalog:
+- A product must have a name
+- A product must have a price
+- A product can be given one or more categories
+- A product cannot have a negative price
+- A product cannot duplicate categories
+
 Customers:
-- Can register with the website
 - Must have a unique email address
 - Must have an address
+
+Cart:
+- Must be associated with a customer
+- Must always have the correct price
 
 Orders:
 - An order must be associated with a customer
 - The order total must always be correct
 - The order tax must always be correct
+- Shipping must be included in the total price
 - Payment must be completed for the order to be placed (FUTURE: Consider splitting payments to it's own module)
-
-Products:
-- A customer must be able to search products
-- A product can be given one or more categories
-
-Warehouse:
-- Products can be loaded into the warehouse and have their location tracked
-- When an order is placed the stock level must be updated
-- If there is not enough stock the order must be put on back order
-- When stock is below a certain threshold the warehouse will be notified to restock
-- An order can be dispatched from the warehouse
-
-Shipping:
-- Once an order is dispatched from the warehouse the shipping company must be notified
-- The all 'stops' must be tracked until delivered
-- The customer must be able to track their order
-- Once delivered the order must be marked as complete and the customer will be notified
-- Must be able to calculate the shipping cost based on time to delivery
