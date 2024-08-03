@@ -1,6 +1,6 @@
-﻿using Ardalis.GuardClauses;
-using Common.SharedKernel.Domain.Base;
+﻿using Common.SharedKernel.Domain.Base;
 using Common.SharedKernel.Domain.Exceptions;
+using Throw;
 
 namespace Modules.Catelog.Categories.Domain;
 
@@ -27,7 +27,8 @@ internal class Category : AggregateRoot<CategoryId>
 
     public void UpdateName(string name, ICategoryRepository categoryRepository)
     {
-        Guard.Against.NullOrWhiteSpace(name);
+        name.Throw().IfEmpty();
+        // Guard.Against.NullOrWhiteSpace(name);
 
         if (categoryRepository.CategoryExists(name))
             throw new DomainException($"Category {name} already exists");

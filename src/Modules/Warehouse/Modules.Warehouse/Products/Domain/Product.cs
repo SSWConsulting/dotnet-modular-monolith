@@ -1,8 +1,8 @@
-﻿using Ardalis.GuardClauses;
-using Common.SharedKernel.Domain.Base;
+﻿using Common.SharedKernel.Domain.Base;
 using Common.SharedKernel.Domain.Entities;
 using Common.SharedKernel.Domain.Exceptions;
 using Common.SharedKernel.Domain.Identifiers;
+using Throw;
 
 namespace Modules.Warehouse.Products.Domain;
 
@@ -29,11 +29,8 @@ internal class Product : AggregateRoot<ProductId>
     // NOTE: Need to use a factory, as EF does not let owned entities (i.e Money & Sku) be passed via the constructor
     public static Product Create(string name, Money price, Sku sku, IProductRepository productRepository)
     {
-        Guard.Against.NullOrWhiteSpace(name);
-        Guard.Against.Null(sku);
-        Guard.Against.Null(price);
-        Guard.Against.ZeroOrNegative(price.Amount);
-        // Guard.Against.Null(categoryId);
+        name.Throw().IfEmpty();
+        price.Throw().IfNegativeOrZero(p => p.Amount);
 
         var product = new Product
         {
@@ -53,21 +50,18 @@ internal class Product : AggregateRoot<ProductId>
 
     public void UpdateName(string name)
     {
-        Guard.Against.NullOrWhiteSpace(name);
+        name.Throw().IfEmpty();
         Name = name;
     }
 
     public void UpdatePrice(Money price)
     {
-        Guard.Against.Null(price);
-        Guard.Against.ZeroOrNegative(price.Amount);
+        price.Throw().IfNegativeOrZero(p => p.Amount);
         Price = price;
     }
 
     public void UpdateSku(Sku sku, IProductRepository productRepository)
     {
-        Guard.Against.Null(sku);
-
         if (productRepository.SkuExists(sku))
             throw new ArgumentException("Sku already exists");
 
@@ -76,7 +70,7 @@ internal class Product : AggregateRoot<ProductId>
 
     public void RemoveStock(int quantity)
     {
-        Guard.Against.NegativeOrZero(quantity);
+        quantity.Throw().IfNegativeOrZero();
 
         if (StockOnHand - quantity < 0)
             throw new DomainException("Cannot adjust stock below zero");
@@ -89,7 +83,7 @@ internal class Product : AggregateRoot<ProductId>
 
     public void AddStock(int quantity)
     {
-        Guard.Against.NegativeOrZero(quantity);
+        quantity.Throw().IfNegativeOrZero();
         StockOnHand += quantity;
     }
 }

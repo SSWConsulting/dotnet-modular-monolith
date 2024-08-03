@@ -1,8 +1,11 @@
-﻿using Ardalis.GuardClauses;
-using Common.SharedKernel.Domain.Base;
+﻿using Common.SharedKernel.Domain.Base;
 using Common.SharedKernel.Domain.Entities;
 using Common.SharedKernel.Domain.Exceptions;
 using Common.SharedKernel.Domain.Identifiers;
+using ErrorOr;
+using OneOf.Types;
+using Error = ErrorOr.Error;
+using Success = ErrorOr.Success;
 
 namespace Module.Orders.Orders;
 
@@ -37,7 +40,9 @@ internal class Order : AggregateRoot<OrderId>
         }
     }
 
-    private Order() { }
+    private Order()
+    {
+    }
 
     public static Order Create(CustomerId customerId)
     {
@@ -54,14 +59,15 @@ internal class Order : AggregateRoot<OrderId>
         return order;
     }
 
-    public LineItem AddLineItem(ProductId productId, Money price, int quantity)
+    public ErrorOr<LineItem> AddLineItem(ProductId productId, Money price, int quantity)
     {
-        Guard.Against.Expression(_ => Status != OrderStatus.PendingPayment, Status,
-            "Can't modify order once payment is done");
+        // TODO: Unit test
+        if (Status == OrderStatus.PendingPayment)
+            return OrderErrors.CantModifyAfterPayment;
 
+        // TODO: Unit test
         if (OrderCurrency != null && OrderCurrency != price.Currency)
-            throw new DomainException(
-                $"Cannot add line item with currency {price.Currency} to and order than already contains a currency of {price.Currency}");
+            return OrderErrors.CurrencyMismatch;
 
         var existingLineItem = _lineItems.FirstOrDefault(li => li.ProductId == productId);
         if (existingLineItem != null)
@@ -77,19 +83,23 @@ internal class Order : AggregateRoot<OrderId>
         return lineItem;
     }
 
-    public void RemoveLineItem(ProductId productId)
+    public ErrorOr<Success> RemoveLineItem(ProductId productId)
     {
-        Guard.Against.Expression(_ => Status != OrderStatus.PendingPayment, Status,
-            "Can't modify order once payment is done");
+        if (Status == OrderStatus.PendingPayment)
+            return OrderErrors.CantModifyAfterPayment;
 
         var lineItem = _lineItems.RemoveAll(x => x.ProductId == productId);
+
+        return Result.Success;
     }
 
-    public void AddPayment(Money payment)
+    public ErrorOr<Success> AddPayment(Money payment)
     {
-        Guard.Against.ZeroOrNegative(payment.Amount);
+        if (payment.Amount <= 0)
+            return OrderErrors.PaymentAmountZeroOrNegative;
+
         if (payment > OrderTotal - AmountPaid)
-            throw new DomainException("Payment can't exceed order total");
+            return OrderErrors.PaymentExceedsOrderTotal;
 
         // Ensure currency is set on first payment
         if (AmountPaid.Amount == 0)
@@ -102,6 +112,8 @@ internal class Order : AggregateRoot<OrderId>
             Status = OrderStatus.ReadyForShipping;
             AddDomainEvent(new OrderReadyForShippingEvent(Id));
         }
+
+        return Result.Success;
     }
 
     public void AddQuantity(ProductId productId, int quantity) =>
@@ -110,15 +122,20 @@ internal class Order : AggregateRoot<OrderId>
     public void RemoveQuantity(ProductId productId, int quantity) =>
         _lineItems.FirstOrDefault(li => li.ProductId == productId)?.RemoveQuantity(quantity);
 
-    public void ShipOrder(TimeProvider timeProvider)
+    public ErrorOr<Success> ShipOrder(TimeProvider timeProvider)
     {
-        Guard.Against.Expression(_ => Status == OrderStatus.PendingPayment, Status, "Can't ship an unpaid order");
-        Guard.Against.Expression(_ => Status == OrderStatus.InTransit, Status, "Order already shipped to customer");
+        if (Status == OrderStatus.PendingPayment)
+            return OrderErrors.CantShipUnpaidOrder;
+
+        if (Status == OrderStatus.InTransit)
+            return OrderErrors.OrderAlreadyShipped;
 
         if (_lineItems.Sum(li => li.Quantity) <= 0)
             throw new DomainException("Can't ship an order with no items");
 
         ShippingDate = timeProvider.GetUtcNow();
         Status = OrderStatus.InTransit;
+
+        return Result.Success;
     }
 }

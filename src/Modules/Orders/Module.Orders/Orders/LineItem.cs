@@ -1,5 +1,4 @@
-﻿using Ardalis.GuardClauses;
-using Common.SharedKernel.Domain.Base;
+﻿using Common.SharedKernel.Domain.Base;
 using Common.SharedKernel.Domain.Entities;
 using Common.SharedKernel.Domain.Identifiers;
 using Throw;
@@ -50,8 +49,7 @@ internal class LineItem : Entity<LineItemId>
 
     internal void RemoveQuantity(int quantity)
     {
-        Guard.Against.Expression(_ => Quantity - quantity <= 0, quantity,
-            "Can't remove all units.  Remove the entire item instead.");
+        quantity.Throw("Can't remove all units.  Remove the entire item instead").IfTrue(Quantity - quantity <= 0);
         Quantity -= quantity;
     }
 }

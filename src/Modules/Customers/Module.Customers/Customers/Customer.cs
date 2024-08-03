@@ -1,5 +1,5 @@
-﻿using Ardalis.GuardClauses;
-using Common.SharedKernel.Domain.Base;
+﻿using Common.SharedKernel.Domain.Base;
+using Throw;
 
 namespace Module.Customers.Customers;
 
@@ -17,7 +17,7 @@ internal class Customer : AggregateRoot<CustomerId>
 
     internal static Customer Create(string email, string firstName, string lastName)
     {
-        Guard.Against.NullOrWhiteSpace(email);
+        email.Throw().IfEmpty();
 
         var customer = new Customer() { Id = new CustomerId(Guid.NewGuid()), Email = email, };
 
@@ -29,8 +29,8 @@ internal class Customer : AggregateRoot<CustomerId>
 
     public void UpdateName(string firstName, string lastName)
     {
-        Guard.Against.NullOrWhiteSpace(firstName);
-        Guard.Against.NullOrWhiteSpace(lastName);
+        firstName.Throw().IfEmpty();
+        lastName.Throw().IfEmpty();
 
         FirstName = firstName;
         LastName = lastName;

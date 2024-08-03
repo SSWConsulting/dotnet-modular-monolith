@@ -1,4 +1,4 @@
-﻿using Ardalis.GuardClauses;
+﻿using Throw;
 
 namespace Module.Customers.Customers;
 
@@ -13,11 +13,11 @@ internal record Address
 
     internal Address(string line1, string? line2, string city, string state, string zipCode, string country)
     {
-        Guard.Against.NullOrWhiteSpace(line1);
-        Guard.Against.NullOrWhiteSpace(city);
-        Guard.Against.NullOrWhiteSpace(state);
-        Guard.Against.NullOrWhiteSpace(zipCode);
-        Guard.Against.NullOrWhiteSpace(country);
+        line1.Throw().IfEmpty();
+        city.Throw().IfEmpty();
+        state.Throw().IfEmpty();
+        zipCode.Throw().IfEmpty();
+        country.Throw().IfEmpty();
 
         Line1 = line1;
         Line2 = line2;
