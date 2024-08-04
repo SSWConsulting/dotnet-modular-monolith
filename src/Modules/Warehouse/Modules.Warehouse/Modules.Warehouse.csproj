@@ -26,4 +26,8 @@
       <ProjectReference Include="..\..\..\Common\Common.SharedKernel\Common.SharedKernel.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="BackOrders\" />
+    </ItemGroup>
+
 </Project>

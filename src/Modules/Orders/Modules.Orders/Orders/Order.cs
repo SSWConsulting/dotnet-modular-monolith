@@ -1,10 +1,7 @@
 ﻿using Common.SharedKernel.Domain.Base;
 using Common.SharedKernel.Domain.Entities;
 using Common.SharedKernel.Domain.Exceptions;
-using Common.SharedKernel.Domain.Identifiers;
 using ErrorOr;
-using OneOf.Types;
-using Error = ErrorOr.Error;
 using Success = ErrorOr.Success;
 
 namespace Module.Orders.Orders;

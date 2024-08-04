@@ -7,6 +7,7 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
+        <RootNamespace>Module.Orders.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -24,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Module.Orders\Module.Orders.csproj" />
+      <ProjectReference Include="..\Modules.Orders\Modules.Orders.csproj" />
     </ItemGroup>
 
 </Project>

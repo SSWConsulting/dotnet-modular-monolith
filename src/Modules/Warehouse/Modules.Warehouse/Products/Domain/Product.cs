@@ -1,18 +1,15 @@
 ﻿using Common.SharedKernel.Domain.Base;
 using Common.SharedKernel.Domain.Entities;
 using Common.SharedKernel.Domain.Exceptions;
-using Common.SharedKernel.Domain.Identifiers;
 using Throw;
 
 namespace Modules.Warehouse.Products.Domain;
 
+internal record ProductId(Guid Value);
+
 internal class Product : AggregateRoot<ProductId>
 {
     private const int LowStockThreshold = 5;
-
-    // public CategoryId CategoryId { get; set; } = null!;
-
-    // public Category Category { get; set; } = null!;
 
     public string Name { get; private set; } = null!;
 

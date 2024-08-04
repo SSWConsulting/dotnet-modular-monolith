@@ -1,5 +1,4 @@
-﻿using Common.SharedKernel.Domain.Identifiers;
-using Common.SharedKernel.Persistence;
+﻿using Common.SharedKernel.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Modules.Warehouse.Products.Domain;

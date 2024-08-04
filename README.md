@@ -31,7 +31,8 @@ Responsible for Warehouse and Inventory Management
 ## Business Invariants
 
 Warehouse:
-- N/A
+- An Aisle cannot have duplicate bays
+- A bay cannot have duplicate shelves
 
 Product Catalog:
 - A product must have a name

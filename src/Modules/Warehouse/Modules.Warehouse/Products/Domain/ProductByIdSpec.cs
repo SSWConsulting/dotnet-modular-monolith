@@ -1,5 +1,4 @@
 ﻿using Ardalis.Specification;
-using Common.SharedKernel.Domain.Identifiers;
 
 namespace Modules.Warehouse.Products.Domain;
 
