@@ -27,7 +27,7 @@ public static class WarehouseModule
         // services.AddTransient<IProductRepository, ProductRepository>();
     }
 
-    public static async Task UseWarehouse(this WebApplication app)
+    public static Task UseWarehouse(this WebApplication app)
     {
         // TODO: Refactor to up.ps1
         // if (app.Environment.IsDevelopment())
@@ -41,5 +41,7 @@ public static class WarehouseModule
 
         // TODO: Move to feature DI
         app.MapProductEndpoints();
+
+        return Task.CompletedTask;
     }
 }
