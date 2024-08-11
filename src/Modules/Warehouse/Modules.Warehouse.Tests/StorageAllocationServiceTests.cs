@@ -19,7 +19,7 @@ public class StorageAllocationServiceTests
        // Act
        for(var i = 0; i < numBays * numShelves; i++)
        {
-           sut.AllocateStorage([aisle], productId);
+            StorageAllocationService.AllocateStorage([aisle], productId);
        }
 
        // Assert
@@ -40,11 +40,11 @@ public class StorageAllocationServiceTests
         // Act
         for(var i = 0; i < numBays * numShelves; i++)
         {
-            sut.AllocateStorage([aisle], productId);
+            StorageAllocationService.AllocateStorage([aisle], productId);
         }
 
         // Assert
-        var act = () => sut.AllocateStorage([aisle], productId);
+        var act = () => StorageAllocationService.AllocateStorage([aisle], productId);
         act.Should().Throw<Exception>();
     }
 }

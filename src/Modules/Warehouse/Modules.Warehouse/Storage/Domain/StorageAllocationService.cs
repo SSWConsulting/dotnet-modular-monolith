@@ -7,7 +7,7 @@ namespace Modules.Warehouse.Storage.Domain;
 /// </summary>
 internal class StorageAllocationService
 {
-    internal void AllocateStorage(IEnumerable<Aisle> aisles, ProductId productId)
+    internal static void AllocateStorage(IEnumerable<Aisle> aisles, ProductId productId)
     {
         foreach (var aisle in aisles)
         {

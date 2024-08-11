@@ -23,10 +23,10 @@ public class ModelTests
         var aisle = Aisle.Create("Aisle 1", 2, 3);
         var service = new StorageAllocationService();
 
-        service.AllocateStorage(new List<Aisle> { aisle }, productA);
-        service.AllocateStorage(new List<Aisle> { aisle }, productA);
-        service.AllocateStorage(new List<Aisle> { aisle }, productA);
-        service.AllocateStorage(new List<Aisle> { aisle }, productB);
+        StorageAllocationService.AllocateStorage(new List<Aisle> { aisle }, productA);
+        StorageAllocationService.AllocateStorage(new List<Aisle> { aisle }, productA);
+        StorageAllocationService.AllocateStorage(new List<Aisle> { aisle }, productA);
+        StorageAllocationService.AllocateStorage(new List<Aisle> { aisle }, productB);
 
         string aisleName = string.Empty;
         string bayName = string.Empty;
