@@ -1,5 +1,5 @@
 using Common.SharedKernel.Behaviours;
-using Module.Orders;
+using Modules.Orders;
 using Modules.Warehouse;
 
 var builder = WebApplication.CreateBuilder(args);

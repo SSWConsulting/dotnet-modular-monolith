@@ -1,6 +1,6 @@
 ﻿using Common.SharedKernel.Domain.Base;
 
-namespace Module.Orders.Orders;
+namespace Modules.Orders.Orders;
 
 internal record OrderReadyForShippingEvent(OrderId OrderId) : DomainEvent
 {

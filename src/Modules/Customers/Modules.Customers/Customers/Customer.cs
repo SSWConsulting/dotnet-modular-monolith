@@ -1,7 +1,7 @@
 ﻿using Common.SharedKernel.Domain.Base;
 using Throw;
 
-namespace Module.Customers.Customers;
+namespace Modules.Customers.Customers;
 
 internal class Customer : AggregateRoot<CustomerId>
 {

@@ -1,8 +1,8 @@
 using Common.SharedKernel.Domain.Entities;
 using FluentAssertions;
-using Module.Orders.Orders;
+using Modules.Orders.Orders;
 
-namespace Module.Orders.Tests;
+namespace Modules.Orders.Tests;
 
 public class LineItemTests
 {

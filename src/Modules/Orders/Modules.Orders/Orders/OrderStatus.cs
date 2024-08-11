@@ -1,4 +1,4 @@
-﻿namespace Module.Orders.Orders;
+﻿namespace Modules.Orders.Orders;
 
 internal enum OrderStatus
 {

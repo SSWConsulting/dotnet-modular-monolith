@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Modules.Warehouse.Storage.Domain;
 
-namespace Module.Warehouse.Tests;
+namespace Modules.Warehouse.Tests;
 
 public class AisleTests
 {

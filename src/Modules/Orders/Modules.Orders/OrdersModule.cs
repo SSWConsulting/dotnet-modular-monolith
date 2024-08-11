@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Module.Orders;
+namespace Modules.Orders;
 
 public static class OrdersModule
 {

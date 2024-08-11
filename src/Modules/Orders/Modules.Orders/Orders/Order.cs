@@ -4,7 +4,7 @@ using Common.SharedKernel.Domain.Exceptions;
 using ErrorOr;
 using Success = ErrorOr.Success;
 
-namespace Module.Orders.Orders;
+namespace Modules.Orders.Orders;
 
 internal class Order : AggregateRoot<OrderId>
 {

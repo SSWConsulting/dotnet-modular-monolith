@@ -2,7 +2,7 @@
 using Common.SharedKernel.Domain.Entities;
 using Throw;
 
-namespace Module.Orders.Orders;
+namespace Modules.Orders.Orders;
 
 internal class LineItem : Entity<LineItemId>
 {

@@ -1,3 +1,3 @@
-﻿namespace Module.Customers.Customers;
+﻿namespace Modules.Customers.Customers;
 
 internal record CustomerId(Guid Value);

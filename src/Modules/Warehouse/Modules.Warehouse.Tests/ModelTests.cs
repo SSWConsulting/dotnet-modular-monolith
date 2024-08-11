@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Storage.Domain;
 using Xunit.Abstractions;
 
-namespace Module.Warehouse.Tests;
+namespace Modules.Warehouse.Tests;
 
 public class ModelTests
 {
