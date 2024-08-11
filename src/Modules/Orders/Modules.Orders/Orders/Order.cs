@@ -1,4 +1,5 @@
-﻿using Common.SharedKernel.Domain.Base;
+﻿using Ardalis.SmartEnum;
+using Common.SharedKernel.Domain.Base;
 using Common.SharedKernel.Domain.Entities;
 using Common.SharedKernel.Domain.Exceptions;
 using ErrorOr;
@@ -154,10 +155,13 @@ internal class Payment : Entity<PaymentId>
     }
 }
 
-// TODO: Convert to Smart Enums
-internal enum PaymentType
+internal class PaymentType : SmartEnum<PaymentType>
 {
-    CreditCard = 1,
-    PayPal = 2,
-    Cash = 3
+    public static readonly PaymentType CreditCard = new(1, "CreditCard");
+    public static readonly PaymentType PayPal = new(2, "PayPal");
+    public static readonly PaymentType Cash = new(3, "Cash");
+
+    private PaymentType(int id, string name) : base(name, id)
+    {
+    }
 }

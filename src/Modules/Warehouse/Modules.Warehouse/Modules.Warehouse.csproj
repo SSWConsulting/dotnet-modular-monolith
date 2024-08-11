@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
+        <PackageReference Include="Ardalis.SmartEnum" Version="8.0.0" />
         <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="8.0.0" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
         <PackageReference Include="MediatR" Version="12.2.0" />
@@ -18,10 +19,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Common\Common.SharedKernel\Common.SharedKernel.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="BackOrders\" />
     </ItemGroup>
 
 </Project>
