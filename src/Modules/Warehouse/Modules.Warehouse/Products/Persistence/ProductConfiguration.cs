@@ -18,7 +18,7 @@ internal class ProductConfiguration : IEntityTypeConfiguration<Product>
             .HasConversion(sku => sku.Value, value => Sku.Create(value)!)
             .HasMaxLength(50);
 
-        builder.ComplexProperty(p => p.Price, MoneyConfiguration.BuildAction);
+        // builder.ComplexProperty(p => p.Price, MoneyConfiguration.BuildAction);
 
         //builder.ComplexProperty(p => p.Price, () => MoneyConfiguration.BuildAction)
 

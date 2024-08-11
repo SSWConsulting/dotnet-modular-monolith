@@ -13,8 +13,6 @@ internal class Product : AggregateRoot<ProductId>
 
     public string Name { get; private set; } = null!;
 
-    public Money Price { get; private set; } = null!;
-
     public Sku Sku { get; private set; } = null!;
 
     public int StockOnHand { get; private set; }
@@ -23,7 +21,7 @@ internal class Product : AggregateRoot<ProductId>
     {
     }
 
-    // NOTE: Need to use a factory, as EF does not let owned entities (i.e Money & Sku) be passed via the constructor
+    // NOTE: Need to use a factory, as EF does not let owned entities (i.e. Money & Sku) be passed via the constructor
     public static Product Create(string name, Money price, Sku sku, IProductRepository productRepository)
     {
         name.Throw().IfEmpty();
@@ -32,12 +30,10 @@ internal class Product : AggregateRoot<ProductId>
         var product = new Product
         {
             Id = new ProductId(Guid.NewGuid()),
-            // CategoryId = categoryId,
-            Name = name,
-            Price = price,
             StockOnHand = 0
         };
 
+        product.UpdateName(name);
         product.UpdateSku(sku, productRepository);
 
         product.AddDomainEvent(ProductCreatedEvent.Create(product));
@@ -49,12 +45,6 @@ internal class Product : AggregateRoot<ProductId>
     {
         name.Throw().IfEmpty();
         Name = name;
-    }
-
-    public void UpdatePrice(Money price)
-    {
-        price.Throw().IfNegativeOrZero(p => p.Amount);
-        Price = price;
     }
 
     public void UpdateSku(Sku sku, IProductRepository productRepository)

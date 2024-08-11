@@ -2,7 +2,7 @@
 using Common.SharedKernel.Domain.Exceptions;
 using Throw;
 
-namespace Modules.Catelog.Categories.Domain;
+namespace Modules.Catalog.Categories.Domain;
 
 internal class Category : AggregateRoot<CategoryId>
 {

@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Orders.Tests", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{1E1A153A-D69A-4EC5-BD21-DE4249E8FA4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Catelog", "src\Modules\Products\Modules.Catelog\Modules.Catelog.csproj", "{591B271C-4C16-49CA-9549-E51087B591D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Catalog", "src\Modules\Products\Modules.Catalog\Modules.Catalog.csproj", "{591B271C-4C16-49CA-9549-E51087B591D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Warehouse.Tests", "src\Modules\Warehouse\Modules.Warehouse.Tests\Modules.Warehouse.Tests.csproj", "{C9C4959A-0DB6-4C6C-9811-A42D7A5E3CE0}"
 EndProject

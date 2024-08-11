@@ -1,4 +1,4 @@
-﻿namespace Modules.Catelog.Categories.Domain;
+﻿namespace Modules.Catalog.Categories.Domain;
 
 internal interface ICategoryRepository
 {
