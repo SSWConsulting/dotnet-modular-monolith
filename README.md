@@ -55,3 +55,26 @@ Orders:
 - The order tax must always be correct
 - Shipping must be included in the total price
 - Payment must be completed for the order to be placed (FUTURE: Consider splitting payments to it's own module)
+
+## Event Storming
+
+![image](https://github.com/user-attachments/assets/63ceadd7-428e-4cac-9937-377e46ae384a)
+
+## Bounded Contexts
+
+### Warehouse Context
+
+![image](https://github.com/user-attachments/assets/f7d5a522-246b-4ecf-88cf-e5cb0738f0a0)
+
+### Catalog Context
+
+![image](https://github.com/user-attachments/assets/a08d2964-c3fa-417f-8b6a-598d2a2fe511)
+
+### Customer Context
+
+![image](https://github.com/user-attachments/assets/d104aff7-2d5d-4308-af97-fca0c298d0b7)
+
+### Orders Context
+
+![image](https://github.com/user-attachments/assets/3c731981-1f98-42ca-9f74-c955a31a5790)
+
