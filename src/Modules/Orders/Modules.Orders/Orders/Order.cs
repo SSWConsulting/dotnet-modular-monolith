@@ -17,6 +17,8 @@ internal class Order : AggregateRoot<OrderId>
     // TODO: Check FE overrides this
     public Money AmountPaid { get; private set; } = null!;
 
+    private Payment _payment = null!;
+
     public OrderStatus Status { get; private set; }
 
     public DateTimeOffset ShippingDate { get; private set; }
@@ -135,4 +137,27 @@ internal class Order : AggregateRoot<OrderId>
 
         return Result.Success;
     }
+}
+
+internal record PaymentId(Guid Value);
+
+internal class Payment : Entity<PaymentId>
+{
+    public Money Amount { get; private set; }
+
+    public PaymentType PaymentType { get; private set; }
+
+    public Payment(Money amount, PaymentType paymentType)
+    {
+        Amount = amount;
+        PaymentType = paymentType;
+    }
+}
+
+// TODO: Convert to Smart Enums
+internal enum PaymentType
+{
+    CreditCard = 1,
+    PayPal = 2,
+    Cash = 3
 }
