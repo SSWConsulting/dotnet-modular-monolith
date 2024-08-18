@@ -3,8 +3,6 @@ using Throw;
 
 namespace Modules.Warehouse.Storage.Domain;
 
-// internal record BayId(Guid Value);
-
 internal class Bay : Entity<int>
 {
     private readonly List<Shelf> _shelves = [];

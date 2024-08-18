@@ -8,11 +8,54 @@ internal record ProductId(Guid Value);
 
 internal class Product : AggregateRoot<ProductId>
 {
-    private string _name = string.Empty;
+    public string Name { get; private set; } = null!;
 
-    private string _sku = string.Empty;
+    public string Sku { get; private set; } = null!;
 
-    private Money _price = Money.Default;
+    public Money Price { get; private set; } = Money.Default;
 
-    private List<Category> _categories = [];
+    private readonly List<Category> _categories = [];
+
+    public IReadOnlyList<Category> Categories => _categories.AsReadOnly();
+
+    private Product()
+    {
+    }
+
+    public static Product Create(string name, string sku)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+        ArgumentException.ThrowIfNullOrWhiteSpace(sku);
+
+        var product = new Product
+        {
+            Name = name,
+            Sku = sku,
+            Id = new ProductId(Guid.NewGuid())
+        };
+
+        return product;
+    }
+
+    public void UpdatePrice(Money price)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price.Amount);
+        Price = price;
+    }
+
+    public void AddCategory(Category category)
+    {
+        if (_categories.Contains(category))
+            return;
+
+        _categories.Add(category);
+    }
+
+    public void RemoveCategory(Category category)
+    {
+        if (!_categories.Contains(category))
+            return;
+
+        _categories.Remove(category);
+    }
 }

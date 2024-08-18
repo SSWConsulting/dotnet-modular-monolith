@@ -41,13 +41,13 @@ internal class Product : AggregateRoot<ProductId>
         return product;
     }
 
-    public void UpdateName(string name)
+    private void UpdateName(string name)
     {
         name.Throw().IfEmpty();
         Name = name;
     }
 
-    public void UpdateSku(Sku sku, IProductRepository productRepository)
+    private void UpdateSku(Sku sku, IProductRepository productRepository)
     {
         if (productRepository.SkuExists(sku))
             throw new ArgumentException("Sku already exists");

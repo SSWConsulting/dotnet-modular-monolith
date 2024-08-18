@@ -36,7 +36,6 @@ Warehouse:
 
 Product Catalog:
 - A product must have a name
-- A product must have a price
 - A product can be given one or more categories
 - A product cannot have a negative price
 - A product cannot duplicate categories
@@ -77,4 +76,3 @@ Orders:
 ### Orders Context
 
 ![image](https://github.com/user-attachments/assets/3c731981-1f98-42ca-9f74-c955a31a5790)
-
