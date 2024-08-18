@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Catalog", "src\Modu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Warehouse.Tests", "src\Modules\Warehouse\Modules.Warehouse.Tests\Modules.Warehouse.Tests.csproj", "{C9C4959A-0DB6-4C6C-9811-A42D7A5E3CE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Catalog.Tests", "src\Modules\Products\Modules.Catalog.Tests\Modules.Catalog.Tests.csproj", "{11925734-961D-4761-B209-BF601E59EB95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{C9C4959A-0DB6-4C6C-9811-A42D7A5E3CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9C4959A-0DB6-4C6C-9811-A42D7A5E3CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9C4959A-0DB6-4C6C-9811-A42D7A5E3CE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11925734-961D-4761-B209-BF601E59EB95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11925734-961D-4761-B209-BF601E59EB95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11925734-961D-4761-B209-BF601E59EB95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11925734-961D-4761-B209-BF601E59EB95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{916135AD-7D7F-4472-BDAB-C5F2BA5F8C67} = {382656EC-4C92-485C-8BC5-349D1A5C05C7}
@@ -95,5 +101,6 @@ Global
 		{1E1A153A-D69A-4EC5-BD21-DE4249E8FA4F} = {916135AD-7D7F-4472-BDAB-C5F2BA5F8C67}
 		{591B271C-4C16-49CA-9549-E51087B591D1} = {1E1A153A-D69A-4EC5-BD21-DE4249E8FA4F}
 		{C9C4959A-0DB6-4C6C-9811-A42D7A5E3CE0} = {D4C452DB-CB41-4B65-8A1A-FCD6E7811EE8}
+		{11925734-961D-4761-B209-BF601E59EB95} = {1E1A153A-D69A-4EC5-BD21-DE4249E8FA4F}
 	EndGlobalSection
 EndGlobal
