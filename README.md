@@ -45,7 +45,6 @@ Customers:
 - Must have an address
 
 Cart:
-- Must be associated with a customer
 - Must always have the correct price
 
 Orders:
