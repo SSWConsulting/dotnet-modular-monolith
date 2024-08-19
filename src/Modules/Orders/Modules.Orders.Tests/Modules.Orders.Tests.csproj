@@ -23,4 +23,8 @@
       <ProjectReference Include="..\Modules.Orders\Modules.Orders.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Orders\" />
+    </ItemGroup>
+
 </Project>

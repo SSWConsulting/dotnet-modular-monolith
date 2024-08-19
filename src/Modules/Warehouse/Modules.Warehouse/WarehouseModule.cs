@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Modules.Warehouse.Common.Persistence;
-using Modules.Warehouse.Products;
-using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Products.Endpoints;
 
 namespace Modules.Warehouse;
@@ -27,7 +23,7 @@ public static class WarehouseModule
         // services.AddTransient<IProductRepository, ProductRepository>();
     }
 
-    public static Task UseWarehouse(this WebApplication app)
+    public static void UseWarehouse(this WebApplication app)
     {
         // TODO: Refactor to up.ps1
         // if (app.Environment.IsDevelopment())
@@ -41,7 +37,5 @@ public static class WarehouseModule
 
         // TODO: Move to feature DI
         app.MapProductEndpoints();
-
-        return Task.CompletedTask;
     }
 }

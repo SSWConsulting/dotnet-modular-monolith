@@ -6,9 +6,11 @@
 
         <!-- Configure code analysis. -->
         <AnalysisLevel>latest</AnalysisLevel>
+        <!-- TODO: Upgrade to 'Recommended' -->
         <AnalysisMode>Minimum</AnalysisMode>
         <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
         <CodeAnalysisTreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</CodeAnalysisTreatWarningsAsErrors>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
     </PropertyGroup>
 </Project>

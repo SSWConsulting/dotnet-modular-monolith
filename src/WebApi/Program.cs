@@ -31,7 +31,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseOrders();
-await app.UseWarehouse();
+app.UseOrders(); app.UseWarehouse();
 
 app.Run();
