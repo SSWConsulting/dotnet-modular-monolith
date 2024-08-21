@@ -48,11 +48,11 @@ Cart:
 - ✅ Must always have the correct price
 
 Orders:
-- An order must be associated with a customer
-- The order total must always be correct
-- The order tax must always be correct
-- Shipping must be included in the total price
-- Payment must be completed for the order to be placed (FUTURE: Consider splitting payments to it's own module)
+- ✅ An order must be associated with a customer
+- ✅ The order total must always be correct
+- ✅ The order tax must always be correct
+- ✅ Shipping must be included in the total price
+- ✅ Payment must be completed for the order to be placed (FUTURE: Consider splitting payments to its own module)
 
 ## Event Storming
 

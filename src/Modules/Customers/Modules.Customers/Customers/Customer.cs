@@ -1,8 +1,11 @@
 ﻿using Common.SharedKernel.Domain.Base;
-using Throw;
 
 namespace Modules.Customers.Customers;
 
+/* Invariants:
+ * - Must have a unique email address (handled by application)
+ * - Must have an address
+ */
 internal class Customer : AggregateRoot<CustomerId>
 {
     public string Email { get; private set; } = null!;
@@ -17,27 +20,31 @@ internal class Customer : AggregateRoot<CustomerId>
 
     internal static Customer Create(string email, string firstName, string lastName)
     {
-        email.Throw().IfEmpty();
-
-        var customer = new Customer() { Id = new CustomerId(Guid.NewGuid()), Email = email, };
-
+        var customer = new Customer { Id = new CustomerId(Guid.NewGuid()) };
+        customer.UpdateEmail(email);
         customer.UpdateName(firstName, lastName);
         customer.AddDomainEvent(CustomerCreatedEvent.Create(customer));
 
         return customer;
     }
 
-    public void UpdateName(string firstName, string lastName)
+    private void UpdateName(string firstName, string lastName)
     {
-        firstName.Throw().IfEmpty();
-        lastName.Throw().IfEmpty();
-
+        ArgumentException.ThrowIfNullOrWhiteSpace(firstName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(lastName);
         FirstName = firstName;
         LastName = lastName;
     }
 
+    private void UpdateEmail(string email)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(email);
+        Email = email;
+    }
+
     public void UpdateAddress(Address address)
     {
+        ArgumentNullException.ThrowIfNull(address);
         Address = address;
     }
 }

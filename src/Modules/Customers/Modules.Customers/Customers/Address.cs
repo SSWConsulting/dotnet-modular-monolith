@@ -1,6 +1,4 @@
-﻿using Throw;
-
-namespace Modules.Customers.Customers;
+﻿namespace Modules.Customers.Customers;
 
 internal record Address
 {
@@ -13,11 +11,11 @@ internal record Address
 
     internal Address(string line1, string? line2, string city, string state, string zipCode, string country)
     {
-        line1.Throw().IfEmpty();
-        city.Throw().IfEmpty();
-        state.Throw().IfEmpty();
-        zipCode.Throw().IfEmpty();
-        country.Throw().IfEmpty();
+        ArgumentException.ThrowIfNullOrWhiteSpace(line1);
+        ArgumentException.ThrowIfNullOrWhiteSpace(city);
+        ArgumentException.ThrowIfNullOrWhiteSpace(state);
+        ArgumentException.ThrowIfNullOrWhiteSpace(zipCode);
+        ArgumentException.ThrowIfNullOrWhiteSpace(country);
 
         Line1 = line1;
         Line2 = line2;
