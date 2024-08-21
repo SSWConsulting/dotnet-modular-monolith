@@ -73,7 +73,7 @@ internal class Order : AggregateRoot<OrderId>
             OrderSubTotal = Money.Zero,
             ShippingTotal = Money.Zero,
             TaxTotal = Money.Zero,
-            Status = OrderStatus.PendingPayment
+            Status = OrderStatus.New
         };
 
         order.AddDomainEvent(OrderCreatedEvent.Create(order));
@@ -84,7 +84,7 @@ internal class Order : AggregateRoot<OrderId>
     public ErrorOr<LineItem.LineItem> AddLineItem(ProductId productId, Money price, int quantity)
     {
         // TODO: Unit test
-        if (Status == OrderStatus.PendingPayment)
+        if (Status == OrderStatus.PaymentReceived)
             return OrderErrors.CantModifyAfterPayment;
 
         // TODO: Unit test
@@ -108,7 +108,7 @@ internal class Order : AggregateRoot<OrderId>
 
     public ErrorOr<Success> RemoveLineItem(ProductId productId)
     {
-        if (Status == OrderStatus.PendingPayment)
+        if (Status == OrderStatus.PaymentReceived)
             return OrderErrors.CantModifyAfterPayment;
 
         _lineItems.RemoveAll(x => x.ProductId == productId);
@@ -128,7 +128,8 @@ internal class Order : AggregateRoot<OrderId>
         if (payment.Amount <= 0)
             return OrderErrors.PaymentAmountZeroOrNegative;
 
-        if (payment > OrderTotal - AmountPaid)
+        // Compare raw amounts to avoid error with default currency (i.e. AUD on $0 amounts)
+        if (payment.Amount > OrderTotal.Amount - AmountPaid.Amount)
             return OrderErrors.PaymentExceedsOrderTotal;
 
         // Ensure currency is set on first payment
@@ -136,6 +137,8 @@ internal class Order : AggregateRoot<OrderId>
             AmountPaid = payment;
         else
             AmountPaid += payment;
+
+        Status = OrderStatus.PaymentReceived;
 
         if (AmountPaid >= OrderTotal)
         {
@@ -148,7 +151,7 @@ internal class Order : AggregateRoot<OrderId>
 
     public ErrorOr<Success> ShipOrder(TimeProvider timeProvider)
     {
-        if (Status == OrderStatus.PendingPayment)
+        if (Status == OrderStatus.New)
             return OrderErrors.CantShipUnpaidOrder;
 
         if (Status == OrderStatus.InTransit)

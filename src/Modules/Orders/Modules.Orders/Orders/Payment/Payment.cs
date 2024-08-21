@@ -7,13 +7,26 @@ internal record PaymentId(Guid Value);
 
 internal class Payment : Entity<PaymentId>
 {
-    public Money Amount { get; private set; }
+    public Money Amount { get; private set; } = null!;
 
-    public PaymentType PaymentType { get; private set; }
+    public PaymentType PaymentType { get; private set; } = null!;
 
-    public Payment(Money amount, PaymentType paymentType)
+    private Payment()
     {
-        Amount = amount;
-        PaymentType = paymentType;
+    }
+
+    public static Payment Create (Money amount, PaymentType paymentType)
+    {
+        ArgumentNullException.ThrowIfNull(amount);
+        ArgumentNullException.ThrowIfNull(paymentType);
+
+        var payment = new Payment
+        {
+            Id = new PaymentId(Guid.NewGuid()),
+            Amount = amount,
+            PaymentType = paymentType
+        };
+
+        return payment;
     }
 }

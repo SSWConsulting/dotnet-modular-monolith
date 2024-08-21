@@ -12,11 +12,11 @@ namespace Modules.Orders.Orders.Order;
 
 internal class OrderStatus : SmartEnum<OrderStatus>
 {
-    public static readonly OrderStatus None = new(0, "None");
-    public static readonly OrderStatus PendingPayment = new(1, "PendingPayment");
-    public static readonly OrderStatus ReadyForShipping = new(2, "ReadyForShipping");
-    public static readonly OrderStatus InTransit = new(3, "InTransit");
-    public static readonly OrderStatus Delivered = new(4, "Delivered");
+    public static readonly OrderStatus New = new(1, "New");
+    public static readonly OrderStatus PaymentReceived = new(2, "PaymentReceived");
+    public static readonly OrderStatus ReadyForShipping = new(3, "ReadyForShipping");
+    public static readonly OrderStatus InTransit = new(4, "InTransit");
+    public static readonly OrderStatus Delivered = new(5, "Delivered");
 
     private OrderStatus(int id, string name) : base(name, id)
     {
