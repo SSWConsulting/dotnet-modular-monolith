@@ -31,21 +31,21 @@ Responsible for Warehouse and Inventory Management
 ## Business Invariants
 
 Warehouse:
-- An Aisle cannot have duplicate bays
-- A bay cannot have duplicate shelves
+- ✅ An Aisle cannot have duplicate bays
+- ✅ A bay cannot have duplicate shelves
 
 Product Catalog:
-- A product must have a name
-- A product can be given one or more categories
-- A product cannot have a negative price
-- A product cannot duplicate categories
+- ✅ A product must have a name
+- ✅ A product can be given one or more categories
+- ✅ A product cannot have a negative price
+- ✅ A product cannot duplicate categories
 
 Customers:
 - Must have a unique email address
 - Must have an address
 
 Cart:
-- Must always have the correct price
+- ✅ Must always have the correct price
 
 Orders:
 - An order must be associated with a customer
