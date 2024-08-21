@@ -28,7 +28,7 @@ internal class Customer : AggregateRoot<CustomerId>
         return customer;
     }
 
-    private void UpdateName(string firstName, string lastName)
+    public void UpdateName(string firstName, string lastName)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(firstName);
         ArgumentException.ThrowIfNullOrWhiteSpace(lastName);
@@ -36,7 +36,7 @@ internal class Customer : AggregateRoot<CustomerId>
         LastName = lastName;
     }
 
-    private void UpdateEmail(string email)
+    public void UpdateEmail(string email)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(email);
         Email = email;
