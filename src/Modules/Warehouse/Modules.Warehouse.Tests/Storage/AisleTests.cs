@@ -1,14 +1,15 @@
+using FluentAssertions;
 using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Storage.Domain;
 using Xunit.Abstractions;
 
 namespace Modules.Warehouse.Tests;
 
-public class ModelTests
+public class AisleTests
 {
     private readonly ITestOutputHelper _output;
 
-    public ModelTests(ITestOutputHelper output)
+    public AisleTests(ITestOutputHelper output)
     {
         _output = output;
     }
@@ -47,5 +48,19 @@ public class ModelTests
         }
 
         _output.WriteLine($"Product B is in Aisle {aisleName}, Bay {bayName}, Shelf {shelfName}");
+    }
+
+    [Fact]
+    public void Create_WithBaysAndShelves_CreatesCorrectNumberOfShelves()
+    {
+        // Arrange
+        var numBays = 2;
+        var numShelves = 3;
+
+        // Act
+        var sut = Aisle.Create("Aisle 1", numBays, numShelves);
+
+        // Assert
+        sut.TotalStorage.Should().Be(numBays * numShelves);
     }
 }
