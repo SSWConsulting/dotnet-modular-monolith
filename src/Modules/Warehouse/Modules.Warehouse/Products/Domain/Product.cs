@@ -5,7 +5,7 @@ using Throw;
 
 namespace Modules.Warehouse.Products.Domain;
 
-internal record ProductId(Guid Value);
+internal record ProductId(Guid Value) : IStronglyTypedId<Guid>;
 
 internal class Product : AggregateRoot<ProductId>
 {
@@ -22,9 +22,11 @@ internal class Product : AggregateRoot<ProductId>
     }
 
     // NOTE: Need to use a factory, as EF does not let owned entities (i.e. Money & Sku) be passed via the constructor
-    public static Product Create(string name, Money price, Sku sku, IProductRepository productRepository)
+    public static Product Create(string name, Money price, Sku sku)
     {
-        name.Throw().IfEmpty();
+        // TODO: Check for SKU uniqueness in Application
+
+        name.ThrowIfNull();
         price.Throw().IfNegativeOrZero(p => p.Amount);
 
         var product = new Product
@@ -34,7 +36,7 @@ internal class Product : AggregateRoot<ProductId>
         };
 
         product.UpdateName(name);
-        product.UpdateSku(sku, productRepository);
+        product.UpdateSku(sku);
 
         product.AddDomainEvent(ProductCreatedEvent.Create(product));
 
@@ -47,11 +49,8 @@ internal class Product : AggregateRoot<ProductId>
         Name = name;
     }
 
-    private void UpdateSku(Sku sku, IProductRepository productRepository)
+    private void UpdateSku(Sku sku)
     {
-        if (productRepository.SkuExists(sku))
-            throw new ArgumentException("Sku already exists");
-
         Sku = sku;
     }
 

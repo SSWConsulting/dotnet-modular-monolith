@@ -3,34 +3,37 @@ using Modules.Orders;
 using Modules.Warehouse;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Common MediatR behaviors across all modules
-builder.Services.AddMediatR(config =>
 {
-    config.AddOpenBehavior(typeof(UnhandledExceptionBehaviour<,>));
-    config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
-    config.AddOpenBehavior(typeof(PerformanceBehaviour<,>));
-});
+    // Add services to the container.
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 
-builder.Services.AddOrders();
-builder.Services.AddWarehouse(builder.Configuration);
+    // Common MediatR behaviors across all modules
+    builder.Services.AddMediatR(config =>
+    {
+        config.AddOpenBehavior(typeof(UnhandledExceptionBehaviour<,>));
+        config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+        config.AddOpenBehavior(typeof(PerformanceBehaviour<,>));
+    });
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    builder.Services.AddOrders();
+    builder.Services.AddWarehouse(builder.Configuration);
 }
 
-app.UseHttpsRedirection();
+var app = builder.Build();
+{
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
 
-app.UseOrders(); app.UseWarehouse();
+    app.UseHttpsRedirection();
 
-app.Run();
+    app.UseOrders();
+    app.UseWarehouse();
+
+    app.Run();
+}

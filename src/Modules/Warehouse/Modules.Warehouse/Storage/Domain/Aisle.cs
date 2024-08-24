@@ -1,9 +1,8 @@
 using Common.SharedKernel.Domain.Base;
-using Throw;
 
 namespace Modules.Warehouse.Storage.Domain;
 
-internal record AisleId(Guid Value);
+internal record AisleId(Guid Value) : IStronglyTypedId<Guid>;
 
 internal class Aisle : AggregateRoot<AisleId>
 {
