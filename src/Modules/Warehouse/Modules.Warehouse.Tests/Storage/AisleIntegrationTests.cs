@@ -37,4 +37,26 @@ public class AisleIntegrationTests (TestingDatabaseFixture fixture, ITestOutputH
         var shelves = aisles.First().Bays.SelectMany(b => b.Shelves).ToList();
         shelves.Count.Should().Be(request.NumBays * request.NumShelves);
     }
+
+    [Theory]
+    [InlineData("name", 0, 0)]
+    [InlineData("name", 0, 1)]
+    [InlineData("name", 1, 0)]
+    [InlineData("", 1, 1)]
+    [InlineData(" ", 1, 1)]
+    [InlineData(null, 1, 1)]
+    public async Task CreateAisle_WithInvalidRequest_Throws(string name, int numBays, int numShelves)
+    {
+        // Arrange
+        var client = GetAnonymousClient();
+        var request = new CreateAisleCommand.Request(name, numBays, numShelves);
+
+        // Act
+        var response = await client.PostAsJsonAsync("/api/aisles", request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        var content = await response.Content.ReadAsStringAsync();
+        output.WriteLine(content);
+    }
 }

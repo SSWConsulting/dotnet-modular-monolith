@@ -18,7 +18,8 @@ public static class MediatRExtensions
         {
             config.RegisterServicesFromAssemblies(_assemblies);
             config.AddOpenBehavior(typeof(UnhandledExceptionBehaviour<,>));
-            config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+            config.AddOpenBehavior(typeof(ResultValidationBehavior<,>));
+            // config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
             config.AddOpenBehavior(typeof(PerformanceBehaviour<,>));
         });
     }

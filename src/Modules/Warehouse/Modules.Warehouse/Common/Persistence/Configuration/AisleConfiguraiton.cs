@@ -22,23 +22,5 @@ internal class AisleConfiguration : IEntityTypeConfiguration<Aisle>
 
         builder.Property(m => m.Name)
             .IsRequired();
-
-        // builder.OwnsMany(m => m.Bays, b =>
-        // {
-        //     // b.HasKey(m => m.Id);
-        //     // b.Property(m => m.Id)
-        //     //     .HasConversion(x => x.Value,
-        //     //         x => new BayId(x))
-        //     //     .ValueGeneratedNever();
-        //     b.OwnsMany(m => m.Shelves, s =>
-        //     {
-        //         // s.HasKey(m => m.Id);
-        //         s
-        //             .Property(m => m.ProductId)!
-        //             .HasStronglyTypedId<ProductId, Guid>()
-        //              // .HasConversion<StronglyTypedIdConverter<ProductId, Guid>>()
-        //             .ValueGeneratedNever();
-        //     });
-        // });
     }
 }
