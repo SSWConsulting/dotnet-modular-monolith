@@ -1,5 +1,5 @@
 ﻿using Common.SharedKernel.Domain.Base;
-using Common.SharedKernel.Domain.Exceptions;
+using ErrorOr;
 using Throw;
 
 namespace Modules.Warehouse.Products.Domain;
@@ -51,17 +51,19 @@ internal class Product : AggregateRoot<ProductId>
         Sku = sku;
     }
 
-    public void RemoveStock(int quantity)
+    public ErrorOr<Success> RemoveStock(int quantity)
     {
         quantity.Throw().IfNegativeOrZero();
 
         if (StockOnHand - quantity < 0)
-            throw new DomainException("Cannot adjust stock below zero");
+            return ProductErrors.CantRemoveMoreStockThanExists;
 
         StockOnHand -= quantity;
 
         if (StockOnHand <= LowStockThreshold)
             AddDomainEvent(new LowStockEvent(Id));
+
+        return Result.Success;
     }
 
     public void AddStock(int quantity)
@@ -69,4 +71,11 @@ internal class Product : AggregateRoot<ProductId>
         quantity.Throw().IfNegativeOrZero();
         StockOnHand += quantity;
     }
+}
+
+public static class ProductErrors
+{
+    public static readonly Error CantRemoveMoreStockThanExists = Error.Validation(
+        "Product.CantRemoveMoreStockThanExists",
+        "Can't remove more stock than the warehouse has on hand");
 }

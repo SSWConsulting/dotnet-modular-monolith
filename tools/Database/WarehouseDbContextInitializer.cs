@@ -52,8 +52,6 @@ internal class WarehouseDbContextInitializer
         if (await _dbContext.Aisles.AnyAsync())
             return;
 
-
-
         for (int i = 1; i <= NumAisles; i++)
         {
             var aisle = Aisle.Create($"Aisle {i}", NumBays, NumShelves);
