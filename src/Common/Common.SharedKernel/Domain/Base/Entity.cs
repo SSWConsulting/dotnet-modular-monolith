@@ -22,3 +22,8 @@ public abstract class Entity<TId> : IAuditableEntity
         UpdatedBy = user;
     }
 }
+
+public interface IStronglyTypedId<out T>
+{
+    T Value { get; }
+}

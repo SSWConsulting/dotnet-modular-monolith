@@ -1,9 +1,8 @@
 using Common.SharedKernel.Domain.Base;
-using Throw;
 
 namespace Modules.Warehouse.Storage.Domain;
 
-internal record AisleId(Guid Value);
+internal record AisleId(Guid Value) : IStronglyTypedId<Guid>;
 
 internal class Aisle : AggregateRoot<AisleId>
 {
@@ -31,7 +30,7 @@ internal class Aisle : AggregateRoot<AisleId>
 
         for (var i = 1; i <= numBays; i++)
         {
-            var bay = Bay.Create(i, numShelves);
+            var bay = Bay.Create($"Bay {i}", numShelves);
             aisle._bays.Add(bay);
         }
 

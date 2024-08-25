@@ -8,13 +8,13 @@ internal static class DepdendencyInjection
 {
     internal static void AddPersistence(this IServiceCollection services, IConfiguration config)
     {
-        var connectionString = config.GetConnectionString("DefaultConnection");
-        // services.AddDbContext<WarehouseDbContext>(options =>
-        //     options.UseSqlServer(connectionString, builder =>
-        //     {
-        //         builder.MigrationsAssembly(typeof(WarehouseModule).Assembly.FullName);
-        //         builder.EnableRetryOnFailure();
-        //     }));
+        var connectionString = config.GetConnectionString("Warehouse");
+        services.AddDbContext<WarehouseDbContext>(options =>
+            options.UseSqlServer(connectionString, builder =>
+            {
+                builder.MigrationsAssembly(typeof(WarehouseModule).Assembly.FullName);
+                builder.EnableRetryOnFailure();
+            }));
 
         //services.AddSingleton<IDateTime, DateTimeService>();
         // TODO: Consider moving to up.ps1

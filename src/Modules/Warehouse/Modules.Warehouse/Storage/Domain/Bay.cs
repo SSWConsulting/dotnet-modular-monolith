@@ -1,9 +1,10 @@
 using Common.SharedKernel.Domain.Base;
-using Throw;
 
 namespace Modules.Warehouse.Storage.Domain;
 
-internal class Bay : Entity<int>
+public record BayId(Guid Value) : IStronglyTypedId<Guid>;
+
+internal class Bay : Entity<BayId>
 {
     private readonly List<Shelf> _shelves = [];
 
@@ -15,20 +16,20 @@ internal class Bay : Entity<int>
 
     public string Name { get; private set; } = null!;
 
-    public static Bay Create(int id, int numShelves)
+    public static Bay Create(string name, int numShelves)
     {
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(id);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(numShelves);
 
         var bay = new Bay
         {
-            Id = id,
-            Name = $"Bay {id}"
+            Id = new BayId(Guid.NewGuid()),
+            Name = name
         };
 
         for (var i = 1; i <= numShelves; i++)
         {
-            var shelf = Shelf.Create(i);
+            var shelf = Shelf.Create($"Shelf {i}");
             bay._shelves.Add(shelf);
         }
 

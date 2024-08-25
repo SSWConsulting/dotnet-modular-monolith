@@ -4,7 +4,7 @@ using Modules.Catalog.Categories.Domain;
 
 namespace Modules.Catalog.Products;
 
-internal record ProductId(Guid Value);
+internal record ProductId(Guid Value) : IStronglyTypedId<Guid>;
 
 internal class Product : AggregateRoot<ProductId>
 {

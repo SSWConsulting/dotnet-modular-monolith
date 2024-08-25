@@ -27,6 +27,7 @@ internal class Category : AggregateRoot<CategoryId>
 
     private void UpdateName(string name)
     {
+        // name.ThrowIfNull();
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         Name = name;

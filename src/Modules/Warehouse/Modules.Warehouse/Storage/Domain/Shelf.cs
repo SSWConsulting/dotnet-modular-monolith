@@ -1,10 +1,11 @@
 using Common.SharedKernel.Domain.Base;
 using Modules.Warehouse.Products.Domain;
-using Throw;
 
 namespace Modules.Warehouse.Storage.Domain;
 
-internal class Shelf : Entity<int>
+internal record ShelfId(Guid Value) : IStronglyTypedId<Guid>;
+
+internal class Shelf : Entity<ShelfId>
 {
     public string Name { get; private set; } = null!;
 
@@ -12,14 +13,14 @@ internal class Shelf : Entity<int>
 
     public bool IsEmpty => ProductId is null;
 
-    public static Shelf Create(int number)
+    public static Shelf Create(string name)
     {
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(number);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         return new Shelf
         {
-            Id = number,
-            Name = $"Shelf {number}"
+            Id = new ShelfId(Guid.NewGuid()),
+            Name = name
         };
     }
 
