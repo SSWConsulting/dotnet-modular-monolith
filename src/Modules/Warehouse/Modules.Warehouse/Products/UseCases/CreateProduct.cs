@@ -8,15 +8,15 @@ using Modules.Warehouse.Storage.UseCases;
 
 namespace Modules.Warehouse.Products.UseCases;
 
-public static class CreateProductCommand
+public static class CreateProduct
 {
-    public record Request(string Name, string Sku) : IRequest<ErrorOr<Success>>;
+    public record CreateProductCommand(string Name, string Sku) : IRequest<ErrorOr<Success>>;
 
     public static class Endpoint
     {
         public static void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/products", async (Request request, ISender sender) =>
+            app.MapPost("/api/products", async (CreateProductCommand request, ISender sender) =>
                 {
                     var response = await sender.Send(request);
                     return response.IsError ? response.Problem() : TypedResults.Created();
@@ -27,7 +27,7 @@ public static class CreateProductCommand
         }
     }
 
-    public class Validator : AbstractValidator<Request>
+    public class Validator : AbstractValidator<CreateProductCommand>
     {
         public Validator()
         {
@@ -38,7 +38,7 @@ public static class CreateProductCommand
         }
     }
 
-    internal class Handler : IRequestHandler<Request, ErrorOr<Success>>
+    internal class Handler : IRequestHandler<CreateProductCommand, ErrorOr<Success>>
     {
         private readonly WarehouseDbContext _dbDbContext;
 
@@ -47,11 +47,11 @@ public static class CreateProductCommand
             _dbDbContext = dbContext;
         }
 
-        public async Task<ErrorOr<Success>> Handle(Request request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Success>> Handle(CreateProductCommand createProductCommand, CancellationToken cancellationToken)
         {
-            var sku = Sku.Create(request.Sku);
+            var sku = Sku.Create(createProductCommand.Sku);
 
-            var product = Product.Create(request.Name, sku);
+            var product = Product.Create(createProductCommand.Name, sku);
             _dbDbContext.Products.Add(product);
             await _dbDbContext.SaveChangesAsync(cancellationToken);
 

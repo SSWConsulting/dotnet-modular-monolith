@@ -7,26 +7,26 @@ using Modules.Warehouse.Storage.Domain;
 
 namespace Modules.Warehouse.Storage.UseCases;
 
-public static class CreateAisleCommand
+public static class CreateAisle
 {
-    public record Request(string Name, int NumBays, int NumShelves) : IRequest<ErrorOr<Success>>;
+    public record CreateAisleCommand(string Name, int NumBays, int NumShelves) : IRequest<ErrorOr<Success>>;
 
     public static class Endpoint
     {
         public static void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/aisles", async (Request request, ISender sender) =>
+            app.MapPost("/api/aisles", async (CreateAisleCommand request, ISender sender) =>
                 {
                     var response = await sender.Send(request);
                     return response.IsError ? response.Problem() : TypedResults.Created();
                 })
                 .WithName("CreateAisle")
-                .WithTags("Storage")
+                .WithTags("Warehouse")
                 .WithOpenApi();
         }
     }
 
-    public class Validator : AbstractValidator<Request>
+    public class Validator : AbstractValidator<CreateAisleCommand>
     {
         public Validator()
         {
@@ -36,7 +36,7 @@ public static class CreateAisleCommand
         }
     }
 
-    internal class Handler : IRequestHandler<Request, ErrorOr<Success>>
+    internal class Handler : IRequestHandler<CreateAisleCommand, ErrorOr<Success>>
     {
         private readonly WarehouseDbContext _context;
 
@@ -45,9 +45,9 @@ public static class CreateAisleCommand
             _context = context;
         }
 
-        public async Task<ErrorOr<Success>> Handle(Request request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Success>> Handle(CreateAisleCommand createAisleCommand, CancellationToken cancellationToken)
         {
-            var aisle = Aisle.Create(request.Name, request.NumBays, request.NumShelves);
+            var aisle = Aisle.Create(createAisleCommand.Name, createAisleCommand.NumBays, createAisleCommand.NumShelves);
             await _context.Aisles.AddAsync(aisle, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success;

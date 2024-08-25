@@ -21,7 +21,7 @@ public static class WarehouseModule
     public static void UseWarehouse(this WebApplication app)
     {
         // TODO: Consider source generation or reflection for endpoint mapping
-        CreateAisleCommand.Endpoint.MapEndpoint(app);
-        CreateProductCommand.Endpoint.MapEndpoint(app);
+        CreateAisle.Endpoint.MapEndpoint(app);
+        CreateProduct.Endpoint.MapEndpoint(app);
     }
 }
