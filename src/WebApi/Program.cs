@@ -1,6 +1,6 @@
-using Common.SharedKernel.Behaviours;
 using Modules.Orders;
 using Modules.Warehouse;
+using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -9,13 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    // Common MediatR behaviors across all modules
-    builder.Services.AddMediatR(config =>
-    {
-        config.AddOpenBehavior(typeof(UnhandledExceptionBehaviour<,>));
-        config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
-        config.AddOpenBehavior(typeof(PerformanceBehaviour<,>));
-    });
+    builder.Services.AddMediatR();
 
     builder.Services.AddOrders();
     builder.Services.AddWarehouse(builder.Configuration);

@@ -18,7 +18,7 @@ internal class WarehouseDbContextInitializer
     private const int NumShelves = 5;
     private const int NumBays = 20;
 
-    public WarehouseDbContextInitializer(ILogger<WarehouseDbContextInitializer> logger, WarehouseDbContext dbContext)
+    internal WarehouseDbContextInitializer(ILogger<WarehouseDbContextInitializer> logger, WarehouseDbContext dbContext)
     {
         _logger = logger;
         _dbContext = dbContext;
@@ -42,7 +42,7 @@ internal class WarehouseDbContextInitializer
         }
     }
 
-    public async Task SeedAsync()
+    internal async Task SeedAsync()
     {
         await SeedAisles();
         await SeedProductsAsync();

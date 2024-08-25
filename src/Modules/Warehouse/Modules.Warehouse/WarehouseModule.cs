@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Warehouse.Products.Endpoints;
+using Modules.Warehouse.Storage.UseCases;
 
 namespace Modules.Warehouse;
 
@@ -13,27 +14,13 @@ public static class WarehouseModule
 
         services.AddValidatorsFromAssembly(applicationAssembly);
 
-        // TODO: Check we can call this multiple times
-        services.AddMediatR(config =>
-        {
-            config.RegisterServicesFromAssembly(applicationAssembly);
-        });
-
         // Todo: Move to feature DI
         // services.AddTransient<IProductRepository, ProductRepository>();
     }
 
     public static void UseWarehouse(this WebApplication app)
     {
-        // TODO: Refactor to up.ps1
-        // if (app.Environment.IsDevelopment())
-        // {
-        //     // Initialise and seed database
-        //     using var scope = app.Services.CreateScope();
-        //     var initializer = scope.ServiceProvider.GetRequiredService<WarehouseDbContextInitializer>();
-        //     await initializer.InitializeAsync();
-        //     await initializer.SeedAsync();
-        // }
+        CreateAisleCommand.Endpoint.MapEndpoint(app);
 
         // TODO: Move to feature DI
         app.MapProductEndpoints();
