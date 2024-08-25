@@ -30,7 +30,7 @@ internal class Aisle : AggregateRoot<AisleId>
 
         for (var i = 1; i <= numBays; i++)
         {
-            var bay = Bay.Create(i, numShelves);
+            var bay = Bay.Create($"Bay {i}", numShelves);
             aisle._bays.Add(bay);
         }
 

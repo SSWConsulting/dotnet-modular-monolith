@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Storage.Domain;
-// using Modules.Warehouse.Features.Categories.Domain;
 
 namespace Modules.Warehouse.Common.Persistence;
 
@@ -10,17 +10,8 @@ internal class WarehouseDbContext : DbContext
     // private readonly OutboxInterceptor _outboxInterceptor;
 
     internal DbSet<Aisle> Aisles => Set<Aisle>();
-    //
-    // public DbSet<Customer> Customers { get; set; } = default!;
-    //
-    // public DbSet<Order> Orders { get; set; } = default!;
-    //
-    // public DbSet<OutboxMessage> OutboxMessages { get; set; } = default!;
-    //
 
-    // public DbSet<Product> Products => Set<Product>();
-
-    // public DbSet<Category> Categories => Set<Category>();
+    internal DbSet<Product> Products => Set<Product>();
 
     // Needs to be public for the Database project
     public WarehouseDbContext(DbContextOptions options /*EntitySaveChangesInterceptor saveChangesInterceptor, OutboxInterceptor outboxInterceptor*/) : base(options)
