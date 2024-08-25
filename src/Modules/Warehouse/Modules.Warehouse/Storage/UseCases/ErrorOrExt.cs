@@ -36,7 +36,13 @@ public static class ErrorOrExt
     {
         var errors = new Dictionary<string, string[]>();
         foreach (var e in error.Errors!)
-            errors.Add(e.Code, [e.Description]);
+        {
+            if (errors.Remove(e.Code, out string[]? value))
+                errors.Add(e.Description, [..value, e.Description]);
+            else
+                errors.Add(e.Code, [e.Description]);
+
+        }
 
         return TypedResults.ValidationProblem(errors, title: "One or more validation errors occurred.");
     }

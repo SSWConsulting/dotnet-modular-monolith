@@ -73,9 +73,10 @@ internal class Product : AggregateRoot<ProductId>
     }
 }
 
-public static class ProductErrors
-{
-    public static readonly Error CantRemoveMoreStockThanExists = Error.Validation(
-        "Product.CantRemoveMoreStockThanExists",
-        "Can't remove more stock than the warehouse has on hand");
-}
+// internal class GetAllProductsSpecification : Specification<Product>
+// {
+//     public GetAllProductsSpecification()
+//     {
+//
+//     }
+// }
