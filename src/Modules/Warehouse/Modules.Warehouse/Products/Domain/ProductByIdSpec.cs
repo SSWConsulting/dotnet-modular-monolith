@@ -2,7 +2,7 @@
 
 namespace Modules.Warehouse.Products.Domain;
 
-internal class ProductByIdSpec : Specification<Product>, ISingleResultSpecification<Product>
+internal class ProductByIdSpec : Specification<Product>
 {
     public ProductByIdSpec(ProductId id) : base()
     {

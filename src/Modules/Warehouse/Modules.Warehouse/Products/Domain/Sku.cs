@@ -1,20 +1,19 @@
-﻿namespace Modules.Warehouse.Products.Domain;
+﻿using Common.SharedKernel.Domain.Base;
 
-internal record Sku
+namespace Modules.Warehouse.Products.Domain;
+
+internal record Sku : ValueObject
 {
-    private const int DefaultLength = 8;
+    internal const int DefaultLength = 8;
 
     public string Value { get; }
 
     private Sku(string value) => Value = value;
 
-    public static Sku? Create(string value)
+    public static Sku Create(string value)
     {
-        if (string.IsNullOrWhiteSpace(value))
-            return null;
-
-        if (value.Length != DefaultLength)
-            return null;
+        ArgumentException.ThrowIfNullOrWhiteSpace(value);
+        ArgumentOutOfRangeException.ThrowIfNotEqual(value.Length, DefaultLength);
 
         return new Sku(value);
     }

@@ -1,5 +1,4 @@
-﻿using Common.SharedKernel.Persistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Modules.Warehouse.Products.Domain;
 
@@ -17,14 +16,5 @@ internal class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Sku)
             .HasConversion(sku => sku.Value, value => Sku.Create(value)!)
             .HasMaxLength(50);
-
-        // builder.ComplexProperty(p => p.Price, MoneyConfiguration.BuildAction);
-
-        //builder.ComplexProperty(p => p.Price, () => MoneyConfiguration.BuildAction)
-
-        // builder.HasOne(p => p.Category)
-        //     .WithMany()
-        //     .HasForeignKey(o => o.CategoryId)
-        //     .IsRequired();
     }
 }

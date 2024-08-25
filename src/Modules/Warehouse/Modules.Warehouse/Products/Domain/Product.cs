@@ -1,5 +1,4 @@
 ﻿using Common.SharedKernel.Domain.Base;
-using Common.SharedKernel.Domain.Entities;
 using Common.SharedKernel.Domain.Exceptions;
 using Throw;
 
@@ -22,12 +21,10 @@ internal class Product : AggregateRoot<ProductId>
     }
 
     // NOTE: Need to use a factory, as EF does not let owned entities (i.e. Money & Sku) be passed via the constructor
-    public static Product Create(string name, Money price, Sku sku)
+    public static Product Create(string name, Sku sku)
     {
         // TODO: Check for SKU uniqueness in Application
-
-        name.ThrowIfNull();
-        price.Throw().IfNegativeOrZero(p => p.Amount);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         var product = new Product
         {

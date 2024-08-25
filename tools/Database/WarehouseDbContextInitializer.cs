@@ -1,5 +1,4 @@
 using Bogus;
-using Common.SharedKernel.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Modules.Warehouse.Common.Persistence;
@@ -69,15 +68,14 @@ internal class WarehouseDbContextInitializer
         if (await _dbContext.Products.AnyAsync())
             return;
 
-        var moneyFaker = new Faker<Money>()
-            .CustomInstantiator(f => new Money(f.PickRandom(Currency.Currencies), f.Finance.Amount()));
+        // var moneyFaker = new Faker<Money>()
+            // .CustomInstantiator(f => new Money(f.PickRandom(Currency.Currencies), f.Finance.Amount()));
 
         var skuFaker = new Faker<Sku>()
             .CustomInstantiator(f => Sku.Create(f.Commerce.Ean8())!);
 
         var faker = new Faker<Product>()
-            .CustomInstantiator(f => Product.Create(f.Commerce.ProductName(), moneyFaker.Generate(),
-                skuFaker.Generate()));
+            .CustomInstantiator(f => Product.Create(f.Commerce.ProductName(), skuFaker.Generate()));
 
         var products = faker.Generate(NumProducts);
         _dbContext.Products.AddRange(products);

@@ -45,6 +45,9 @@ public abstract class IntegrationTestBase : IAsyncLifetime
     //     await Context.SaveChangesAsync(cancellationToken);
     // }
 
+    /// <summary>
+    /// Gets called between each test to reset the state of the database
+    /// </summary>
     public async Task InitializeAsync()
     {
         await _fixture.ResetState();
