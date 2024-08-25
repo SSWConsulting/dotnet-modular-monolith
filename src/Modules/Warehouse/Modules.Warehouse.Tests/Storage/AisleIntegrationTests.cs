@@ -29,8 +29,8 @@ public class AisleIntegrationTests (TestingDatabaseFixture fixture, ITestOutputH
         aisles.Should().HaveCount(1);
 
         var aisle = aisles.First();
-        // aisle.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
-        // aisle.CreatedBy.Should().NotBeNullOrWhiteSpace();
+        aisle.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        aisle.CreatedBy.Should().NotBeNullOrWhiteSpace();
         aisle.Name.Should().Be(request.Name);
         aisle.Bays.Count.Should().Be(request.NumBays);
 

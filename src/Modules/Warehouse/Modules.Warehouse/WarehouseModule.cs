@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modules.Warehouse.Common.Persistence;
 using Modules.Warehouse.Products.Endpoints;
 using Modules.Warehouse.Storage.UseCases;
 
@@ -14,15 +15,12 @@ public static class WarehouseModule
 
         services.AddValidatorsFromAssembly(applicationAssembly);
 
-        // Todo: Move to feature DI
-        // services.AddTransient<IProductRepository, ProductRepository>();
+        services.AddPersistence(configuration);
     }
 
     public static void UseWarehouse(this WebApplication app)
     {
         CreateAisleCommand.Endpoint.MapEndpoint(app);
-
-        // TODO: Move to feature DI
         app.MapProductEndpoints();
     }
 }

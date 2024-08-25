@@ -1,6 +1,6 @@
 ﻿namespace Common.SharedKernel.Domain.Interfaces;
 
-public interface IAuditableEntity
+public interface IAuditable
 {
     void Created(DateTimeOffset dateTime, string? user);
 

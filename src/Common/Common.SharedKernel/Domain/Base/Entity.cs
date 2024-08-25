@@ -2,7 +2,7 @@
 
 namespace Common.SharedKernel.Domain.Base;
 
-public abstract class Entity<TId> : IAuditableEntity
+public abstract class Entity<TId> : IAuditable
 {
     public required TId Id { get; init; }
     public DateTimeOffset CreatedAt { get; private set; }

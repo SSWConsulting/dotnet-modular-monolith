@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Modules.Warehouse.Common.Persistence.Interceptors;
 using System.Diagnostics;
 
 namespace Modules.Warehouse.Tests.Common.Extensions;
@@ -25,10 +26,10 @@ internal static class ServiceCollectionExt
                 options.LogTo(m => Debug.WriteLine(m));
                 options.EnableSensitiveDataLogging();
 
-                // options.AddInterceptors(
-                //     services.BuildServiceProvider().GetRequiredService<EntitySaveChangesInterceptor>(),
-                //     services.BuildServiceProvider().GetRequiredService<DispatchDomainEventsInterceptor>()
-                // );
+                options.AddInterceptors(
+                    services.BuildServiceProvider().GetRequiredService<EntitySaveChangesInterceptor>()
+                    // services.BuildServiceProvider().GetRequiredService<DispatchDomainEventsInterceptor>()
+                );
             });
 
         return services;
