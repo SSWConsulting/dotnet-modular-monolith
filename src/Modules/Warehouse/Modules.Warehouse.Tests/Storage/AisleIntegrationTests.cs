@@ -18,7 +18,7 @@ public class AisleIntegrationTests (TestingDatabaseFixture fixture, ITestOutputH
     {
         // Arrange
         var client = GetAnonymousClient();
-        var request = new CreateAisle.CreateAisleCommand("Name", 2, 2);
+        var request = new CreateAisleCommand.Request("Name", 2, 2);
 
         // Act
         var response = await client.PostAsJsonAsync("/api/aisles", request);
@@ -49,7 +49,7 @@ public class AisleIntegrationTests (TestingDatabaseFixture fixture, ITestOutputH
     {
         // Arrange
         var client = GetAnonymousClient();
-        var request = new CreateAisle.CreateAisleCommand(name, numBays, numShelves);
+        var request = new CreateAisleCommand.Request(name, numBays, numShelves);
 
         // Act
         var response = await client.PostAsJsonAsync("/api/aisles", request);

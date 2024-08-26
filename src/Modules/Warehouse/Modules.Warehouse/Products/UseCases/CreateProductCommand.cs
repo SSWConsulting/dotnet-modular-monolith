@@ -1,3 +1,4 @@
+using Common.SharedKernel;
 using ErrorOr;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -8,26 +9,27 @@ using Modules.Warehouse.Storage.UseCases;
 
 namespace Modules.Warehouse.Products.UseCases;
 
-public static class CreateProduct
+public static class CreateProductCommand
 {
-    public record CreateProductCommand(string Name, string Sku) : IRequest<ErrorOr<Success>>;
+    public record Request(string Name, string Sku) : IRequest<ErrorOr<Success>>;
 
     public static class Endpoint
     {
         public static void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/products", async (CreateProductCommand request, ISender sender) =>
+            app.MapPost("/api/products", async (Request request, ISender sender) =>
                 {
                     var response = await sender.Send(request);
                     return response.IsError ? response.Problem() : TypedResults.Created();
                 })
                 .WithName("Create Product")
                 .WithTags("Warehouse")
+                .ProducesPost()
                 .WithOpenApi();
         }
     }
 
-    public class Validator : AbstractValidator<CreateProductCommand>
+    public class Validator : AbstractValidator<Request>
     {
         public Validator()
         {
@@ -38,7 +40,7 @@ public static class CreateProduct
         }
     }
 
-    internal class Handler : IRequestHandler<CreateProductCommand, ErrorOr<Success>>
+    internal class Handler : IRequestHandler<Request, ErrorOr<Success>>
     {
         private readonly WarehouseDbContext _dbDbContext;
 
@@ -47,11 +49,11 @@ public static class CreateProduct
             _dbDbContext = dbContext;
         }
 
-        public async Task<ErrorOr<Success>> Handle(CreateProductCommand createProductCommand, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Success>> Handle(Request request, CancellationToken cancellationToken)
         {
-            var sku = Sku.Create(createProductCommand.Sku);
+            var sku = Sku.Create(request.Sku);
 
-            var product = Product.Create(createProductCommand.Name, sku);
+            var product = Product.Create(request.Name, sku);
             _dbDbContext.Products.Add(product);
             await _dbDbContext.SaveChangesAsync(cancellationToken);
 

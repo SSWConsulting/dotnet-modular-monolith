@@ -17,7 +17,7 @@ public class ProductIntegrationTests (TestingDatabaseFixture fixture, ITestOutpu
     {
         // Arrange
         var client = GetAnonymousClient();
-        var request = new CreateProduct.CreateProductCommand("Name", "12345678");
+        var request = new CreateProductCommand.Request("Name", "12345678");
 
         // Act
         var response = await client.PostAsJsonAsync("/api/products", request);
@@ -45,7 +45,7 @@ public class ProductIntegrationTests (TestingDatabaseFixture fixture, ITestOutpu
     {
         // Arrange
         var client = GetAnonymousClient();
-        var request = new CreateProduct.CreateProductCommand(name, sku);
+        var request = new CreateProductCommand.Request(name, sku);
 
         // Act
         var response = await client.PostAsJsonAsync("/api/products", request);
