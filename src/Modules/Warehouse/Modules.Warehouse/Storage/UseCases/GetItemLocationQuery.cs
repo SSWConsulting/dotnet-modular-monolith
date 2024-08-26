@@ -3,6 +3,7 @@ using Common.SharedKernel.Api;
 using ErrorOr;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Modules.Warehouse.Common.Persistence;
@@ -21,9 +22,9 @@ public static class GetItemLocationQuery
     {
         public static void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet("/api/aisles/products/{productID:guid}", async (Request request, ISender sender) =>
+            app.MapGet("/api/aisles/products/{productId:guid}", async (Guid productId, ISender sender) =>
                 {
-                    var response = await sender.Send(request);
+                    var response = await sender.Send(new Request(productId));
                     return response.IsError ? response.Problem() : TypedResults.Ok(response.Value);
                 })
                 .WithName("FindProductLocation")

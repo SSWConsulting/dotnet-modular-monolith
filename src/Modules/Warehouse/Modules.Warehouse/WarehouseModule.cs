@@ -24,5 +24,6 @@ public static class WarehouseModule
         CreateAisleCommand.Endpoint.MapEndpoint(app);
         CreateProductCommand.Endpoint.MapEndpoint(app);
         AllocateStorageCommand.Endpoint.MapEndpoint(app);
+        GetItemLocationQuery.Endpoint.MapEndpoint(app);
     }
 }
