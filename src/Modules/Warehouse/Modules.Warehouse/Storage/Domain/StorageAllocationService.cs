@@ -1,3 +1,4 @@
+using ErrorOr;
 using Modules.Warehouse.Products.Domain;
 
 namespace Modules.Warehouse.Storage.Domain;
@@ -7,7 +8,7 @@ namespace Modules.Warehouse.Storage.Domain;
 /// </summary>
 internal class StorageAllocationService
 {
-    internal static void AllocateStorage(IEnumerable<Aisle> aisles, ProductId productId)
+    internal static ErrorOr<Success> AllocateStorage(IEnumerable<Aisle> aisles, ProductId productId)
     {
         foreach (var aisle in aisles)
         {
@@ -19,11 +20,16 @@ internal class StorageAllocationService
                         continue;
 
                     shelf.AssignProduct(productId);
-                    return;
+                    return Result.Success;
                 }
             }
         }
 
-        throw new Exception("No available storage");
+        return StorageAllocationErrors.NoAvailableStorage;
     }
+}
+
+public static class StorageAllocationErrors
+{
+    public static readonly Error NoAvailableStorage = Error.Failure("No available storage");
 }

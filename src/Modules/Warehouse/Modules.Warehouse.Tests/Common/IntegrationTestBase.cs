@@ -33,12 +33,12 @@ public abstract class IntegrationTestBase : IAsyncLifetime
     }
 
 
-    // protected async Task AddEntityAsync<T>(T entity, CancellationToken cancellationToken = default) where T : class
-    // {
-    //     await Context.Set<T>().AddAsync(entity, cancellationToken);
-    //     await Context.SaveChangesAsync(cancellationToken);
-    // }
-    //
+    protected async Task AddEntityAsync<T>(T entity, CancellationToken cancellationToken = default) where T : class
+    {
+        await DbContext.Set<T>().AddAsync(entity, cancellationToken);
+        await DbContext.SaveChangesAsync(cancellationToken);
+    }
+
     // protected async Task AddEntitiesAsync<T>(IEnumerable<T> entities, CancellationToken cancellationToken = default) where T : class
     // {
     //     await Context.Set<T>().AddRangeAsync(entities, cancellationToken);
