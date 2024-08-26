@@ -2,7 +2,7 @@ using ErrorOr;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Modules.Warehouse.Storage.UseCases;
+namespace Common.SharedKernel.Api;
 
 public static class ErrorOrExt
 {

@@ -1,11 +1,11 @@
 using Common.SharedKernel;
+using Common.SharedKernel.Api;
 using ErrorOr;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Modules.Warehouse.Common.Persistence;
 using Modules.Warehouse.Products.Domain;
-using Modules.Warehouse.Storage.UseCases;
 
 namespace Modules.Warehouse.Products.UseCases;
 
