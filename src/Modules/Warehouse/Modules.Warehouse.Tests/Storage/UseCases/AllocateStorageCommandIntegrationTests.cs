@@ -7,9 +7,9 @@ using System.Net;
 using System.Net.Http.Json;
 using Xunit.Abstractions;
 
-namespace Modules.Warehouse.Tests.Storage;
+namespace Modules.Warehouse.Tests.Storage.UseCases;
 
-public class StorageAllocationIntegrationTests (TestingDatabaseFixture fixture, ITestOutputHelper output)
+public class AllocateStorageCommandIntegrationTests (TestingDatabaseFixture fixture, ITestOutputHelper output)
     : IntegrationTestBase(fixture, output)
 {
     [Fact]

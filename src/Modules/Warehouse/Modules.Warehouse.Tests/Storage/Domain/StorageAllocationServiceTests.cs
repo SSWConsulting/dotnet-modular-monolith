@@ -2,7 +2,7 @@ using FluentAssertions;
 using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Storage.Domain;
 
-namespace Modules.Warehouse.Tests.Storage;
+namespace Modules.Warehouse.Tests.Storage.Domain;
 
 public class StorageAllocationServiceTests
 {

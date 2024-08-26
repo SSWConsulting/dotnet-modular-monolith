@@ -3,7 +3,7 @@ using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Storage.Domain;
 using Xunit.Abstractions;
 
-namespace Modules.Warehouse.Tests.Storage;
+namespace Modules.Warehouse.Tests.Storage.Domain;
 
 public class AisleTests
 {
