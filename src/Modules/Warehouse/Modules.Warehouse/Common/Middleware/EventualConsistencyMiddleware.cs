@@ -1,4 +1,4 @@
-using Common.SharedKernel.Domain.Base;
+using Common.SharedKernel.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Modules.Warehouse.Common.Persistence;
 

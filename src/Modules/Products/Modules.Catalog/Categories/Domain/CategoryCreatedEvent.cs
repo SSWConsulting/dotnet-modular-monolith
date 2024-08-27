@@ -1,4 +1,4 @@
-﻿using Common.SharedKernel.Domain.Base;
+﻿using Common.SharedKernel.Domain.Interfaces;
 
 namespace Modules.Catalog.Categories.Domain;
 

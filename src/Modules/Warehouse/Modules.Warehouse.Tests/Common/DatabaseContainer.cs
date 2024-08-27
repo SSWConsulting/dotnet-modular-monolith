@@ -1,3 +1,4 @@
+using DotNet.Testcontainers.Builders;
 using Testcontainers.SqlEdge;
 
 namespace Modules.Warehouse.Tests.Common;
@@ -7,10 +8,18 @@ namespace Modules.Warehouse.Tests.Common;
 /// </summary>
 public class DatabaseContainer
 {
+    // private static readonly int _exposedPort = Random.Shared.Next(10000, 60000);
+    private static readonly int _exposedPort = 20_000;
+    private static readonly int _internalPort = 1433;
+
+
     private readonly SqlEdgeContainer _container = new SqlEdgeBuilder()
         .WithName("Modular-Monolith-IntegrationTests-DbContainer")
         .WithPassword("Password123")
         .WithAutoRemove(true)
+        .WithPortBinding(_internalPort)
+        // .WithExposedPort(_exposedPort)
+        .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(_internalPort))
         .Build();
 
     public string? ConnectionString { get; private set; }

@@ -1,7 +1,5 @@
 ﻿using MediatR;
 
-namespace Common.SharedKernel.Domain.Base;
+namespace Common.SharedKernel.Domain.Interfaces;
 
-public interface IDomainEvent : INotification { }
-
-// public record DomainEvent;
+public interface IDomainEvent : INotification;

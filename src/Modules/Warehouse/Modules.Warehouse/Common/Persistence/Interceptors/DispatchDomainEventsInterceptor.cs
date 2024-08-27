@@ -1,5 +1,4 @@
-﻿using Common.SharedKernel.Domain.Base;
-using Common.SharedKernel.Domain.Interfaces;
+﻿using Common.SharedKernel.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -52,7 +51,8 @@ public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
 
         var domainEvents = context.ChangeTracker.Entries<IAggregateRoot>()
             .Select(entry => entry.Entity.PopDomainEvents())
-            .SelectMany(x => x);
+            .SelectMany(x => x)
+            .ToList();
 
         if (IsUserWaitingOnline())
         {

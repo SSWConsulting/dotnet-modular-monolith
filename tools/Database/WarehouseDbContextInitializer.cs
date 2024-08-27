@@ -17,7 +17,8 @@ internal class WarehouseDbContextInitializer
     private const int NumShelves = 5;
     private const int NumBays = 20;
 
-    internal WarehouseDbContextInitializer(ILogger<WarehouseDbContextInitializer> logger, WarehouseDbContext dbContext)
+    // public constructor needed for DI
+    public WarehouseDbContextInitializer(ILogger<WarehouseDbContextInitializer> logger, WarehouseDbContext dbContext)
     {
         _logger = logger;
         _dbContext = dbContext;
@@ -66,8 +67,7 @@ internal class WarehouseDbContextInitializer
         if (await _dbContext.Products.AnyAsync())
             return;
 
-        // var moneyFaker = new Faker<Money>()
-            // .CustomInstantiator(f => new Money(f.PickRandom(Currency.Currencies), f.Finance.Amount()));
+        // TODO: Consider how to handle integration events that get raised and handled
 
         var skuFaker = new Faker<Sku>()
             .CustomInstantiator(f => Sku.Create(f.Commerce.Ean8())!);

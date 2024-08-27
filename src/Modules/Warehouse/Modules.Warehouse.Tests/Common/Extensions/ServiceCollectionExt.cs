@@ -26,9 +26,11 @@ internal static class ServiceCollectionExt
                 options.LogTo(m => Debug.WriteLine(m));
                 options.EnableSensitiveDataLogging();
 
+                var serviceProvider = services.BuildServiceProvider();
+
                 options.AddInterceptors(
-                    services.BuildServiceProvider().GetRequiredService<EntitySaveChangesInterceptor>()
-                    // services.BuildServiceProvider().GetRequiredService<DispatchDomainEventsInterceptor>()
+                    serviceProvider.GetRequiredService<EntitySaveChangesInterceptor>(),
+                    serviceProvider.GetRequiredService<DispatchDomainEventsInterceptor>()
                 );
             });
 

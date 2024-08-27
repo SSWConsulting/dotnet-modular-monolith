@@ -17,7 +17,7 @@ internal static class DepdendencyInjection
             options.UseSqlServer(connectionString, builder =>
             {
                 builder.MigrationsAssembly(typeof(WarehouseModule).Assembly.FullName);
-                builder.EnableRetryOnFailure();
+                // builder.EnableRetryOnFailure();
             });
 
             var serviceProvider = services.BuildServiceProvider();

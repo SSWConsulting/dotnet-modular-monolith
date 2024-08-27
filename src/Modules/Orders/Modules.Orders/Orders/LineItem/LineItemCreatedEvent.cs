@@ -1,4 +1,4 @@
-﻿using Common.SharedKernel.Domain.Base;
+﻿using Common.SharedKernel.Domain.Interfaces;
 using Modules.Orders.Orders.Order;
 
 namespace Modules.Orders.Orders.LineItem;

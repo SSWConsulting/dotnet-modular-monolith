@@ -1,4 +1,5 @@
 using Common.SharedKernel.Behaviours;
+using Modules.Catalog;
 using Modules.Warehouse;
 using System.Reflection;
 
@@ -8,7 +9,8 @@ public static class MediatRExtensions
 {
     private static readonly Assembly[] _assemblies =
     [
-        typeof(WarehouseModule).Assembly
+        typeof(WarehouseModule).Assembly,
+        typeof(CatalogModule).Assembly,
     ];
 
     public static void AddMediatR(this IServiceCollection services)
