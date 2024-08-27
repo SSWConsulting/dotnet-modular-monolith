@@ -21,7 +21,6 @@ public class AisleTests
         var productA = new ProductId(Guid.NewGuid());
         var productB = new ProductId(Guid.NewGuid());
         var aisle = Aisle.Create("Aisle 1", 2, 3);
-        var service = new StorageAllocationService();
 
         StorageAllocationService.AllocateStorage(new List<Aisle> { aisle }, productA);
         StorageAllocationService.AllocateStorage(new List<Aisle> { aisle }, productA);
@@ -62,5 +61,66 @@ public class AisleTests
 
         // Assert
         sut.TotalStorage.Should().Be(numBays * numShelves);
+    }
+
+    [Fact]
+    public void Create_WithBaysAndShelves_CreatesCorrectNumberOfBays()
+    {
+        // Arrange
+        var numBays = 2;
+        var numShelves = 3;
+
+        // Act
+        var sut = Aisle.Create("Aisle 1", numBays, numShelves);
+
+        // Assert
+        sut.Bays.Should().HaveCount(numBays);
+    }
+
+    [Fact]
+    public void Create_WithBaysAndShelves_CreatesCorrectNumberOfShelvesPerBay()
+    {
+        // Arrange
+        var numBays = 2;
+        var numShelves = 3;
+
+        // Act
+        var sut = Aisle.Create("Aisle 1", numBays, numShelves);
+
+        // Assert
+        sut.Bays.Should().OnlyContain(bay => bay.Shelves.Count == numShelves);
+    }
+
+    [Fact]
+    public void AssignProduct_WithAvailableStorage_AssignsProductToShelf()
+    {
+        // Arrange
+        var productId = new ProductId(Guid.NewGuid());
+        var sut = Aisle.Create("Aisle 1", 1, 1);
+
+        // Act
+        var result = sut.AssignProduct(productId);
+
+        // Assert
+        result.IsError.Should().BeFalse();
+        result.Value.ProductId.Should().Be(productId);
+        var events = sut.PopDomainEvents();
+        events.Should().ContainSingle();
+        events[0].Should().BeOfType<ProductStoredEvent>();
+    }
+
+    [Fact]
+    public void AssignProduct_WithNoAvailableStorage_ReturnsError()
+    {
+        // Arrange
+        var productId = new ProductId(Guid.NewGuid());
+        var sut = Aisle.Create("Aisle 1", 1, 1);
+        sut.AssignProduct(productId);
+
+        // Act
+        var result = sut.AssignProduct(productId);
+
+        // Assert
+        result.IsError.Should().BeTrue();
     }
 }
