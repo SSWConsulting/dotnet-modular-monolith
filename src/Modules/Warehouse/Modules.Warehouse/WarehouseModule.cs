@@ -13,6 +13,8 @@ public static class WarehouseModule
     {
         var applicationAssembly = typeof(WarehouseModule).Assembly;
 
+        services.AddHttpContextAccessor();
+
         services.AddValidatorsFromAssembly(applicationAssembly);
 
         services.AddPersistence(configuration);
@@ -20,6 +22,8 @@ public static class WarehouseModule
 
     public static void UseWarehouse(this WebApplication app)
     {
+        app.UseInfrastructureMiddleware();
+
         // TODO: Consider source generation or reflection for endpoint mapping
         CreateAisleCommand.Endpoint.MapEndpoint(app);
         CreateProductCommand.Endpoint.MapEndpoint(app);

@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modules.Warehouse.Common.Middleware;
 using Modules.Warehouse.Common.Persistence.Interceptors;
 
 namespace Modules.Warehouse.Common.Persistence;
@@ -18,15 +20,22 @@ internal static class DepdendencyInjection
                 builder.EnableRetryOnFailure();
             });
 
-            options.AddInterceptors(services.BuildServiceProvider().GetRequiredService<EntitySaveChangesInterceptor>());
+            var serviceProvider = services.BuildServiceProvider();
+
+            options.AddInterceptors(
+                serviceProvider.GetRequiredService<EntitySaveChangesInterceptor>(),
+                serviceProvider.GetRequiredService<DispatchDomainEventsInterceptor>());
         });
 
 
-        //services.AddSingleton<IDateTime, DateTimeService>();
-        // TODO: Consider moving to up.ps1
-        // services.AddScoped<WarehouseDbContextInitializer>();
         services.AddScoped<EntitySaveChangesInterceptor>();
-        // services.AddScoped<DispatchDomainEventsInterceptor>();
+        services.AddScoped<DispatchDomainEventsInterceptor>();
         // services.AddScoped<OutboxInterceptor>();
+    }
+
+    public static IApplicationBuilder UseInfrastructureMiddleware(this IApplicationBuilder app)
+    {
+        app.UseMiddleware<EventualConsistencyMiddleware>();
+        return app;
     }
 }

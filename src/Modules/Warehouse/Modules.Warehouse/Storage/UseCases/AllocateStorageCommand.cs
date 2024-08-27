@@ -61,7 +61,7 @@ public static class AllocateStorageCommand
 
             var result = StorageAllocationService.AllocateStorage(aisles, product.Id);
             if (result.IsError)
-                return result;
+                return result.FirstError;
 
             await _dbContext.SaveChangesAsync(cancellationToken);
             return Result.Success;

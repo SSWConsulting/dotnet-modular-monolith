@@ -8,21 +8,14 @@ namespace Modules.Warehouse.Storage.Domain;
 /// </summary>
 internal class StorageAllocationService
 {
-    internal static ErrorOr<Success> AllocateStorage(IEnumerable<Aisle> aisles, ProductId productId)
+    internal static ErrorOr<Shelf> AllocateStorage(IEnumerable<Aisle> aisles, ProductId productId)
     {
         foreach (var aisle in aisles)
         {
-            foreach (var bay in aisle.Bays)
-            {
-                foreach (var shelf in bay.Shelves)
-                {
-                    if (!shelf.IsEmpty)
-                        continue;
+            if (aisle.AvailableStorage == 0)
+                continue;
 
-                    shelf.AssignProduct(productId);
-                    return Result.Success;
-                }
-            }
+            return aisle.AssignProduct(productId);
         }
 
         return StorageAllocationErrors.NoAvailableStorage;

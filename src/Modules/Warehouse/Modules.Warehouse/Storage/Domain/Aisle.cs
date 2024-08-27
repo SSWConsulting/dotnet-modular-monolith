@@ -1,4 +1,6 @@
 using Common.SharedKernel.Domain.Base;
+using ErrorOr;
+using Modules.Warehouse.Products.Domain;
 
 namespace Modules.Warehouse.Storage.Domain;
 
@@ -35,5 +37,23 @@ internal class Aisle : AggregateRoot<AisleId>
         }
 
         return aisle;
+    }
+
+    public ErrorOr<Shelf> AssignProduct(ProductId productId)
+    {
+        ArgumentNullException.ThrowIfNull(productId);
+
+        var shelf = _bays
+            .SelectMany(b => b.Shelves)
+            .FirstOrDefault(s => s.IsEmpty);
+
+        if (AvailableStorage == 0 || shelf is null)
+            return StorageAllocationErrors.NoAvailableStorage;
+
+        shelf.AssignProduct(productId);
+
+        AddDomainEvent(new ProductStoredEvent(productId));
+
+        return shelf;
     }
 }

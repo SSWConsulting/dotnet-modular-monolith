@@ -3,7 +3,7 @@ using Modules.Orders.Orders.Order;
 
 namespace Modules.Orders.Orders.LineItem;
 
-internal record LineItemCreatedEvent(LineItemId LineItemId, OrderId Order) : DomainEvent
+internal record LineItemCreatedEvent(LineItemId LineItemId, OrderId Order) : IDomainEvent
 {
     public LineItemCreatedEvent(LineItem lineItem) : this(lineItem.Id, lineItem.OrderId) { }
 

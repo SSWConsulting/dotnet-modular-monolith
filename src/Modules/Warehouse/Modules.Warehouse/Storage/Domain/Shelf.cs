@@ -26,6 +26,7 @@ internal class Shelf : Entity<ShelfId>
 
     public void AssignProduct(ProductId productId)
     {
+        ArgumentNullException.ThrowIfNull(productId);
         ProductId = productId;
     }
 }
