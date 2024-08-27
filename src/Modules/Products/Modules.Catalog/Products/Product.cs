@@ -22,7 +22,7 @@ internal class Product : AggregateRoot<ProductId>
     {
     }
 
-    public static Product Create(string name, string sku)
+    public static Product Create(string name, string sku, ProductId? id = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentException.ThrowIfNullOrWhiteSpace(sku);
@@ -31,7 +31,7 @@ internal class Product : AggregateRoot<ProductId>
         {
             Name = name,
             Sku = sku,
-            Id = new ProductId(Guid.NewGuid())
+            Id = id ?? new ProductId(Guid.NewGuid())
         };
 
         return product;

@@ -20,10 +20,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Common\Common.SharedKernel\Common.SharedKernel.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Storage\Events\" />
+      <ProjectReference Include="..\Modules.Warehouse.Messages\Modules.Warehouse.Messages.csproj" />
     </ItemGroup>
 
 </Project>
