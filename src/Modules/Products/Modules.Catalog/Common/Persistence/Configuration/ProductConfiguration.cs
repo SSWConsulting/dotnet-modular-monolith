@@ -18,7 +18,7 @@ internal class ProductConfiguration : IEntityTypeConfiguration<Product>
             .ValueGeneratedNever();
 
         builder.HasMany(t => t.Categories)
-            .WithOne();
+            .WithMany();
 
         builder.Property(m => m.Name)
             .IsRequired();

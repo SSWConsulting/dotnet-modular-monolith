@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Modules.Catalog.Categories.Domain;
 using Modules.Catalog.Products;
 
 namespace Modules.Catalog.Common.Persistence;
@@ -6,6 +7,8 @@ namespace Modules.Catalog.Common.Persistence;
 internal class CatalogDbContext : DbContext
 {
     internal DbSet<Product> Products => Set<Product>();
+
+    internal DbSet<Category> Categories => Set<Category>();
 
     // Needs to be public for the Database project
     public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options)
