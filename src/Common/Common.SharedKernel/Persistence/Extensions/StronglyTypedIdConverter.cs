@@ -1,9 +1,9 @@
 using Common.SharedKernel.Domain.Base;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Modules.Warehouse.Common.Persistence.Extensions;
+namespace Common.SharedKernel.Persistence.Extensions;
 
-internal class StronglyTypedIdConverter<TId, TValue> : ValueConverter<TId, TValue>
+public class StronglyTypedIdConverter<TId, TValue> : ValueConverter<TId, TValue>
     where TId : IStronglyTypedId<TValue>
 {
     public StronglyTypedIdConverter(ConverterMappingHints? mappingHints = null)

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Modules.Warehouse.Products.Domain;
 
-namespace Modules.Warehouse.Products.Persistence;
+namespace Modules.Warehouse.Common.Persistence.Configuration;
 
 internal class ProductConfiguration : IEntityTypeConfiguration<Product>
 {

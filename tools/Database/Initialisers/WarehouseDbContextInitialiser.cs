@@ -5,11 +5,11 @@ using Modules.Warehouse.Common.Persistence;
 using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Storage.Domain;
 
-namespace Database;
+namespace Database.Initialisers;
 
-internal class WarehouseDbContextInitializer
+internal class WarehouseDbContextInitialiser
 {
-    private readonly ILogger<WarehouseDbContextInitializer> _logger;
+    private readonly ILogger<WarehouseDbContextInitialiser> _logger;
     private readonly WarehouseDbContext _dbContext;
 
     private const int NumProducts = 20;
@@ -18,7 +18,7 @@ internal class WarehouseDbContextInitializer
     private const int NumBays = 20;
 
     // public constructor needed for DI
-    public WarehouseDbContextInitializer(ILogger<WarehouseDbContextInitializer> logger, WarehouseDbContext dbContext)
+    public WarehouseDbContextInitialiser(ILogger<WarehouseDbContextInitialiser> logger, WarehouseDbContext dbContext)
     {
         _logger = logger;
         _dbContext = dbContext;
@@ -42,10 +42,10 @@ internal class WarehouseDbContextInitializer
         }
     }
 
-    internal async Task SeedAsync()
+    internal async Task<IReadOnlyList<Product>> SeedAsync()
     {
         await SeedAisles();
-        await SeedProductsAsync();
+        return await SeedProductsAsync();
     }
 
     private async Task SeedAisles()
@@ -62,10 +62,10 @@ internal class WarehouseDbContextInitializer
         await _dbContext.SaveChangesAsync();
     }
 
-    private async Task SeedProductsAsync()
+    private async Task<IReadOnlyList<Product>> SeedProductsAsync()
     {
         if (await _dbContext.Products.AnyAsync())
-            return;
+            return [];
 
         // TODO: Consider how to handle integration events that get raised and handled
 
@@ -78,5 +78,7 @@ internal class WarehouseDbContextInitializer
         var products = faker.Generate(NumProducts);
         _dbContext.Products.AddRange(products);
         await _dbContext.SaveChangesAsync();
+
+        return products;
     }
 }

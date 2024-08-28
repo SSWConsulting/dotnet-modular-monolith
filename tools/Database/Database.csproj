@@ -10,6 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Modules\Products\Modules.Catalog\Modules.Catalog.csproj" />
       <ProjectReference Include="..\..\src\Modules\Warehouse\Modules.Warehouse\Modules.Warehouse.csproj" />
     </ItemGroup>
 

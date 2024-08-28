@@ -1,6 +1,6 @@
+using Common.SharedKernel.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Modules.Warehouse.Common.Persistence.Extensions;
 using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Storage.Domain;
 

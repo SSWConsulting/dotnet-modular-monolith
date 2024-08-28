@@ -6,6 +6,7 @@ namespace Modules.Warehouse.Common.Middleware;
 
 internal class EventualConsistencyMiddleware
 {
+    // TODO: Make the key specific to each module
     public const string DomainEventsKey = "DomainEventsKey";
 
     private readonly RequestDelegate _next;
@@ -15,6 +16,7 @@ internal class EventualConsistencyMiddleware
         _next = next;
     }
 
+    // TODO: See if we can make this middleware generic
     public async Task InvokeAsync(HttpContext context, IPublisher publisher, WarehouseDbContext dbContext)
     {
         var transaction = await dbContext.Database.BeginTransactionAsync();

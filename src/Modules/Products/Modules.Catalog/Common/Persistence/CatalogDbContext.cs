@@ -1,0 +1,21 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Modules.Catalog.Products;
+
+namespace Modules.Catalog.Common.Persistence;
+
+internal class CatalogDbContext : DbContext
+{
+    internal DbSet<Product> Products => Set<Product>();
+
+    // Needs to be public for the Database project
+    public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options)
+    {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("catalog");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);
+        base.OnModelCreating(modelBuilder);
+    }
+}

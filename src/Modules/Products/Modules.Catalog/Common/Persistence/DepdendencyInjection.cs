@@ -3,21 +3,20 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Modules.Warehouse.Common.Middleware;
 using Modules.Warehouse.Common.Persistence.Interceptors;
 
-namespace Modules.Warehouse.Common.Persistence;
+namespace Modules.Catalog.Common.Persistence;
 
-internal static class DepdendencyInjection
+internal static class DependencyInjection
 {
     internal static void AddPersistence(this IServiceCollection services, IConfiguration config)
     {
-        var connectionString = config.GetConnectionString("Warehouse");
-        services.AddDbContext<WarehouseDbContext>(options =>
+        var connectionString = config.GetConnectionString("Catalog");
+        services.AddDbContext<CatalogDbContext>(options =>
         {
             options.UseSqlServer(connectionString, builder =>
             {
-                builder.MigrationsAssembly(typeof(WarehouseModule).Assembly.FullName);
+                builder.MigrationsAssembly(typeof(CatalogModule).Assembly.FullName);
                 // builder.EnableRetryOnFailure();
             });
 
@@ -28,7 +27,6 @@ internal static class DepdendencyInjection
                 serviceProvider.GetRequiredService<DispatchDomainEventsInterceptor>());
         });
 
-
         services.AddScoped<EntitySaveChangesInterceptor>();
         services.AddScoped<DispatchDomainEventsInterceptor>();
         // services.AddScoped<OutboxInterceptor>();
@@ -36,7 +34,8 @@ internal static class DepdendencyInjection
 
     public static IApplicationBuilder UseInfrastructureMiddleware(this IApplicationBuilder app)
     {
-        app.UseMiddleware<EventualConsistencyMiddleware>();
+        // TODO: Will need to add this when any events are fired
+        // app.UseMiddleware<EventualConsistencyMiddleware>();
         return app;
     }
 }

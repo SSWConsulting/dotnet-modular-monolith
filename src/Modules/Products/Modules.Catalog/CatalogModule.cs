@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modules.Catalog.Common.Persistence;
 
 namespace Modules.Catalog;
 
@@ -15,7 +16,7 @@ public static class CatalogModule
 
         services.AddValidatorsFromAssembly(applicationAssembly);
 
-        // services.AddPersistence(configuration);
+        services.AddPersistence(configuration);
     }
 
     public static void UseCatalog(this WebApplication app)

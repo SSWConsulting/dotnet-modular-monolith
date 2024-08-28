@@ -9,7 +9,6 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-        <PackageReference Include="Bogus" Version="34.0.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
@@ -21,6 +20,10 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Common\Common.SharedKernel\Common.SharedKernel.csproj" />
       <ProjectReference Include="..\Modules.Warehouse.Messages\Modules.Warehouse.Messages.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Common\Persistence\Extensions\" />
     </ItemGroup>
 
 </Project>

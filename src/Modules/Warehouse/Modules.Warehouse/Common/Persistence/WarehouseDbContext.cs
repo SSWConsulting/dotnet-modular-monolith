@@ -11,7 +11,7 @@ internal class WarehouseDbContext : DbContext
     internal DbSet<Product> Products => Set<Product>();
 
     // Needs to be public for the Database project
-    public WarehouseDbContext(DbContextOptions options) : base(options)
+    public WarehouseDbContext(DbContextOptions<WarehouseDbContext> options) : base(options)
     {
     }
 

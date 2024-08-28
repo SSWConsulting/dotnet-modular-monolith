@@ -3,7 +3,7 @@ using FluentAssertions;
 using Modules.Catalog.Categories.Domain;
 using Modules.Catalog.Products;
 
-namespace Modules.Catalog.Tests;
+namespace Modules.Catalog.Tests.Products;
 
 public class ProductTests
 {

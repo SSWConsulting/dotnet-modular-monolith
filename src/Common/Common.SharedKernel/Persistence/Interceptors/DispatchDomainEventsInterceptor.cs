@@ -1,10 +1,10 @@
 ﻿using Common.SharedKernel.Domain.Interfaces;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Modules.Warehouse.Common.Middleware;
 
-namespace Modules.Warehouse.Common.Persistence.Interceptors;
+namespace Common.SharedKernel.Persistence.Interceptors;
 
 public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
 {
@@ -76,7 +76,8 @@ public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
 
     private void AddDomainEventsToOfflineProcessingQueue(IEnumerable<IDomainEvent> domainEvents)
     {
-        var domainEventsQueue = _httpContextAccessor.HttpContext!.Items.TryGetValue(EventualConsistencyMiddleware.DomainEventsKey, out var value) &&
+        // TODO: This queue will need to be module specific
+        var domainEventsQueue = _httpContextAccessor.HttpContext!.Items.TryGetValue("DomainEventsKey", out var value) &&
                                 value is Queue<IDomainEvent> existingDomainEvents
             ? existingDomainEvents
             : new Queue<IDomainEvent>();
@@ -84,6 +85,6 @@ public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
         foreach (var domainEvent in domainEvents)
             domainEventsQueue.Enqueue(domainEvent);
 
-        _httpContextAccessor.HttpContext.Items[EventualConsistencyMiddleware.DomainEventsKey] = domainEventsQueue;
+        _httpContextAccessor.HttpContext.Items["DomainEventsKey"] = domainEventsQueue;
     }
 }

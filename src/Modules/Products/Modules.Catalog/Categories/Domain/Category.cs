@@ -2,6 +2,8 @@
 
 namespace Modules.Catalog.Categories.Domain;
 
+internal record CategoryId(Guid Value) : IStronglyTypedId<Guid>;
+
 internal class Category : AggregateRoot<CategoryId>
 {
     /// <summary>
@@ -27,7 +29,6 @@ internal class Category : AggregateRoot<CategoryId>
 
     private void UpdateName(string name)
     {
-        // name.ThrowIfNull();
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         Name = name;

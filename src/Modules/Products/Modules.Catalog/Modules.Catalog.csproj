@@ -1,13 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Common\Common.SharedKernel\Common.SharedKernel.csproj" />
-      <ProjectReference Include="..\..\Warehouse\Modules.Warehouse.Messages\Modules.Warehouse.Messages.csproj" />
+        <PackageReference Include="Ardalis.SmartEnum" Version="8.0.0" />
+        <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="ErrorOr" Version="2.0.1" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Ardalis.Specification" Version="8.0.0" />
-      <PackageReference Include="ErrorOr" Version="2.0.1" />
+        <ProjectReference Include="..\..\..\Common\Common.SharedKernel\Common.SharedKernel.csproj" />
+        <ProjectReference Include="..\..\Warehouse\Modules.Warehouse.Messages\Modules.Warehouse.Messages.csproj" />
     </ItemGroup>
 
 </Project>

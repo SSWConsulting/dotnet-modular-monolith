@@ -1,9 +1,9 @@
 using FluentAssertions;
 using Modules.Catalog.Categories.Domain;
 
-namespace Modules.Catalog.Tests;
+namespace Modules.Catalog.Tests.Categories;
 
-public class CatalogTests
+public class CategoryTests
 {
     [Fact]
     public void Create_ShouldThrowException_WhenNameIsNull()
