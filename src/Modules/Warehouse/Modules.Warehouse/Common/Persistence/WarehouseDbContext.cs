@@ -4,7 +4,8 @@ using Modules.Warehouse.Storage.Domain;
 
 namespace Modules.Warehouse.Common.Persistence;
 
-internal class WarehouseDbContext : DbContext
+// Needs to be public for tests
+public class WarehouseDbContext : DbContext
 {
     internal DbSet<Aisle> Aisles => Set<Aisle>();
 

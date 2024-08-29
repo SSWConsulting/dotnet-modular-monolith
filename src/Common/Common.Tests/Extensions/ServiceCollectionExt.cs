@@ -1,11 +1,12 @@
 ﻿using Common.SharedKernel.Persistence.Interceptors;
+using Common.Tests.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Modules.Warehouse.Common.Persistence.Interceptors;
 using System.Diagnostics;
 
-namespace Modules.Warehouse.Tests.Common.Extensions;
+namespace Common.Tests.Extensions;
 
 internal static class ServiceCollectionExt
 {

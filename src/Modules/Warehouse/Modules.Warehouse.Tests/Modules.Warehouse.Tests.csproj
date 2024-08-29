@@ -28,6 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\Common.Tests\Common.Tests.csproj" />
       <ProjectReference Include="..\..\..\WebApi\WebApi.csproj" />
       <ProjectReference Include="..\Modules.Warehouse\Modules.Warehouse.csproj" />
     </ItemGroup>

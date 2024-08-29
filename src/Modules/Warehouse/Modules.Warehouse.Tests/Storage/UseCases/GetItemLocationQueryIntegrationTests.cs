@@ -3,14 +3,13 @@ using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Storage.Domain;
 using Modules.Warehouse.Storage.UseCases;
 using Modules.Warehouse.Tests.Common;
-using System.Net;
 using System.Net.Http.Json;
 using Xunit.Abstractions;
 
 namespace Modules.Warehouse.Tests.Storage.UseCases;
 
-public class GetItemLocationQueryIntegrationTests (TestingDatabaseFixture fixture, ITestOutputHelper output)
-    : IntegrationTestBase(fixture, output)
+public class GetItemLocationQueryIntegrationTests (WarehouseDatabaseFixture fixture, ITestOutputHelper output)
+    : WarehouseIntegrationTestBase(fixture, output)
 {
     [Fact]
     public async Task Query_ValidRequest_ReturnsOk()

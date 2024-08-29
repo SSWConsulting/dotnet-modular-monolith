@@ -10,9 +10,11 @@ using Xunit.Abstractions;
 
 namespace Modules.Warehouse.Tests.Storage.UseCases;
 
-public class CreateAisleCommandIntegrationTests (TestingDatabaseFixture fixture, ITestOutputHelper output)
-    : IntegrationTestBase(fixture, output)
+public class CreateAisleCommandIntegrationTests (WarehouseDatabaseFixture fixture, ITestOutputHelper output)
+    : WarehouseIntegrationTestBase(fixture, output)
 {
+    private readonly ITestOutputHelper _output = output;
+
     [Fact]
     public async Task CreateAisle_ValidRequest_ReturnsCreatedAisle()
     {
@@ -57,6 +59,6 @@ public class CreateAisleCommandIntegrationTests (TestingDatabaseFixture fixture,
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         var content = await response.Content.ReadAsStringAsync();
-        output.WriteLine(content);
+        _output.WriteLine(content);
     }
 }

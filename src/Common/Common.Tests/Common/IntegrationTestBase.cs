@@ -1,37 +1,35 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Modules.Warehouse.Common.Persistence;
+using Xunit;
 using Xunit.Abstractions;
 
-namespace Modules.Warehouse.Tests.Common;
+namespace Common.Tests.Common;
 
 /// <summary>
 /// Integration tests inherit from this to access helper classes
 /// </summary>
-[Collection(TestingDatabaseFixtureCollection.Name)]
-public abstract class IntegrationTestBase : IAsyncLifetime
+public abstract class IntegrationTestBase<TDbContext> : IAsyncLifetime where TDbContext : DbContext
 {
     private readonly IServiceScope _scope;
 
-    private readonly TestingDatabaseFixture _fixture;
+    private readonly TestingDatabaseFixture<TDbContext> _fixture;
 
     protected IMediator Mediator { get; }
 
     protected IQueryable<T> GetQueryable<T>() where T : class => DbContext.Set<T>().AsNoTracking();
 
-    internal WarehouseDbContext DbContext { get; }
+    private TDbContext DbContext { get; }
 
-    protected IntegrationTestBase(TestingDatabaseFixture fixture, ITestOutputHelper output)
+    protected IntegrationTestBase(TestingDatabaseFixture<TDbContext> fixture, ITestOutputHelper output)
     {
         _fixture = fixture;
         _fixture.SetOutput(output);
 
         _scope = _fixture.ScopeFactory.CreateScope();
         Mediator = _scope.ServiceProvider.GetRequiredService<IMediator>();
-        DbContext = _scope.ServiceProvider.GetRequiredService<WarehouseDbContext>();
+        DbContext = _scope.ServiceProvider.GetRequiredService<TDbContext>();
     }
-
 
     protected async Task AddEntityAsync<T>(T entity, CancellationToken cancellationToken = default) where T : class
     {

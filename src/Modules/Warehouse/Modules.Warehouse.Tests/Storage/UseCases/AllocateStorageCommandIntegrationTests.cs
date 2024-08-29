@@ -9,8 +9,8 @@ using Xunit.Abstractions;
 
 namespace Modules.Warehouse.Tests.Storage.UseCases;
 
-public class AllocateStorageCommandIntegrationTests (TestingDatabaseFixture fixture, ITestOutputHelper output)
-    : IntegrationTestBase(fixture, output)
+public class AllocateStorageCommandIntegrationTests (WarehouseDatabaseFixture fixture, ITestOutputHelper output)
+    : WarehouseIntegrationTestBase(fixture, output)
 {
     [Fact]
     public async Task AllocateStorage_ValidRequest_ReturnsOk()

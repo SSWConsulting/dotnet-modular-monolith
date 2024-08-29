@@ -9,9 +9,11 @@ using Xunit.Abstractions;
 
 namespace Modules.Warehouse.Tests.Products;
 
-public class ProductIntegrationTests (TestingDatabaseFixture fixture, ITestOutputHelper output)
-    : IntegrationTestBase(fixture, output)
+public class ProductIntegrationTests(WarehouseDatabaseFixture fixture, ITestOutputHelper output)
+    : WarehouseIntegrationTestBase(fixture, output)
 {
+    private readonly ITestOutputHelper _output = output;
+
     [Fact]
     public async Task CreateProduct_ValidRequest_ReturnsCreatedProduct()
     {
@@ -53,6 +55,6 @@ public class ProductIntegrationTests (TestingDatabaseFixture fixture, ITestOutpu
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         var content = await response.Content.ReadAsStringAsync();
-        output.WriteLine(content);
+        _output.WriteLine(content);
     }
 }
