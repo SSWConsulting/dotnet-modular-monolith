@@ -4,7 +4,7 @@ using Modules.Catalog.Products;
 
 namespace Modules.Catalog.Common.Persistence;
 
-internal class CatalogDbContext : DbContext
+public class CatalogDbContext : DbContext
 {
     internal DbSet<Product> Products => Set<Product>();
 
