@@ -1,3 +1,4 @@
+using Ardalis.Specification.EntityFrameworkCore;
 using Common.SharedKernel;
 using Common.SharedKernel.Api;
 using ErrorOr;
@@ -21,7 +22,7 @@ public static class RemoveProductCategoryCommand
     {
         public static void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapDelete("/api/products/{productId:guid}/category/{categoryId:guid}",
+            app.MapDelete("/api/products/{productId:guid}/categories/{categoryId:guid}",
                     async (Guid productId, Guid categoryId, ISender sender) =>
                     {
                         var request = new Request(productId, categoryId);
@@ -59,9 +60,9 @@ public static class RemoveProductCategoryCommand
         public async Task<ErrorOr<Success>> Handle(Request request, CancellationToken cancellationToken)
         {
             var productId = new ProductId(request.ProductId);
-            var product =
-                await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == productId,
-                    cancellationToken: cancellationToken);
+            var product = await _dbContext.Products
+                .WithSpecification(new ProductByIdSpec(productId))
+                .FirstOrDefaultAsync(cancellationToken);
 
             if (product is null)
                 return ProductErrors.NotFound;

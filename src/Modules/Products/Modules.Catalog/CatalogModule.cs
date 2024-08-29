@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Catalog.Categories;
 using Modules.Catalog.Common.Persistence;
+using Modules.Catalog.Products.UseCases;
 
 namespace Modules.Catalog;
 
@@ -26,5 +27,7 @@ public static class CatalogModule
 
         // // TODO: Consider source generation or reflection for endpoint mapping
         CreateCategoryCommand.Endpoint.MapEndpoint(app);
+        AddProductCategoryCommand.Endpoint.MapEndpoint(app);
+        RemoveProductCategoryCommand.Endpoint.MapEndpoint(app);
     }
 }

@@ -70,27 +70,4 @@ public class CategoryIntegrationTests(CatalogDatabaseFixture fixture, ITestOutpu
         // Assert
         response2.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
-
-    //
-    // [Theory]
-    // [InlineData(null, "12345678")]
-    // [InlineData("", "12345678")]
-    // [InlineData(" ", "12345678")]
-    // [InlineData("name", null)]
-    // [InlineData("name", "")]
-    // [InlineData("name", "123")]
-    // public async Task CreateProduct_InvalidRequest_ReturnsBadRequest(string name, string sku)
-    // {
-    //     // Arrange
-    //     var client = GetAnonymousClient();
-    //     var request = new CreateProductCommand.Request(name, sku);
-    //
-    //     // Act
-    //     var response = await client.PostAsJsonAsync("/api/products", request);
-    //
-    //     // Assert
-    //     response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-    //     var content = await response.Content.ReadAsStringAsync();
-    //     _output.WriteLine(content);
-    // }
 }
