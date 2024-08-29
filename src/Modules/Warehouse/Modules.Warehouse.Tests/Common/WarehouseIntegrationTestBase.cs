@@ -4,7 +4,8 @@ using Xunit.Abstractions;
 
 namespace Modules.Warehouse.Tests.Common;
 
-public abstract class WarehouseDatabaseFixture : TestingDatabaseFixture<WarehouseDbContext>;
+// ReSharper disable once ClassNeverInstantiated.Global
+public class WarehouseDatabaseFixture : TestingDatabaseFixture<WarehouseDbContext>;
 
 [Collection(TestingDatabaseFixtureCollection.Name)]
 public abstract class WarehouseIntegrationTestBase(
