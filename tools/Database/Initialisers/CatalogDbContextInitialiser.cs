@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Modules.Catalog.Categories.Domain;
 using Modules.Catalog.Common.Persistence;
 using Modules.Warehouse.Products.Domain;
-using ProductId = Modules.Catalog.Products.ProductId;
+using ProductId = Modules.Catalog.Products.Domain.ProductId;
 
 namespace Database.Initialisers;
 
@@ -73,7 +73,7 @@ internal class CatalogDbContextInitialiser
         // However, to simplify test data seed, we'll manually pass products into the catalog
         foreach (var warehouseProduct in warehouseProducts)
         {
-            var catalogProduct = Modules.Catalog.Products.Product.Create(
+            var catalogProduct = Modules.Catalog.Products.Domain.Product.Create(
                 warehouseProduct.Name,
                 warehouseProduct.Sku.Value,
                 new ProductId(warehouseProduct.Id.Value));

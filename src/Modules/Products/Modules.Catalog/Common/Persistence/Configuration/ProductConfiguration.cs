@@ -2,7 +2,7 @@ using Common.SharedKernel.Persistence;
 using Common.SharedKernel.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Modules.Catalog.Products;
+using Modules.Catalog.Products.Domain;
 
 namespace Modules.Catalog.Common.Persistence.Configuration;
 

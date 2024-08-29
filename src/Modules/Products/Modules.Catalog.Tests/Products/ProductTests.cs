@@ -1,7 +1,7 @@
 using Common.SharedKernel.Domain.Entities;
 using FluentAssertions;
 using Modules.Catalog.Categories.Domain;
-using Modules.Catalog.Products;
+using Modules.Catalog.Products.Domain;
 
 namespace Modules.Catalog.Tests.Products;
 

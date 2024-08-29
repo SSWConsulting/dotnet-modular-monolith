@@ -2,7 +2,7 @@ using Common.SharedKernel.Domain.Base;
 using Common.SharedKernel.Domain.Entities;
 using Modules.Catalog.Categories.Domain;
 
-namespace Modules.Catalog.Products;
+namespace Modules.Catalog.Products.Domain;
 
 internal record ProductId(Guid Value) : IStronglyTypedId<Guid>;
 

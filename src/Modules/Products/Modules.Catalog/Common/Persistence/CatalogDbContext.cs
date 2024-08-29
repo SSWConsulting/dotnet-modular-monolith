@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Modules.Catalog.Categories.Domain;
-using Modules.Catalog.Products;
+using Modules.Catalog.Products.Domain;
 
 namespace Modules.Catalog.Common.Persistence;
 

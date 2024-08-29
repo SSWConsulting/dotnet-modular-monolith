@@ -17,6 +17,7 @@ internal class EventualConsistencyMiddleware
     }
 
     // TODO: See if we can make this middleware generic
+    // TODO: Possibly use IDbContextFactory to dynamically create the context
     public async Task InvokeAsync(HttpContext context, IPublisher publisher, WarehouseDbContext dbContext)
     {
         var transaction = await dbContext.Database.BeginTransactionAsync();

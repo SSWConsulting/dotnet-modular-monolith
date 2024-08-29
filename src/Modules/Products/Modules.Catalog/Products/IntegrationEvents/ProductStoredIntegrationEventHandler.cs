@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Modules.Catalog.Common.Persistence;
+using Modules.Catalog.Products.Domain;
 using Modules.Warehouse.Messages;
 
 namespace Modules.Catalog.Products.IntegrationEvents;
