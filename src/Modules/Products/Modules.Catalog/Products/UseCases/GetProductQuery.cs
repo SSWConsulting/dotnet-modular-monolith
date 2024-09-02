@@ -29,7 +29,7 @@ public static class GetProductQuery
                     {
                         var request = new Request(productId);
                         var response = await sender.Send(request);
-                        return response.IsError ? response.Problem() : TypedResults.NoContent();
+                        return response.IsError ? response.Problem() : TypedResults.Ok(response.Value);
                     })
                 .WithName("GetProduct")
                 .WithTags("Catalog")
