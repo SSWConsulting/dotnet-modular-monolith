@@ -7,10 +7,8 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
-using Modules.Catalog.Categories.Domain;
 using Modules.Catalog.Common.Persistence;
 using Modules.Catalog.Products.Domain;
 using System.Text.Json.Serialization;
@@ -19,16 +17,20 @@ namespace Modules.Catalog.Products.UseCases;
 
 public static class UpdateProductPriceCommand
 {
-    public record Request([property: FromRoute]Guid ProductId, decimal Price) : IRequest<ErrorOr<Success>>;
+    public record Request(decimal Price) : IRequest<ErrorOr<Success>>
+    {
+        [JsonIgnore]
+        public Guid ProductId { get; set; }
+    }
 
     public static class Endpoint
     {
         public static void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/products/{productId:guid}",
-                    async (Request request, ISender sender) =>
+            app.MapPut("/api/products/{productId:guid}/price",
+                    async (Guid productId, Request request, ISender sender) =>
                     {
-                        // var request = new Request(productId, categoryId);
+                        request.ProductId = productId;
                         var response = await sender.Send(request);
                         return response.IsError ? response.Problem() : TypedResults.NoContent();
                     })
@@ -72,6 +74,7 @@ public static class UpdateProductPriceCommand
 
             var money = Money.Create(request.Price);
             product.UpdatePrice(money);
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
             return Result.Success;
         }

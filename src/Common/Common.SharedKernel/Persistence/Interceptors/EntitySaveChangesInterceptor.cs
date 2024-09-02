@@ -28,6 +28,8 @@ public class EntitySaveChangesInterceptor(ICurrentUserService currentUserService
         if (context is null)
             return;
 
+        var entries = context.ChangeTracker.Entries();
+
         foreach (var entry in context.ChangeTracker.Entries<IAuditable>())
         {
             if (entry.State is EntityState.Added)

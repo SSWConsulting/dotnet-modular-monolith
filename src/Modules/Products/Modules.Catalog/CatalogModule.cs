@@ -30,5 +30,6 @@ public static class CatalogModule
         AddProductCategoryCommand.Endpoint.MapEndpoint(app);
         RemoveProductCategoryCommand.Endpoint.MapEndpoint(app);
         GetProductQuery.Endpoint.MapEndpoint(app);
+        UpdateProductPriceCommand.Endpoint.MapEndpoint(app);
     }
 }

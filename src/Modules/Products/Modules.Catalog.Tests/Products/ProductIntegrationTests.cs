@@ -24,11 +24,12 @@ public class ProductIntegrationTests(CatalogDatabaseFixture fixture, ITestOutput
         await AddEntityAsync(product);
 
         // Act
-        var response = await client.PostAsync($"/api/products/{product.Id.Value}/categories/{category.Id.Value}",null);
+        var response = await client.PostAsync($"/api/products/{product.Id.Value}/categories/{category.Id.Value}", null);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Created);
-        var updatedProduct = GetQueryable<Product>().WithSpecification(new ProductByIdSpec(new ProductId(product.Id.Value))).FirstOrDefault();
+        var updatedProduct = GetQueryable<Product>()
+            .WithSpecification(new ProductByIdSpec(new ProductId(product.Id.Value))).FirstOrDefault();
         updatedProduct.Should().NotBeNull();
         updatedProduct!.Categories.Should().HaveCount(1);
         updatedProduct.Categories[0].Should().BeEquivalentTo(category);
@@ -51,7 +52,8 @@ public class ProductIntegrationTests(CatalogDatabaseFixture fixture, ITestOutput
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
-        var updatedProduct = GetQueryable<Product>().WithSpecification(new ProductByIdSpec(new ProductId(product.Id.Value))).FirstOrDefault();
+        var updatedProduct = GetQueryable<Product>()
+            .WithSpecification(new ProductByIdSpec(new ProductId(product.Id.Value))).FirstOrDefault();
         updatedProduct.Should().NotBeNull();
         updatedProduct!.Categories.Should().HaveCount(0);
     }
@@ -93,5 +95,26 @@ public class ProductIntegrationTests(CatalogDatabaseFixture fixture, ITestOutput
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task UpdateProductPrice_ValidRequest_ShouldReturnNoContent()
+    {
+        // Arrange
+        var client = GetAnonymousClient();
+        var product = Product.Create("product", "12345678");
+        await AddEntityAsync(product);
+        await SaveAsync();
+        var request = new UpdateProductPriceCommand.Request(10.0m);
+
+        // Act
+        var response = await client.PutAsJsonAsync($"/api/products/{product.Id.Value}/price", request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        var updatedProduct = GetQueryable<Product>()
+            .WithSpecification(new ProductByIdSpec(new ProductId(product.Id.Value))).FirstOrDefault();
+        updatedProduct.Should().NotBeNull();
+        updatedProduct!.Price.Amount.Should().Be(request.Price);
     }
 }
