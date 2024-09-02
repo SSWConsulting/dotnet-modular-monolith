@@ -28,9 +28,11 @@ internal class Order : AggregateRoot<OrderId>
 
     public Money AmountPaid { get; private set; } = null!;
 
+#pragma warning disable CS0414 // Field is assigned but its value is never used
     private Payment.Payment _payment = null!;
+#pragma warning restore CS0414 // Field is assigned but its value is never used
 
-    public OrderStatus Status { get; private set; }
+    public OrderStatus Status { get; private set; } = null!;
 
     public DateTimeOffset ShippingDate { get; private set; }
 

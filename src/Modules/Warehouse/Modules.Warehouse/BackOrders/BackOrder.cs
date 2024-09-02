@@ -2,6 +2,8 @@ using Ardalis.SmartEnum;
 using Common.SharedKernel.Domain.Base;
 using Modules.Warehouse.Products.Domain;
 
+#pragma warning disable CS0414 // Field is assigned but its value is never used
+
 namespace Modules.Warehouse.BackOrders;
 
 internal record BackOrderId(Guid Value);

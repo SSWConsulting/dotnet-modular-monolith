@@ -29,5 +29,6 @@ public static class CatalogModule
         CreateCategoryCommand.Endpoint.MapEndpoint(app);
         AddProductCategoryCommand.Endpoint.MapEndpoint(app);
         RemoveProductCategoryCommand.Endpoint.MapEndpoint(app);
+        GetProductQuery.Endpoint.MapEndpoint(app);
     }
 }
