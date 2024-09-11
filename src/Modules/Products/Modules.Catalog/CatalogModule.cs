@@ -31,5 +31,6 @@ public static class CatalogModule
         RemoveProductCategoryCommand.Endpoint.MapEndpoint(app);
         GetProductQuery.Endpoint.MapEndpoint(app);
         UpdateProductPriceCommand.Endpoint.MapEndpoint(app);
+        SearchProductsQuery.Endpoint.MapEndpoint(app);
     }
 }
