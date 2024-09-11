@@ -7,24 +7,32 @@ namespace Common.Tests.Common;
 /// </summary>
 public class DatabaseContainer
 {
-    private readonly SqlEdgeContainer _container;
-
-    public DatabaseContainer(string name)
-    {
-        _container = new SqlEdgeBuilder()
-            .WithName($"Modular-Monolith-Tests-{name}")
-            .WithPassword("Password123")
-            .WithAutoRemove(true)
-            .Build();
-    }
+    private readonly SqlEdgeContainer _container = new SqlEdgeBuilder()
+        .WithName($"Modular-Monolith-Tests-{Guid.NewGuid()}")
+        .WithPassword("Password123")
+        // .WithWaitStrategy(Wait.ForUnixContainer())
+        // .WithAutoRemove(true)
+        .Build();
 
     public string? ConnectionString { get; private set; }
 
     public async Task InitializeAsync()
     {
-        await _container.StartAsync();
-        ConnectionString = _container.GetConnectionString();
+        try
+        {
+            await _container.StartAsync();
+            ConnectionString = _container.GetConnectionString();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
-    public Task DisposeAsync() => _container.StopAsync() ?? Task.CompletedTask;
+    public async Task DisposeAsync()
+    {
+        await _container.StopAsync();
+        await _container.DisposeAsync();
+    }
 }

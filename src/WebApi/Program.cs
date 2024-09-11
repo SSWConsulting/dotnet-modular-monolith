@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddSwagger();
 
+    builder.Services.AddGlobalErrorHandler();
+
     builder.Services.AddCommon();
 
     builder.Services.AddMediatR();

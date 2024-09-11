@@ -16,7 +16,7 @@ namespace Common.Tests.Common;
 /// </summary>
 public class WebApiTestFactory<TDbContext> : WebApplicationFactory<IWebApiMarker> where TDbContext : DbContext
 {
-    public DatabaseContainer Database { get; } = new(typeof(TDbContext).Name);
+    public DatabaseContainer Database { get; } = new();
 
     public ITestOutputHelper? Output { private get; set; }
 
