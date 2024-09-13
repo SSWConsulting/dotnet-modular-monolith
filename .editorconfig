@@ -1,0 +1,34 @@
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
+root = true
+
+##########################################################################################
+#
+# CODE STYLE RULES
+#
+##########################################################################################
+
+# All files
+[*]
+indent_style = space
+
+# Xml files
+[*.{xml,yml,json}]
+indent_size = 2
+tab_width = 2
+
+# C# Projects
+[*.csproj]
+indent_size = 4
+tab_width = 4
+
+# C# files
+[*.cs]
+indent_size = 4
+tab_width = 4
+
+# New line preferences
+end_of_line = lf
+insert_final_newline = false
+
+# File scoped namespaces
+csharp_style_namespace_declarations = file_scoped:silent
