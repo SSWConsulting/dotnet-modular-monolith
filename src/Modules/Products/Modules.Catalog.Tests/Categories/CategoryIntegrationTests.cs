@@ -12,8 +12,6 @@ namespace Modules.Catalog.Tests.Categories;
 public class CategoryIntegrationTests(CatalogDatabaseFixture fixture, ITestOutputHelper output)
     : CatalogIntegrationTestBase(fixture, output)
 {
-    private readonly ITestOutputHelper _output = output;
-
     [Fact]
     public async Task CreateCategory_ValidRequest_ShouldReturnCreated()
     {
@@ -40,11 +38,11 @@ public class CategoryIntegrationTests(CatalogDatabaseFixture fixture, ITestOutpu
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public async Task CreateCategory_InvalidRequest_ReturnsBadRequest(string name)
+    public async Task CreateCategory_InvalidRequest_ReturnsBadRequest(string? name)
     {
         // Arrange
         var client = GetAnonymousClient();
-        var request = new CreateCategoryCommand.Request(name);
+        var request = new CreateCategoryCommand.Request(name!);
 
         // Act
         var response = await client.PostAsJsonAsync("/api/categories", request);

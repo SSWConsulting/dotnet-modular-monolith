@@ -8,7 +8,7 @@ internal record CartId(Guid Value);
 
 internal class Cart : AggregateRoot<CartId>
 {
-    private List<CartItem> _items = [];
+    private readonly List<CartItem> _items = [];
 
     public IReadOnlyList<CartItem> Items => _items.AsReadOnly();
 

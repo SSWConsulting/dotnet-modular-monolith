@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace Modules.Warehouse.Tests.Storage.UseCases;
 
-public class CreateAisleCommandIntegrationTests (WarehouseDatabaseFixture fixture, ITestOutputHelper output)
+public class CreateAisleCommandIntegrationTests(WarehouseDatabaseFixture fixture, ITestOutputHelper output)
     : WarehouseIntegrationTestBase(fixture, output)
 {
     private readonly ITestOutputHelper _output = output;
@@ -47,11 +47,11 @@ public class CreateAisleCommandIntegrationTests (WarehouseDatabaseFixture fixtur
     [InlineData("", 1, 1)]
     [InlineData(" ", 1, 1)]
     [InlineData(null, 1, 1)]
-    public async Task CreateAisle_WithInvalidRequest_Throws(string name, int numBays, int numShelves)
+    public async Task CreateAisle_WithInvalidRequest_Throws(string? name, int numBays, int numShelves)
     {
         // Arrange
         var client = GetAnonymousClient();
-        var request = new CreateAisleCommand.Request(name, numBays, numShelves);
+        var request = new CreateAisleCommand.Request(name!, numBays, numShelves);
 
         // Act
         var response = await client.PostAsJsonAsync("/api/aisles", request);

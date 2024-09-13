@@ -37,8 +37,8 @@ public static class ErrorOrExt
         var errors = new Dictionary<string, string[]>();
         foreach (var e in error.Errors!)
         {
-            if (errors.Remove(e.Code, out string[]? value))
-                errors.Add(e.Code, [..value, e.Description]);
+            if (errors.Remove(e.Code, out var value))
+                errors.Add(e.Code, [.. value, e.Description]);
             else
                 errors.Add(e.Code, [e.Description]);
         }

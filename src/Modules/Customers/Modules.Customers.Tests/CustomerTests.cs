@@ -57,7 +57,7 @@ public class CustomerTests
     {
         // Arrange
         var customer = Customer.Create("test@example.com", "John", "Doe");
-        var address = new Address("123 Main St", null,"City", "State", "12345", "US");
+        var address = new Address("123 Main St", null, "City", "State", "12345", "US");
 
         // Act
         customer.UpdateAddress(address);

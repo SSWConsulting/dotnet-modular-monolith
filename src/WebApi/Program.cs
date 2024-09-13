@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddMediatR();
 
-    builder.Services.AddOrders();
+    // builder.Services.AddOrders();
     builder.Services.AddWarehouse(builder.Configuration);
     builder.Services.AddCatalog(builder.Configuration);
 }

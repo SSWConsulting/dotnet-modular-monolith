@@ -27,9 +27,9 @@ public class AisleTests
         StorageAllocationService.AllocateStorage(new List<Aisle> { aisle }, productA);
         StorageAllocationService.AllocateStorage(new List<Aisle> { aisle }, productB);
 
-        string aisleName = string.Empty;
-        string bayName = string.Empty;
-        string shelfName = string.Empty;
+        var aisleName = string.Empty;
+        var bayName = string.Empty;
+        var shelfName = string.Empty;
 
         // NOTE: If look ups like there were to cause performacne problems, two-way relationships could be added between
         // Different storage locations (e.g. Shelf->Bay->Aisle) to make lookups more efficient.

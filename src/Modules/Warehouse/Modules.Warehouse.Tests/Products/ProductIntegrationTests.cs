@@ -43,11 +43,11 @@ public class ProductIntegrationTests(WarehouseDatabaseFixture fixture, ITestOutp
     [InlineData("name", null)]
     [InlineData("name", "")]
     [InlineData("name", "123")]
-    public async Task CreateProduct_InvalidRequest_ReturnsBadRequest(string name, string sku)
+    public async Task CreateProduct_InvalidRequest_ReturnsBadRequest(string? name, string? sku)
     {
         // Arrange
         var client = GetAnonymousClient();
-        var request = new CreateProductCommand.Request(name, sku);
+        var request = new CreateProductCommand.Request(name!, sku!);
 
         // Act
         var response = await client.PostAsJsonAsync("/api/products", request);

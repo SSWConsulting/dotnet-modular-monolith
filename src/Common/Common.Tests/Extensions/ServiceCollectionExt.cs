@@ -23,7 +23,7 @@ internal static class ServiceCollectionExt
             .AddDbContext<T>((_, options) =>
             {
                 options.UseSqlServer(databaseContainer.ConnectionString);
-                    // b => b.MigrationsAssembly(typeof(T).Assembly.FullName));
+                // b => b.MigrationsAssembly(typeof(T).Assembly.FullName));
 
                 options.LogTo(m => Debug.WriteLine(m));
                 options.EnableSensitiveDataLogging();

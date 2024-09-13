@@ -15,7 +15,7 @@ internal class Payment : Entity<PaymentId>
     {
     }
 
-    public static Payment Create (Money amount, PaymentType paymentType)
+    public static Payment Create(Money amount, PaymentType paymentType)
     {
         ArgumentNullException.ThrowIfNull(amount);
         ArgumentNullException.ThrowIfNull(paymentType);

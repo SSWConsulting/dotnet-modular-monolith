@@ -51,7 +51,6 @@ public class StorageAllocationServiceTests
         var numBays = 2;
         var numShelves = 3;
         var aisle = Aisle.Create("Aisle 1", numBays, numShelves);
-        var sut = new StorageAllocationService();
         var productId = new ProductId(Guid.NewGuid());
 
         // Act
@@ -73,11 +72,10 @@ public class StorageAllocationServiceTests
         var numBays = 2;
         var numShelves = 3;
         var aisle = Aisle.Create("Aisle 1", numBays, numShelves);
-        var sut = new StorageAllocationService();
         var productId = new ProductId(Guid.NewGuid());
 
         // Act
-        for(var i = 0; i < numBays * numShelves; i++)
+        for (var i = 0; i < numBays * numShelves; i++)
         {
             StorageAllocationService.AllocateStorage([aisle], productId);
         }

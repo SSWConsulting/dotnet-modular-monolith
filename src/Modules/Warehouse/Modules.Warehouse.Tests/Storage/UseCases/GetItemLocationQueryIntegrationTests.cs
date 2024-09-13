@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace Modules.Warehouse.Tests.Storage.UseCases;
 
-public class GetItemLocationQueryIntegrationTests (WarehouseDatabaseFixture fixture, ITestOutputHelper output)
+public class GetItemLocationQueryIntegrationTests(WarehouseDatabaseFixture fixture, ITestOutputHelper output)
     : WarehouseIntegrationTestBase(fixture, output)
 {
     [Fact]

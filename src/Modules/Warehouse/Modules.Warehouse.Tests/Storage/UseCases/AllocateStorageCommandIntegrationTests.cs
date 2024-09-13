@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 
 namespace Modules.Warehouse.Tests.Storage.UseCases;
 
-public class AllocateStorageCommandIntegrationTests (WarehouseDatabaseFixture fixture, ITestOutputHelper output)
+public class AllocateStorageCommandIntegrationTests(WarehouseDatabaseFixture fixture, ITestOutputHelper output)
     : WarehouseIntegrationTestBase(fixture, output)
 {
     [Fact]

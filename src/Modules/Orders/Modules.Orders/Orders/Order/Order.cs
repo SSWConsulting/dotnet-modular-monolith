@@ -28,9 +28,7 @@ internal class Order : AggregateRoot<OrderId>
 
     public Money AmountPaid { get; private set; } = null!;
 
-#pragma warning disable CS0414 // Field is assigned but its value is never used
-    private Payment.Payment _payment = null!;
-#pragma warning restore CS0414 // Field is assigned but its value is never used
+    // private readonly Payment.Payment _payment = null!;
 
     public OrderStatus Status { get; private set; } = null!;
 
@@ -47,7 +45,7 @@ internal class Order : AggregateRoot<OrderId>
     /// <summary>
     /// Shipping total.  Excludes tax.
     /// </summary>
-    public Money ShippingTotal {get; private set; } = null!;
+    public Money ShippingTotal { get; private set; } = null!;
 
     /// <summary>
     /// Tax of the order. Calculated on the OrderSubTotal and ShippingTotal.

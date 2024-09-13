@@ -1,5 +1,4 @@
 using Common.SharedKernel.Domain.Entities;
-using FluentAssertions;
 using Modules.Orders.Carts;
 using Modules.Orders.Orders;
 

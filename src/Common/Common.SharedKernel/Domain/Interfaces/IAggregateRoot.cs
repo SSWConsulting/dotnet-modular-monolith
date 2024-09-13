@@ -1,6 +1,4 @@
-﻿using Common.SharedKernel.Domain.Base;
-
-namespace Common.SharedKernel.Domain.Interfaces;
+﻿namespace Common.SharedKernel.Domain.Interfaces;
 
 public interface IAggregateRoot
 {

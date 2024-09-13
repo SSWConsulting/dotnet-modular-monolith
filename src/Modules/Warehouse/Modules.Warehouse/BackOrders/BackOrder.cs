@@ -1,8 +1,5 @@
 using Ardalis.SmartEnum;
 using Common.SharedKernel.Domain.Base;
-using Modules.Warehouse.Products.Domain;
-
-#pragma warning disable CS0414 // Field is assigned but its value is never used
 
 namespace Modules.Warehouse.BackOrders;
 
@@ -10,11 +7,11 @@ internal record BackOrderId(Guid Value);
 
 internal class BackOrder : AggregateRoot<BackOrderId>
 {
-    private ProductId _productId = null!;
+    // private ProductId _productId = null!;
 
-    private int _quantityOrdered;
+    // private int _quantityOrdered;
 
-    private int _quantityReceived;
+    // private int _quantityReceived;
 
     public BackOrderStatus Status { get; private set; } = null!;
 
@@ -22,14 +19,14 @@ internal class BackOrder : AggregateRoot<BackOrderId>
     {
     }
 
-    public static BackOrder Create(ProductId productId, int quantityOrdered)
+    public static BackOrder Create(/*ProductId productId, int quantityOrdered*/)
     {
         var backOrder = new BackOrder
         {
             Id = new BackOrderId(Guid.NewGuid()),
-            _productId = productId,
-            _quantityOrdered = quantityOrdered,
-            _quantityReceived = 0,
+            // _productId = productId,
+            // _quantityOrdered = quantityOrdered,
+            // _quantityReceived = 0,
             Status = BackOrderStatus.Pending
         };
 
