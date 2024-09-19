@@ -1,3 +1,4 @@
+using DotNet.Testcontainers.Builders;
 using Testcontainers.SqlEdge;
 
 namespace Common.Tests.Common;
@@ -10,8 +11,8 @@ public class DatabaseContainer
     private readonly SqlEdgeContainer _container = new SqlEdgeBuilder()
         .WithName($"Modular-Monolith-Tests-{Guid.NewGuid()}")
         .WithPassword("Password123")
-        // .WithWaitStrategy(Wait.ForUnixContainer())
-        // .WithAutoRemove(true)
+        .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(1433))
+        .WithAutoRemove(true)
         .Build();
 
     public string? ConnectionString { get; private set; }
