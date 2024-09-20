@@ -5,6 +5,8 @@
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
 
         <PackageReference Include="Testcontainers" Version="3.10.0" />
+
+        <PackageReference Include="Testcontainers.MsSql" Version="3.10.0" />
         <PackageReference Include="Testcontainers.SqlEdge" Version="3.10.0" />
         <PackageReference Include="Respawn" Version="6.2.1"/>
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.0-rc.1.24452.1" />

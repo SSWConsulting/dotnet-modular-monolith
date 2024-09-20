@@ -1,5 +1,4 @@
-using DotNet.Testcontainers.Builders;
-using Testcontainers.SqlEdge;
+using Testcontainers.MsSql;
 
 namespace Common.Tests.Common;
 
@@ -8,10 +7,11 @@ namespace Common.Tests.Common;
 /// </summary>
 public class DatabaseContainer
 {
-    private readonly SqlEdgeContainer _container = new SqlEdgeBuilder()
-        .WithName($"Modular-Monolith-Tests-{Guid.NewGuid()}")
+    private readonly MsSqlContainer _container = new MsSqlBuilder()
+        .WithImage("mcr.microsoft.com/mssql/server:2022-CU14-ubuntu-22.04")
+        .WithName($"BizCover-IntegrationTests-{Guid.NewGuid()}")
         .WithPassword("Password123")
-        .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(1433))
+        .WithPortBinding(1433, true)
         .WithAutoRemove(true)
         .Build();
 
@@ -19,16 +19,8 @@ public class DatabaseContainer
 
     public async Task InitializeAsync()
     {
-        try
-        {
-            await _container.StartAsync();
-            ConnectionString = _container.GetConnectionString();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        await _container.StartAsync();
+        ConnectionString = _container.GetConnectionString();
     }
 
     public async Task DisposeAsync()
