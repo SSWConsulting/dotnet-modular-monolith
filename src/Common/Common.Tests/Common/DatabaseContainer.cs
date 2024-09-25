@@ -1,3 +1,4 @@
+using Polly;
 using Testcontainers.MsSql;
 
 namespace Common.Tests.Common;
@@ -28,29 +29,10 @@ public class DatabaseContainer
     private async Task StartWithRetry()
     {
         // NOTE: For some reason the container sometimes fails to start up.  Add in a retry to protect against this
-        var notReady = true;
-        var numTries = 0;
+        var policy = Policy.Handle<Exception>()
+            .WaitAndRetry(MaxRetries, _ => TimeSpan.FromMilliseconds(2000));
 
-        while (notReady)
-        {
-            if (numTries >= MaxRetries)
-            {
-                Console.WriteLine("Max tries reached, giving up");
-                break;
-            }
-
-            try
-            {
-                await _container.StartAsync();
-                notReady = false;
-            }
-            catch (Exception ex)
-            {
-                numTries++;
-                await Task.Delay(2000);
-                Console.WriteLine($"container failed to start: {ex.Message}");
-            }
-        }
+        await policy.Execute(async () => { await _container.StartAsync(); });
     }
 
     public async Task DisposeAsync()
