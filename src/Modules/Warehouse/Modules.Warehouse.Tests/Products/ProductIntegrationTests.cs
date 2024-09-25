@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Products.UseCases;

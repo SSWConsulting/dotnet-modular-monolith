@@ -1,4 +1,3 @@
-using Common.SharedKernel.Domain.Entities;
 using Modules.Orders.Orders;
 
 namespace Modules.Orders.Tests.Cart;
@@ -9,7 +8,7 @@ public class CartTests
     public void AddItem_ShouldIncreaseQuantity_WhenItemAlreadyExists()
     {
         // Arrange
-        var productId = new ProductId(Guid.NewGuid());
+        var productId = new ProductId(Uuid.Create());
         var unitPrice = new Money(Currency.Default, 10);
         var cart = Carts.Cart.Create(productId, 1, unitPrice);
 
@@ -26,8 +25,8 @@ public class CartTests
     public void AddItem_ShouldAddNewItem_WhenItemDoesNotExist()
     {
         // Arrange
-        var productId1 = new ProductId(Guid.NewGuid());
-        var productId2 = new ProductId(Guid.NewGuid());
+        var productId1 = new ProductId(Uuid.Create());
+        var productId2 = new ProductId(Uuid.Create());
         var unitPrice = new Money(Currency.Default, 10);
         var cart = Carts.Cart.Create(productId1, 1, unitPrice);
 
@@ -45,7 +44,7 @@ public class CartTests
     public void RemoveItem_ShouldRemoveItem_WhenItemExists()
     {
         // Arrange
-        var productId = new ProductId(Guid.NewGuid());
+        var productId = new ProductId(Uuid.Create());
         var unitPrice = new Money(Currency.Default, 10);
         var cart = Carts.Cart.Create(productId, 1, unitPrice);
 
@@ -61,8 +60,8 @@ public class CartTests
     public void RemoveItem_ShouldDoNothing_WhenItemDoesNotExist()
     {
         // Arrange
-        var productId1 = new ProductId(Guid.NewGuid());
-        var productId2 = new ProductId(Guid.NewGuid());
+        var productId1 = new ProductId(Uuid.Create());
+        var productId2 = new ProductId(Uuid.Create());
         var unitPrice = new Money(Currency.Default, 10);
         var cart = Carts.Cart.Create(productId1, 1, unitPrice);
 
@@ -78,8 +77,8 @@ public class CartTests
     public void UpdateTotal_ShouldCalculateTotalPriceCorrectly()
     {
         // Arrange
-        var productId1 = new ProductId(Guid.NewGuid());
-        var productId2 = new ProductId(Guid.NewGuid());
+        var productId1 = new ProductId(Uuid.Create());
+        var productId2 = new ProductId(Uuid.Create());
         var unitPrice1 = new Money(Currency.Default, 10);
         var unitPrice2 = new Money(Currency.Default, 20);
         var cart = Carts.Cart.Create(productId1, 1, unitPrice1);

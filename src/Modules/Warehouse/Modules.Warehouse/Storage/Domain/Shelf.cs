@@ -1,4 +1,3 @@
-using Common.SharedKernel.Domain.Base;
 using Modules.Warehouse.Products.Domain;
 
 namespace Modules.Warehouse.Storage.Domain;
@@ -19,7 +18,7 @@ internal class Shelf : Entity<ShelfId>
 
         return new Shelf
         {
-            Id = new ShelfId(Guid.NewGuid()),
+            Id = new ShelfId(Uuid.Create()),
             Name = name
         };
     }

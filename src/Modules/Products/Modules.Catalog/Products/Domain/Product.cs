@@ -1,5 +1,3 @@
-using Common.SharedKernel.Domain.Base;
-using Common.SharedKernel.Domain.Entities;
 using Modules.Catalog.Categories.Domain;
 
 namespace Modules.Catalog.Products.Domain;
@@ -31,7 +29,7 @@ internal class Product : AggregateRoot<ProductId>
         {
             Name = name,
             Sku = sku,
-            Id = id ?? new ProductId(Guid.NewGuid())
+            Id = id ?? new ProductId(Uuid.Create())
         };
 
         return product;

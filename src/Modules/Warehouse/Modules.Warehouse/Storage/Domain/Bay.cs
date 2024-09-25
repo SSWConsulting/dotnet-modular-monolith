@@ -1,5 +1,3 @@
-using Common.SharedKernel.Domain.Base;
-
 namespace Modules.Warehouse.Storage.Domain;
 
 public record BayId(Guid Value) : IStronglyTypedId<Guid>;
@@ -23,7 +21,7 @@ internal class Bay : Entity<BayId>
 
         var bay = new Bay
         {
-            Id = new BayId(Guid.NewGuid()),
+            Id = new BayId(Uuid.Create()),
             Name = name
         };
 

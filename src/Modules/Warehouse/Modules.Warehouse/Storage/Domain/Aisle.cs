@@ -1,4 +1,3 @@
-using Common.SharedKernel.Domain.Base;
 using ErrorOr;
 using Modules.Warehouse.Products.Domain;
 
@@ -26,7 +25,7 @@ internal class Aisle : AggregateRoot<AisleId>
 
         var aisle = new Aisle
         {
-            Id = new AisleId(Guid.NewGuid()),
+            Id = new AisleId(Uuid.Create()),
             Name = name
         };
 

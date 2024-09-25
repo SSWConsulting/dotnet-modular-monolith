@@ -1,5 +1,4 @@
-﻿using Common.SharedKernel.Domain.Base;
-using ErrorOr;
+﻿using ErrorOr;
 using Throw;
 
 namespace Modules.Warehouse.Products.Domain;
@@ -28,7 +27,7 @@ internal class Product : AggregateRoot<ProductId>
 
         var product = new Product
         {
-            Id = new ProductId(Guid.NewGuid()),
+            Id = new ProductId(Uuid.Create()),
             StockOnHand = 0
         };
 

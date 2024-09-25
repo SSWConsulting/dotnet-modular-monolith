@@ -1,5 +1,3 @@
-using Common.SharedKernel.Domain.Base;
-using Common.SharedKernel.Domain.Entities;
 using Modules.Orders.Orders;
 
 namespace Modules.Orders.Carts;
@@ -18,7 +16,7 @@ internal class Cart : AggregateRoot<CartId>
     {
         var cart = new Cart
         {
-            Id = new CartId(Guid.NewGuid())
+            Id = new CartId(Uuid.Create())
         };
 
         cart.AddItem(productId, quantity, unitPrice);

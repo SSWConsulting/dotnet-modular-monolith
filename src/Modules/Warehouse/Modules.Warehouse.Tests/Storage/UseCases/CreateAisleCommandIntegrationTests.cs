@@ -1,5 +1,4 @@
 using Ardalis.Specification.EntityFrameworkCore;
-using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Modules.Warehouse.Storage.Domain;
 using Modules.Warehouse.Storage.UseCases;

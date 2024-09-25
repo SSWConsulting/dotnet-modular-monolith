@@ -1,6 +1,4 @@
-﻿using Common.SharedKernel.Domain.Base;
-
-namespace Modules.Catalog.Categories.Domain;
+﻿namespace Modules.Catalog.Categories.Domain;
 
 internal record CategoryId(Guid Value) : IStronglyTypedId<Guid>;
 
@@ -18,7 +16,7 @@ internal class Category : AggregateRoot<CategoryId>
     {
         var category = new Category
         {
-            Id = new CategoryId(Guid.NewGuid()),
+            Id = new CategoryId(Uuid.Create()),
         };
 
         category.UpdateName(name);
