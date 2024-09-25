@@ -4,9 +4,9 @@ using Testcontainers.MsSql;
 namespace Common.Tests.Common;
 
 /// <summary>
-/// Wrapper for SQL edge container
+/// Wrapper for MS SQL container
 /// </summary>
-public class DatabaseContainer
+public class DatabaseContainer : IAsyncDisposable
 {
     private readonly MsSqlContainer _container = new MsSqlBuilder()
         .WithImage("mcr.microsoft.com/mssql/server:2022-CU14-ubuntu-22.04")
@@ -35,7 +35,7 @@ public class DatabaseContainer
         await policy.Execute(async () => { await _container.StartAsync(); });
     }
 
-    public async Task DisposeAsync()
+    public async ValueTask DisposeAsync()
     {
         await _container.StopAsync();
         await _container.DisposeAsync();
