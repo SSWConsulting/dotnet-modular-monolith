@@ -1,4 +1,4 @@
-using Modules.Orders.Orders;
+using Modules.Orders.Common;
 using Modules.Orders.Orders.Order;
 
 namespace Modules.Orders.Tests.Orders
@@ -10,7 +10,7 @@ namespace Modules.Orders.Tests.Orders
         {
             // Arrange
             var order = Order.Create(new CustomerId(Uuid.Create()));
-            var productId = new ProductId(Uuid.Create());
+            var productId = new ProductId();
             var price = new Money(Currency.USD, 100);
             var quantity = 1;
 
@@ -28,7 +28,7 @@ namespace Modules.Orders.Tests.Orders
         {
             // Arrange
             var order = Order.Create(new CustomerId(Uuid.Create()));
-            var productId = new ProductId(Uuid.Create());
+            var productId = new ProductId();
             var price = new Money(Currency.USD, 100);
             var quantity = 1;
             order.AddLineItem(productId, price, quantity);
@@ -47,7 +47,7 @@ namespace Modules.Orders.Tests.Orders
         {
             // Arrange
             var order = Order.Create(new CustomerId(Uuid.Create()));
-            var productId = new ProductId(Uuid.Create());
+            var productId = new ProductId();
             var price = new Money(Currency.USD, 100);
             var quantity = 1;
             order.AddLineItem(productId, price, quantity);
@@ -65,7 +65,7 @@ namespace Modules.Orders.Tests.Orders
         {
             // Arrange
             var order = Order.Create(new CustomerId(Uuid.Create()));
-            var productId = new ProductId(Uuid.Create());
+            var productId = new ProductId();
             var price = new Money(Currency.USD, 100);
             var quantity = 1;
             order.AddLineItem(productId, price, quantity);
@@ -85,7 +85,7 @@ namespace Modules.Orders.Tests.Orders
         {
             // Arrange
             var order = Order.Create(new CustomerId(Uuid.Create()));
-            var productId = new ProductId(Uuid.Create());
+            var productId = new ProductId();
             var price = new Money(Currency.USD, 100);
             var quantity = 1;
             order.AddLineItem(productId, price, quantity);

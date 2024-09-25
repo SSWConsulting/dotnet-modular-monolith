@@ -1,4 +1,4 @@
-using Modules.Orders.Orders;
+using Modules.Orders.Common;
 using Modules.Orders.Orders.LineItem;
 using Modules.Orders.Orders.Order;
 
@@ -11,7 +11,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = Money.Create(100m);
         var quantity = 2;
 
@@ -30,7 +30,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = Money.Create(-100m);
         var quantity = 2;
 
@@ -46,7 +46,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = Money.Create(100m);
         var quantity = 0;
 
@@ -62,7 +62,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = Money.Create(100m);
         var quantity = 2;
 
@@ -78,7 +78,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = Money.Create(100m);
         var quantity = 2;
 
@@ -94,7 +94,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = Money.Create(100m);
         var quantity = 2;
 
@@ -110,7 +110,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = Money.Create(100m);
         var quantity = 2;
         var lineItem = LineItem.Create(orderId, productId, price, quantity);
@@ -127,7 +127,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = Money.Create(100m);
         var quantity = 5;
         var lineItem = LineItem.Create(orderId, productId, price, quantity);
@@ -144,7 +144,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = Money.Create(100m);
         var quantity = 2;
         var lineItem = LineItem.Create(orderId, productId, price, quantity);

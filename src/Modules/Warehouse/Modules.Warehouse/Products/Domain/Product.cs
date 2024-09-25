@@ -1,9 +1,15 @@
-﻿using ErrorOr;
+﻿using Common.SharedKernel.Domain.Interfaces;
+using ErrorOr;
 using Throw;
 
 namespace Modules.Warehouse.Products.Domain;
 
-internal record ProductId(Guid Value) : IStronglyTypedId<Guid>;
+internal record ProductId(Guid Value) : IStronglyTypedId<Guid>
+{
+    internal ProductId() : this(Uuid.Create())
+    {
+    }
+}
 
 internal class Product : AggregateRoot<ProductId>
 {
@@ -27,7 +33,7 @@ internal class Product : AggregateRoot<ProductId>
 
         var product = new Product
         {
-            Id = new ProductId(Uuid.Create()),
+            Id = new ProductId(),
             StockOnHand = 0
         };
 

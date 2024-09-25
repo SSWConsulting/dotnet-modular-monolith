@@ -1,4 +1,4 @@
-using Modules.Orders.Orders;
+using Modules.Orders.Common;
 using Modules.Orders.Orders.LineItem;
 using Modules.Orders.Orders.Order;
 
@@ -11,7 +11,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = new Money(Currency.Default, 100);
         var quantity = 2;
 
@@ -31,7 +31,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = new Money(Currency.Default, 0);
         var quantity = 2;
         Action act = () => LineItem.Create(orderId, productId, price, quantity);
@@ -45,7 +45,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = new Money(Currency.Default, 100);
         var quantity = 0;
         Action act = () => LineItem.Create(orderId, productId, price, quantity);
@@ -59,7 +59,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = new Money(Currency.Default, 100);
         var quantity = 2;
         var lineItem = LineItem.Create(orderId, productId, price, quantity);
@@ -77,7 +77,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = new Money(Currency.Default, 100);
         var quantity = 5;
         var lineItem = LineItem.Create(orderId, productId, price, quantity);
@@ -95,7 +95,7 @@ public class LineItemTests
     {
         // Arrange
         var orderId = new OrderId(Uuid.Create());
-        var productId = new ProductId(Uuid.Create());
+        var productId = new ProductId();
         var price = new Money(Currency.Default, 100);
         var quantity = 2;
         var lineItem = LineItem.Create(orderId, productId, price, quantity);
