@@ -1,4 +1,4 @@
-﻿namespace Modules.Customers.Customers;
+﻿namespace Modules.Customers.Customers.Domain;
 
 internal record Address
 {

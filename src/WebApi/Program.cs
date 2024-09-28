@@ -1,5 +1,6 @@
 using Common.SharedKernel;
 using Modules.Catalog;
+using Modules.Customers;
 using Modules.Orders;
 using Modules.Warehouse;
 using WebApi.Extensions;
@@ -14,9 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddMediatR();
 
-    // builder.Services.AddOrders();
     builder.Services.AddWarehouse(builder.Configuration);
     builder.Services.AddCatalog(builder.Configuration);
+    builder.Services.AddCustomers(builder.Configuration);
 }
 
 var app = builder.Build();
@@ -33,6 +34,7 @@ var app = builder.Build();
     app.UseOrders();
     app.UseWarehouse();
     app.UseCatalog();
+    app.UseCustomers();
 
     app.Run();
 }
