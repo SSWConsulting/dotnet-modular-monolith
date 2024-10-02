@@ -15,5 +15,8 @@ internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .Property(m => m.Id)
             .HasStronglyTypedId<CustomerId, Guid>()
             .ValueGeneratedNever();
+
+        // Using Owned as ComplexTypes don't support nullable records
+        builder.OwnsOne(m => m.Address);
     }
 }

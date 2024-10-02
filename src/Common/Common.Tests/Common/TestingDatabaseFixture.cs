@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Catalog.Common.Persistence;
+using Modules.Customers.Common.Persistence;
 using Modules.Warehouse.Common.Persistence;
 using Respawn;
 using Xunit;
@@ -36,6 +37,9 @@ public class TestingDatabaseFixture : IAsyncLifetime
 
         var warehouseDb = scope.ServiceProvider.GetRequiredService<WarehouseDbContext>();
         await warehouseDb.Database.MigrateAsync();
+
+        var customersDb = scope.ServiceProvider.GetRequiredService<CustomersDbContext>();
+        await customersDb.Database.MigrateAsync();
 
         // NOTE: If there are any tables you want to skip being reset, they can be configured here
         _checkpoint = await Respawner.CreateAsync(ConnectionString);

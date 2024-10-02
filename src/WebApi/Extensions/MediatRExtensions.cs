@@ -1,5 +1,6 @@
 using Common.SharedKernel.Behaviours;
 using Modules.Catalog;
+using Modules.Customers;
 using Modules.Warehouse;
 using System.Reflection;
 
@@ -11,6 +12,7 @@ public static class MediatRExtensions
     [
         typeof(WarehouseModule).Assembly,
         typeof(CatalogModule).Assembly,
+        typeof(CustomersModule).Assembly,
     ];
 
     public static void AddMediatR(this IServiceCollection services)
