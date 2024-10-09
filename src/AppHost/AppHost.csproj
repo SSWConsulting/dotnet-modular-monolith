@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <IsAspireHost>true</IsAspireHost>
+        <UserSecretsId>25ad7f3b-101b-4d4c-aa10-629ae07db0e5</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\tools\MigrationService\MigrationService.csproj" />
+      <ProjectReference Include="..\WebApi\WebApi.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.1"/>
+        <PackageReference Include="Aspire.Hosting.SqlServer" Version="8.2.1" />
+    </ItemGroup>
+
+</Project>

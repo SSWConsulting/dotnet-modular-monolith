@@ -7,6 +7,9 @@ using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 {
+    // Add service defaults & Aspire components.
+    builder.AddServiceDefaults();
+
     builder.Services.AddSwagger();
 
     builder.Services.AddGlobalErrorHandler();
@@ -15,10 +18,11 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddMediatR();
 
-    builder.Services.AddWarehouse(builder.Configuration);
-    builder.Services.AddCatalog(builder.Configuration);
-    builder.Services.AddCustomers(builder.Configuration);
-    builder.Services.AddOrders(builder.Configuration);
+    // builder.Services.AddOrders();
+    builder.AddWarehouse();
+    builder.AddCatalog();
+    builder.AddCustomers();
+    builder.AddOrders();
 }
 
 var app = builder.Build();
@@ -36,6 +40,8 @@ var app = builder.Build();
     app.UseWarehouse();
     app.UseCatalog();
     app.UseCustomers();
+
+    app.MapDefaultEndpoints();
 
     app.Run();
 }

@@ -73,7 +73,7 @@ internal class CatalogDbContextInitialiser
             var catalogProduct = Modules.Catalog.Products.Domain.Product.Create(
                 warehouseProduct.Name,
                 warehouseProduct.Sku.Value,
-                warehouseProduct.Id);
+                new ProductId(warehouseProduct.Id.Value));
 
             var productCategory = categoryFaker.Generate();
             catalogProduct.AddCategory(productCategory);

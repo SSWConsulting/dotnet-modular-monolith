@@ -1,5 +1,4 @@
-﻿using EntityFramework.Exceptions.SqlServer;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Modules.Warehouse.Products.Domain;
 using Modules.Warehouse.Storage.Domain;
 
@@ -22,13 +21,5 @@ public class WarehouseDbContext : DbContext
         modelBuilder.HasDefaultSchema("warehouse");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(WarehouseDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        // Produces easy to read exceptions
-        optionsBuilder.UseExceptionProcessor();
-
-        base.OnConfiguring(optionsBuilder);
     }
 }
