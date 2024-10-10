@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="8.2.1" />
     <PackageReference Include="Bogus" Version="35.6.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0-rc.2.24473.5" />
   </ItemGroup>
 
   <ItemGroup>
