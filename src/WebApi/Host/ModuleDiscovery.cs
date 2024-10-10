@@ -1,4 +1,4 @@
-﻿using Common.SharedKernel;
+﻿using Common.SharedKernel.Discovery;
 using System.Reflection;
 
 namespace Web.Host;

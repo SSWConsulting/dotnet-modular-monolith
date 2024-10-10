@@ -5,7 +5,6 @@ using Modules.Orders;
 using Modules.Warehouse;
 using WebApi.Extensions;
 
-var appAssembly = Assembly.GetExecutingAssembly();
 var builder = WebApplication.CreateBuilder(args);
 {
     // Add service defaults & Aspire components.

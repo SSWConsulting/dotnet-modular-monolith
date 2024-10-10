@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Common.SharedKernel;
+namespace Common.SharedKernel.Discovery;
 
 public interface IModule
 {
