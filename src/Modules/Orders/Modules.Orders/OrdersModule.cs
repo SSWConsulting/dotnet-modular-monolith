@@ -1,8 +1,8 @@
-﻿using FluentValidation;
+﻿using Common.SharedKernel.Discovery;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
-using Modules.Orders.Carts;
 using Modules.Orders.Common.Persistence;
 
 namespace Modules.Orders;
@@ -32,7 +32,7 @@ public static class OrdersModule
             .WithTags("Orders")
             .WithOpenApi();
 
-        AddProductToCartCommand.Endpoint.MapEndpoint(app);
+        app.DiscoverEndpoints(typeof(OrdersModule).Assembly);
     }
 }
 
