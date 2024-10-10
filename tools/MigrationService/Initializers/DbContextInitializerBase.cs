@@ -36,9 +36,9 @@ internal abstract class DbContextInitializerBase<T> where T : DbContext
         await strategy.ExecuteAsync(async () =>
         {
             // Run migration in a transaction to avoid partial migration if it fails.
-            await using var transaction = await DbContext.Database.BeginTransactionAsync(cancellationToken);
+            // await using var transaction = await DbContext.Database.BeginTransactionAsync(cancellationToken);
             await DbContext.Database.MigrateAsync(cancellationToken);
-            await transaction.CommitAsync(cancellationToken);
+            // await transaction.CommitAsync(cancellationToken);
         });
     }
 
