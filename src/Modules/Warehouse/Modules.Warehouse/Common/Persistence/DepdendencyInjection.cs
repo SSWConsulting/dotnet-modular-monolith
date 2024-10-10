@@ -1,26 +1,36 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Common.SharedKernel.Persistence.Interceptors;
+using EntityFramework.Exceptions.SqlServer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Modules.Warehouse.Common.Middleware;
+using Modules.Warehouse.Common.Persistence.Interceptors;
 
 namespace Modules.Warehouse.Common.Persistence;
 
 internal static class DepdendencyInjection
 {
-    internal static void AddPersistence(this IServiceCollection services, IConfiguration config)
+    internal static void AddPersistence(this IHostApplicationBuilder builder)
     {
-        var connectionString = config.GetConnectionString("DefaultConnection");
-        services.AddDbContext<WarehouseDbContext>(options =>
-            options.UseSqlServer(connectionString, builder =>
+        builder.AddSqlServerDbContext<WarehouseDbContext>("warehouse",
+            null,
+            options =>
             {
-                builder.MigrationsAssembly(typeof(WarehouseModule).Assembly.FullName);
-                builder.EnableRetryOnFailure();
-            }));
+                var serviceProvider = builder.Services.BuildServiceProvider();
+                options.AddInterceptors(
+                    serviceProvider.GetRequiredService<EntitySaveChangesInterceptor>(),
+                    serviceProvider.GetRequiredService<DispatchDomainEventsInterceptor>());
+                options.UseExceptionProcessor();
+            });
 
-        //services.AddSingleton<IDateTime, DateTimeService>();
-        // TODO: Consider moving to up.ps1
-        services.AddScoped<WarehouseDbContextInitializer>();
-        // services.AddScoped<EntitySaveChangesInterceptor>();
-        // services.AddScoped<DispatchDomainEventsInterceptor>();
+        builder.Services.AddScoped<EntitySaveChangesInterceptor>();
+        builder.Services.AddScoped<DispatchDomainEventsInterceptor>();
         // services.AddScoped<OutboxInterceptor>();
+    }
+
+    public static IApplicationBuilder UseInfrastructureMiddleware(this IApplicationBuilder app)
+    {
+        app.UseMiddleware<EventualConsistencyMiddleware>();
+        return app;
     }
 }

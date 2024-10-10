@@ -1,0 +1,20 @@
+<Project>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <!-- Remove exceptions for NUXXXX warnings -->
+        <NoWarn>CS1591,NU1902,NU1903,NU1904</NoWarn>
+
+        <!-- Configure code analysis. -->
+        <AnalysisLevel>latest</AnalysisLevel>
+        <!-- TODO: Upgrade to 'Recommended' -->
+        <AnalysisMode>Minimum</AnalysisMode>
+        <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+        <CodeAnalysisTreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</CodeAnalysisTreatWarningsAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    </PropertyGroup>
+</Project>

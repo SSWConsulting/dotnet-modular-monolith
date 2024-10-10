@@ -1,0 +1,13 @@
+﻿{
+  "solution": {
+    "path": "ModularMonolith.sln",
+    "projects": [
+      "src\\Common\\Common.SharedKernel\\Common.SharedKernel.csproj",
+      "src\\Common\\Common.Tests\\Common.Tests.csproj",
+      "src\\Modules\\Products\\Modules.Catalog.Tests\\Modules.Catalog.Tests.csproj",
+      "src\\Modules\\Products\\Modules.Catalog\\Modules.Catalog.csproj",
+      "src\\WebApi\\WebApi.csproj",
+      "tools\\Database\\Database.csproj"
+    ]
+  }
+}

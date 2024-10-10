@@ -1,47 +1,35 @@
-﻿using Common.SharedKernel;
+using Common.SharedKernel;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Modules.Warehouse.Common.Persistence;
-using Modules.Warehouse.Features.Products;
-using Modules.Warehouse.Features.Products.Domain;
-using Modules.Warehouse.Features.Products.Endpoints;
+using Modules.Warehouse.Products.UseCases;
+using Modules.Warehouse.Storage.UseCases;
 
 namespace Modules.Warehouse;
 
 public static class WarehouseModule
 {
-    public static void AddWarehouse(this IServiceCollection services, IConfiguration configuration)
+    public static void AddWarehouse(this IHostApplicationBuilder builder)
     {
         var applicationAssembly = typeof(WarehouseModule).Assembly;
 
-        services.AddValidatorsFromAssembly(applicationAssembly);
+        builder.Services.AddHttpContextAccessor();
 
-        // TODO: Check we can call this multiple times
-        services.AddMediatR(config =>
-        {
-            config.RegisterServicesFromAssembly(applicationAssembly);
-        });
+        builder.Services.AddValidatorsFromAssembly(applicationAssembly);
 
-        // Todo: Move to feature DI
-        services.AddTransient<IProductRepository, ProductRepository>();
+        builder.AddPersistence();
     }
 
-    public static async Task UseWarehouse(this WebApplication app)
+    public static void UseWarehouse(this WebApplication app)
     {
-        // TODO: Refactor to up.ps1
-        if (app.Environment.IsDevelopment())
-        {
-            // Initialise and seed database
-            using var scope = app.Services.CreateScope();
-            var initializer = scope.ServiceProvider.GetRequiredService<WarehouseDbContextInitializer>();
-            await initializer.InitializeAsync();
-            await initializer.SeedAsync();
-        }
+        app.UseInfrastructureMiddleware();
 
-        // TODO: Move to feature DI
-        app.MapProductEndpoints();
+        // TODO: Consider source generation or reflection for endpoint mapping
+        CreateAisleCommand.Endpoint.MapEndpoint(app);
+        CreateProductCommand.Endpoint.MapEndpoint(app);
+        AllocateStorageCommand.Endpoint.MapEndpoint(app);
+        GetItemLocationQuery.Endpoint.MapEndpoint(app);
     }
 }
 

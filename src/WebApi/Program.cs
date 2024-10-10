@@ -1,44 +1,48 @@
-using Common.SharedKernel.Behaviours;
-using Module.Orders;
+using Common.SharedKernel;
+using Modules.Catalog;
+using Modules.Customers;
+using Modules.Orders;
 using Modules.Warehouse;
-using System.Reflection;
-using Web.Host;
+using WebApi.Extensions;
 
 var appAssembly = Assembly.GetExecutingAssembly();
 var builder = WebApplication.CreateBuilder(args);
-var moduleAssemblies = new[] { typeof(OrdersModule).Assembly, typeof(WarehouseModule).Assembly };
-
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Common MediatR behaviors across all modules
-builder.Services.AddMediatR(config =>
 {
-    config.RegisterServicesFromAssembly(appAssembly);
-    config.AddOpenBehavior(typeof(UnhandledExceptionBehaviour<,>));
-    config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
-    config.AddOpenBehavior(typeof(PerformanceBehaviour<,>));
-});
+    // Add service defaults & Aspire components.
+    builder.AddServiceDefaults();
 
-// builder.Services.AddOrders();
-// builder.Services.AddWarehouse(builder.Configuration);
-builder.Services.AddModules(builder.Configuration, moduleAssemblies);
+    builder.Services.AddSwagger();
 
-var app = builder.Build();
+    builder.Services.AddGlobalErrorHandler();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    builder.Services.AddCommon();
+
+    builder.Services.AddMediatR();
+
+    // builder.Services.AddOrders();
+    builder.AddWarehouse();
+    builder.AddCatalog();
+    builder.AddCustomers();
+    builder.AddOrders();
 }
 
-app.UseHttpsRedirection();
+var app = builder.Build();
+{
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
 
-// app.UseOrders();
-// await app.UseWarehouse();
+    app.UseHttpsRedirection();
 
-app.Run();
+    app.UseOrders();
+    app.UseWarehouse();
+    app.UseCatalog();
+    app.UseCustomers();
+
+    app.MapDefaultEndpoints();
+
+    app.Run();
+}

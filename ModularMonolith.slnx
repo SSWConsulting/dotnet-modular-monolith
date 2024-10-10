@@ -1,0 +1,41 @@
+﻿<Solution>
+  <Folder Name="/.docs/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/.sln/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src\AppHost\AppHost.csproj" Type="Classic C#" />
+    <Project Path="src\WebApi.Tests\WebApi.Tests.csproj" Type="Classic C#" />
+    <Project Path="src\WebApi\WebApi.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Common/">
+    <Project Path="src\Common\Common.ServiceDefaults\Common.ServiceDefaults.csproj" Type="Classic C#" />
+    <Project Path="src\Common\Common.SharedKernel\Common.SharedKernel.csproj" Type="Classic C#" />
+    <Project Path="src\Common\Common.Tests\Common.Tests.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Catalog/">
+    <Project Path="src\Modules\Products\Modules.Catalog.Messages\Modules.Catalog.Messages.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Products\Modules.Catalog.Tests\Modules.Catalog.Tests.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Products\Modules.Catalog\Modules.Catalog.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Modules/Customers/">
+    <Project Path="src\Modules\Customers\Modules.Customers.Tests\Modules.Customers.Tests.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Customers\Modules.Customers\Modules.Customers.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Modules/Orders/">
+    <Project Path="src\Modules\Orders\Modules.Orders.Tests\Modules.Orders.Tests.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Orders\Modules.Orders\Modules.Orders.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Modules/Warehouse/">
+    <Project Path="src\Modules\Warehouse\Modules.Warehouse.Messages\Modules.Warehouse.Messages.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Warehouse\Modules.Warehouse.Tests\Modules.Warehouse.Tests.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Warehouse\Modules.Warehouse\Modules.Warehouse.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools\MigrationService\MigrationService.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>
