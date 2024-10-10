@@ -2,9 +2,9 @@ using Modules.Orders.Common.Persistence;
 
 namespace MigrationService.Initializers;
 
-internal class OrdersDbContextInitializer:DbContextInitializerBase<OrdersDbContext>
+internal class OrdersDbContextInitializer : DbContextInitializerBase<OrdersDbContext>
 {
-    public OrdersDbContextInitializer(OrdersDbContext dbContext) :base(dbContext)
+    public OrdersDbContextInitializer(OrdersDbContext dbContext) : base(dbContext)
     {
     }
 

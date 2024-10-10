@@ -41,5 +41,4 @@ internal abstract class DbContextInitializerBase<T> where T : DbContext
             // await transaction.CommitAsync(cancellationToken);
         });
     }
-
 }

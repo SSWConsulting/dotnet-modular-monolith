@@ -6,14 +6,14 @@ using Modules.Warehouse.Storage.Domain;
 
 namespace MigrationService.Initializers;
 
-internal class WarehouseDbContextInitializer: DbContextInitializerBase<WarehouseDbContext>
+internal class WarehouseDbContextInitializer : DbContextInitializerBase<WarehouseDbContext>
 {
     private const int NumProducts = 20;
     private const int NumAisles = 10;
     private const int NumShelves = 5;
     private const int NumBays = 20;
 
-    public WarehouseDbContextInitializer(WarehouseDbContext dbContext) :base(dbContext)
+    public WarehouseDbContextInitializer(WarehouseDbContext dbContext) : base(dbContext)
     {
     }
 

@@ -8,13 +8,13 @@ namespace MigrationService.Initializers;
 
 internal class CatalogDbContextInitializer : DbContextInitializerBase<CatalogDbContext>
 {
-     private const int NumCategories = 10;
+    private const int NumCategories = 10;
 
-     public CatalogDbContextInitializer(CatalogDbContext dbContext) :base(dbContext)
-     {
-     }
+    public CatalogDbContextInitializer(CatalogDbContext dbContext) : base(dbContext)
+    {
+    }
 
-     public async Task SeedDataAsync(IReadOnlyList<Product> products, CancellationToken cancellationToken)
+    public async Task SeedDataAsync(IReadOnlyList<Product> products, CancellationToken cancellationToken)
     {
         var strategy = DbContext.Database.CreateExecutionStrategy();
         await strategy.ExecuteAsync(async () =>
@@ -29,43 +29,43 @@ internal class CatalogDbContextInitializer : DbContextInitializerBase<CatalogDbC
     }
 
     private async Task<IReadOnlyList<Category>> SeedCategories()
-     {
-         if (await DbContext.Categories.AnyAsync())
-             return [];
+    {
+        if (await DbContext.Categories.AnyAsync())
+            return [];
 
-         var categoryFaker = new Faker<Category>()
-             .CustomInstantiator(f => Category.Create(f.Commerce.Categories(1).First()!));
+        var categoryFaker = new Faker<Category>()
+            .CustomInstantiator(f => Category.Create(f.Commerce.Categories(1).First()!));
 
-         var categories = categoryFaker.Generate(NumCategories);
-         DbContext.Categories.AddRange(categories);
-         await DbContext.SaveChangesAsync();
+        var categories = categoryFaker.Generate(NumCategories);
+        DbContext.Categories.AddRange(categories);
+        await DbContext.SaveChangesAsync();
 
-         return categories;
-     }
+        return categories;
+    }
 
-     private async Task SeedProductsAsync(IEnumerable<Product> warehouseProducts, IEnumerable<Category> categories)
-     {
-         if (await DbContext.Products.AnyAsync())
-             return;
+    private async Task SeedProductsAsync(IEnumerable<Product> warehouseProducts, IEnumerable<Category> categories)
+    {
+        if (await DbContext.Products.AnyAsync())
+            return;
 
-         var categoryFaker = new Faker<Category>()
-             .CustomInstantiator(f => f.PickRandom(categories));
+        var categoryFaker = new Faker<Category>()
+            .CustomInstantiator(f => f.PickRandom(categories));
 
-         // Usually integration events would propagate products to the catalog
-         // However, to simplify test data seed, we'll manually pass products into the catalog
-         foreach (var warehouseProduct in warehouseProducts)
-         {
-             var catalogProduct = Modules.Catalog.Products.Domain.Product.Create(
-                 warehouseProduct.Name,
-                 warehouseProduct.Sku.Value,
-                 warehouseProduct.Id);
+        // Usually integration events would propagate products to the catalog
+        // However, to simplify test data seed, we'll manually pass products into the catalog
+        foreach (var warehouseProduct in warehouseProducts)
+        {
+            var catalogProduct = Modules.Catalog.Products.Domain.Product.Create(
+                warehouseProduct.Name,
+                warehouseProduct.Sku.Value,
+                warehouseProduct.Id);
 
-             var productCategory = categoryFaker.Generate();
-             catalogProduct.AddCategory(productCategory);
+            var productCategory = categoryFaker.Generate();
+            catalogProduct.AddCategory(productCategory);
 
-             DbContext.Products.Add(catalogProduct);
-         }
+            DbContext.Products.Add(catalogProduct);
+        }
 
-         await DbContext.SaveChangesAsync();
-     }
+        await DbContext.SaveChangesAsync();
+    }
 }
