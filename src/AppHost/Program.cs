@@ -2,22 +2,18 @@ using Projects;
 
 var builder = DistributedApplication.CreateBuilder();
 
-// TODO: Figure out how to keep these running after the AppHost shuts down
-// TODO: Perhaps we can store the SQL Server in a variable to add multiple DB's to it?
-var warehouseDb = builder
-    .AddSqlServer("warehouse-sql")
+var sqlServer = builder.AddSqlServer("sql-server");
+
+var warehouseDb = sqlServer
     .AddDatabase("warehouse");
 
-var catalogDb = builder
-    .AddSqlServer("catalog-sql")
+var catalogDb = sqlServer
     .AddDatabase("catalog");
 
-var customersDb = builder
-    .AddSqlServer("customers-sql")
+var customersDb = sqlServer
     .AddDatabase("customers");
 
-var ordersDb = builder
-    .AddSqlServer("orders-sql")
+var ordersDb = sqlServer
     .AddDatabase("orders");
 
 builder.AddProject<MigrationService>("migrations")
